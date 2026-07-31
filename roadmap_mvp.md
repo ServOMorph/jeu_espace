@@ -101,7 +101,7 @@ Créer le projet Godot et son squelette, aujourd'hui inexistants.
 - Scène racine minimale qui se lance sans erreur.
 
 **Gate** : `godot --headless --quit` sur le projet retourne 0 sans erreur ; la fenêtre se lance
-à la bonne résolution. Contrôle visuel ajouté à `tests_manuels.md`.
+à la bonne résolution. Contrôle visuel ajouté à `DEV/tests_manuels.md`.
 
 **⏸ Checkpoint** — Demander à l'utilisateur de faire `/compact` avant de continuer.
 Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmation.
@@ -125,7 +125,7 @@ Produire le décor. C'est la phase qui porte l'essentiel du réalisme attendu. L
 - Fond étoilé : skybox / `Sky` procédural avec champ d'étoiles.
 
 **Gate** : scène de test à caméra libre. Terre reconnaissable, terminateur jour/nuit net,
-Lune et Soleil correctement placés. Contrôle visuel dans `tests_manuels.md`.
+Lune et Soleil correctement placés. Contrôle visuel dans `DEV/tests_manuels.md`.
 
 **⏸ Checkpoint** — Demander à l'utilisateur de faire `/compact` avant de continuer.
 Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmation.
@@ -169,7 +169,7 @@ la complexité de forme retenue :
 - Attacher le vaisseau au rail orbital de la phase 2, orientation tangente à la trajectoire.
 
 **Gate** : depuis une caméra externe, le vaisseau suit l'orbite, reste éclairé correctement
-par le Soleil, et la coupole se distingue de la coque. Contrôle visuel dans `tests_manuels.md`.
+par le Soleil, et la coupole se distingue de la coque. Contrôle visuel dans `DEV/tests_manuels.md`.
 
 > Opportunité de refacto à évaluer à la fin de cette phase : la hiérarchie de nœuds et le
 > couplage orbite/vaisseau sont les endroits où la dette structurelle apparaîtra en premier.
@@ -195,7 +195,7 @@ Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmati
 
 **Gate** : rotation fluide sur 360° sans clipping ni disparition de la Terre ; vaisseau et
 extérieur visibles simultanément volet ouvert, occultés volet fermé ; l'état du volet survit
-à une bascule de lieu. Contrôle visuel dans `tests_manuels.md`.
+à une bascule de lieu. Contrôle visuel dans `DEV/tests_manuels.md`.
 
 **⏸ Checkpoint** — Demander à l'utilisateur de faire `/compact` avant de continuer.
 Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmation.
@@ -212,7 +212,7 @@ Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmati
   Statiques au MVP — aucune donnée live, puisqu'il n'y a pas de pilotage.
 
 **Gate** : aucun élément de coque visible dans tout le débattement caméra ; instruments
-lisibles en 1920x1080. Contrôle visuel dans `tests_manuels.md`.
+lisibles en 1920x1080. Contrôle visuel dans `DEV/tests_manuels.md`.
 
 **⏸ Checkpoint** — Demander à l'utilisateur de faire `/compact` avant de continuer.
 Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmation.
@@ -229,7 +229,7 @@ Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmati
 - Écran ou message de sortie propre.
 
 **Gate** : parcours MVP complet — lancement, observation d'une orbite, bascule dans les deux
-sens plusieurs fois, framerate stable. Contrôle manuel complet dans `tests_manuels.md`.
+sens plusieurs fois, framerate stable. Contrôle manuel complet dans `DEV/tests_manuels.md`.
 
 **⏸ Checkpoint** — Demander à l'utilisateur de faire `/compact` avant de continuer.
 Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmation.

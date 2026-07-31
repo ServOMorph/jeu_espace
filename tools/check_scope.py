@@ -21,7 +21,7 @@ SCOPES = {
 
 
 def changed_files():
-    cmd = ["git", "status", "--porcelain"]
+    cmd = ["git", "diff", "--cached", "--name-only"]
     result = subprocess.run(cmd, capture_output=True, text=True)
     if result.returncode != 0:
         sys.stderr.write(result.stderr)
@@ -30,10 +30,7 @@ def changed_files():
     for line in result.stdout.splitlines():
         if not line.strip():
             continue
-        path = line[3:].strip().strip('"')
-        if " -> " in path:
-            path = path.split(" -> ", 1)[1]
-        paths.append(path.replace("\\", "/"))
+        paths.append(line.strip().strip('"').replace("\\", "/"))
     return paths
 
 
@@ -49,6 +46,10 @@ def main():
 
     paths = changed_files()
     if paths is None:
+        return 1
+
+    if not paths:
+        print("Rien de stage : lancer 'git add' avant.")
         return 1
 
     violations = [p for p in paths if not any(p.startswith(prefix) for prefix in scope)]

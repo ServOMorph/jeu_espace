@@ -89,7 +89,7 @@ Ne jamais committer un fichier de `DESIGN/textures/`, ni forcer l'ajout avec `gi
    retourne 0. C'est le seul test qui prouve que `SOURCES.md` est complet.
 2. Résolutions réelles vérifiées et notées dans `MANIFEST.md`.
 3. Licence de chaque source vérifiée sur la page d'origine, pas supposée.
-4. `tests_manuels.md` : « l'albédo jour ouvert à 100 % reste net, aucun flou de
+4. `DESIGN/tests_manuels.md` : « l'albédo jour ouvert à 100 % reste net, aucun flou de
    suréchantillonnage ».
 
 **⏸ Checkpoint** — Demander à l'utilisateur de faire `/compact` avant de continuer.

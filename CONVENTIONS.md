@@ -106,8 +106,9 @@ contourner.
 - `python tools/coverage_check.py` retourne un code non nul sous 85 % : c'est un gate bloquant.
 
 ### Ce qui n'est pas testable unitairement
-Rendu, shaders, transparence, cadrage caméra, lisibilité d'un asset. Ces points passent par
-`tests_manuels.md` avec un critère observable en une ligne — jamais « vérifier que c'est joli ».
+Rendu, shaders, transparence, cadrage caméra, lisibilité d'un asset. Ces points passent par le
+`tests_manuels.md` propre à chaque zone (`DEV/tests_manuels.md`, `DESIGN/tests_manuels.md`), avec
+un critère observable en une ligne — jamais « vérifier que c'est joli ».
 
 ---
 
