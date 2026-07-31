@@ -23,6 +23,38 @@ réaliste. Vaisseau low poly. 1920x1080 fenêtré, caméra à la souris.
   Pas de dossier `assets/` à la racine, pas de recopie.
 - Environnement technique : Godot 4.5 stable, `D:\Godot\godot.exe`.
 - Mesh du vaisseau : produit par l'agent, pas par un outil externe ni un asset tiers.
+  **Arbitré le 2026-07-31** : `design` fixe la forme et les proportions chiffrées
+  (`DESIGN/vaisseau/proportions.md`), `dev` produit le mesh dans `scenes/`.
+- Tests : objectif 85 % de **couverture fonctionnelle** de `scripts/core/`, mesuré par
+  `tools/coverage_check.py`. GDScript n'ayant pas d'outil de couverture de lignes fiable,
+  ne jamais annoncer un pourcentage de lignes.
+- Passation entre zones : obligatoirement via `tools/handoff.py` (presse-papier), jamais en
+  prose. Voir `CONVENTIONS.md` §4.
+
+### Arbitrages du 2026-07-31 (seconde série)
+- **Textures hors dépôt.** `DESIGN/textures/` est dans `.gitignore`. Le livrable versionné est
+  `DESIGN/SOURCES.md` (URL + sha256), et `tools/fetch_textures.py` reconstruit le dossier à
+  l'identique. Les planches générées par Codex, elles, sont uniques : elles vont dans git.
+- **Shader Terre isolé.** La phase 1 est découpée en 1a (géométrie et échelle, sans shader),
+  1b (jour/nuit), 1c (nuages), 1d (halo + vérification du tri de rendu). **1b se traite en
+  session Opus**, le reste en Sonnet.
+- **Vaisseau visible depuis le cockpit : accepté.** La contrainte d'origine est levée. Ne pas
+  contraindre la forme, le cadrage ni le rendu pour l'éviter.
+- **Pas de verre côté intérieur de la coupole.** L'armature est opaque, la surface vitrée
+  n'existe que sur la vue extérieure du vaisseau. Supprime le risque de tri de rendu au lieu
+  de le gérer. Le tri résiduel (halo + nuages) est vérifié dès la sous-phase 1d.
+
+## Documents de référence
+| Fichier | Pour qui | Contenu |
+|---|---|---|
+| `roadmap_mvp.md` | orchestrateur | vision, décisions cadrantes, arbitrages |
+| `CONVENTIONS.md` | dev + design | périmètres, économie de tokens, passation, tests, nommage |
+| `DEV/roadmap_dev.md` | dev | phases 0 à 6, fichiers, gates techniques |
+| `DESIGN/roadmap_design.md` | design | phases D0 à D5, livrables, gates |
+| `tools/` | tous | `handoff.py`, `coverage_check.py`, `check_scope.py` |
+
+Le détail d'exécution vit dans les roadmaps de zone. Ce fichier ne le duplique pas : il ne
+change que si une **décision** change.
 
 ## Répartition par agent (créés le 2026-07-31)
 - `orchestrateur` (racine) — roadmap, arbitrages, contexte projet.
@@ -31,22 +63,27 @@ réaliste. Vaisseau low poly. 1920x1080 fenêtré, caméra à la souris.
 - `design` (`DESIGN/`) — direction artistique, assets 2D Codex, low poly. **Écrit uniquement
   dans `DESIGN/`.**
 
-| Phase | Agent porteur | Appui |
-|---|---|---|
-| 0 Fondations | dev | — |
-| 1 Environnement spatial | design (assets) | dev (intégration, shaders) |
-| 2 Orbite | dev | — |
-| 3 Vaisseau | design (forme) | dev (mesh, matériaux) |
-| 4 Centre de commande + volet | dev | design (intérieur, volet) |
-| 5 Cockpit | design (instruments 2D) | dev (intégration) |
-| 6 Bascule et polish | dev | design (passe visuelle) |
+`design` livre toujours **avant** que `dev` intègre : la zone design a une phase d'avance.
 
-### Friction de périmètre restante
-**Qui produit le mesh du vaisseau.** `design` tient la direction visuelle mais ne peut pas
-écrire dans `scenes/`. Recommandation : `design` fixe la forme et les proportions dans
-`DESIGN/`, `dev` produit le mesh effectif. Si la voie `.obj` est retenue en phase 3, le
-fichier vit dans `DESIGN/` ; si c'est un `.tscn` d'assemblage, il vit dans `scenes/`.
-À arbitrer en ouverture de phase 3, non bloquant avant.
+| Phase MVP | design livre | dev intègre |
+|---|---|---|
+| 0 Fondations | D0 structure + charte | 0 projet Godot, GdUnit4, input map |
+| 1 Environnement spatial | D1 textures NASA | 1 sphères, shader Terre, ciel |
+| 2 Orbite | — | 2 horloge simulée + rail orbital |
+| 3 Vaisseau | D2 forme + proportions chiffrées | 3 mesh, matériaux, hiérarchie |
+| 4 Centre de commande + volet | D3 intérieur + volet | 4 coupole, caméra 360, volet |
+| 5 Cockpit | D4 instruments 2D | 5 cockpit, caméra bornée |
+| 6 Bascule et polish | D5 passe visuelle | 6 bascule, performance, polish |
+
+Une phase `dev` ne démarre pas tant que sa dépendance n'est pas listée comme `livré` dans
+`DESIGN/MANIFEST.md`. En cas de retard : placeholder nommé `placeholder_*`, jamais figé.
+
+### Frictions résiduelles
+- **Technique de production du mesh** : assemblage `.tscn` ou générateur `.obj` scripté. À
+  choisir en ouverture de phase 3, au vu de la forme réellement livrée en D2. Non bloquant.
+- **Disponibilité réelle des textures NASA en 16k.** Les URLs et les résolutions effectivement
+  proposées n'ont pas été vérifiées. Si le 16k n'est pas disponible en un seul équirectangulaire,
+  D1 devra trancher entre 8k global et assemblage de dalles. À constater en D1, pas à supposer.
 
 ---
 
