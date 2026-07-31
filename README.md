@@ -17,8 +17,10 @@ fenêtré, contrôle caméra à la souris.
 - `roadmap_mvp.md` — décisions cadrantes et arbitrages du MVP, 7 phases.
 - `CONVENTIONS.md` — règles communes dev/design : périmètres, tests, passation, nommage.
 - `tools/` — scripts Python : passation inter-agents, couverture de tests, contrôle de périmètre, téléchargement de textures.
+- `run.py` — lance le projet Godot (fenêtré ou `--headless`).
 
 ## État actuel
-Phase 0 (fondations Godot) terminée côté zone `dev` : project.godot, arborescence, GdUnit4
-opérationnel en headless, scène triviale. Gate visuel en attente utilisateur. Phase 1 bloquée
-par la dépendance design D1.
+Phase 0 (fondations Godot) quasi close côté zone `dev` : project.godot, arborescence, GdUnit4
+opérationnel en headless, scène triviale, gate visuel (fenêtré 1920x1080, sans erreur) validé par
+l'utilisateur — reste à clôturer formellement via une session `dev`. Phase D0 design pas encore
+démarrée. Phase 1 bloquée par la dépendance design D1.

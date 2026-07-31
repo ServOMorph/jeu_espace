@@ -1,3 +1,16 @@
+## v0.4 — 2026-07-31
+
+### Ajouté
+- run.py : lance le projet Godot depuis la racine (fenêtré ou `--headless`).
+
+### Modifié
+- .claude/CLAUDE.md, CONVENTIONS.md, roadmap_mvp.md, DESIGN/roadmap_design.md : références
+  tests_manuels.md requalifiées par zone (DEV/tests_manuels.md, DESIGN/tests_manuels.md).
+
+### Corrigé
+- tools/check_scope.py : vérifie l'index git (`git diff --cached`) au lieu de l'arbre de travail
+  entier, échec explicite si rien n'est stagé.
+
 ## v0.3 — 2026-07-31
 
 ### Ajouté
