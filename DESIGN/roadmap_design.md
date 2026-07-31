@@ -24,7 +24,7 @@ DESIGN/_handoff.md`, puis annoncer **📋 ✅ Prompt copié dans le presse-papie
 
 ---
 
-## Phase D0 — Structure et charte  [EN COURS]
+## Phase D0 — Structure et charte  [FAIT]
 
 - Arborescence de `DESIGN/` :
   ```
@@ -59,7 +59,7 @@ Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmati
 
 ---
 
-## Phase D1 — Textures spatiales  [TODO]
+## Phase D1 — Textures spatiales  [FAIT]
 
 Phase la plus lourde du projet côté design. L'orbite basse (~400 km) est impitoyable : le sol
 est vu de près, toute résolution insuffisante se voit immédiatement.
@@ -97,7 +97,7 @@ Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmati
 
 ---
 
-## Phase D2 — Forme du vaisseau  [TODO]
+## Phase D2 — Forme du vaisseau  [EN COURS]
 
 `design` fixe la forme, `dev` produit le mesh. La frontière est ici : **aucun fichier `.tscn`,
 aucun script de génération côté design.**

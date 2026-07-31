@@ -22,5 +22,6 @@ fenêtré, contrôle caméra à la souris.
 ## État actuel
 Phase 0 (fondations Godot) quasi close côté zone `dev` : project.godot, arborescence, GdUnit4
 opérationnel en headless, scène triviale, gate visuel (fenêtré 1920x1080, sans erreur) validé par
-l'utilisateur — reste à clôturer formellement via une session `dev`. Phase D0 design pas encore
-démarrée. Phase 1 bloquée par la dépendance design D1.
+l'utilisateur — reste à clôturer formellement via une session `dev`. Côté zone `design`, phases D0
+et D1 closes : charte, SOURCES.md, MANIFEST.md renseignés, textures Terre/Lune/étoiles livrées,
+handoff D1 envoyé vers `dev`. Phase D2 (forme du vaisseau) à démarrer.

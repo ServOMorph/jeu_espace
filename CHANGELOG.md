@@ -1,3 +1,15 @@
+## v0.5 — 2026-07-31
+
+### Ajouté
+- DESIGN/charte.md, SOURCES.md, MANIFEST.md, tests_manuels.md : structure et livrables des
+  phases D0-D1 (direction artistique, provenance/licence des textures, inventaire).
+- Textures spatiales : albédo Terre 21600x10800, nightlights 13500x6750, nuages 2048x1024
+  (NASA), albédo Lune 8k et étoiles 8k (Solar System Scope, CC-BY 4.0) — reconstructibles via
+  `fetch_textures.py`, non commitées.
+
+### Modifié
+- DESIGN/roadmap_design.md : Phases D0 et D1 marquées [FAIT], Phase D2 [EN COURS].
+
 ## v0.4 — 2026-07-31
 
 ### Ajouté
