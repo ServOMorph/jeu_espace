@@ -1,26 +1,26 @@
-# Handoff — Phase D1 (Textures spatiales) → dev phase 1 (environnement)
+# Handoff — Phase D2 (Forme du vaisseau) → dev phase 3 (mesh)
 
 ## Livrables
-Voir `DESIGN/MANIFEST.md` pour l'inventaire complet et `DESIGN/SOURCES.md` pour la reconstruction
-(`python tools/fetch_textures.py`, dossier `DESIGN/textures/` non committé).
+Voir `DESIGN/vaisseau/proportions.md` — dimensionnement chiffré complet, validé.
+Planches (schémas techniques cotés, pas de rendu artistique) :
+- `DESIGN/vaisseau/vue_face.svg`
+- `DESIGN/vaisseau/vue_cote.svg`
+- `DESIGN/vaisseau/vue_dessus.svg`
 
-- `terre_albedo_21600x10800.jpg` — albédo jour, format Godot direct
-- `terre_nightlights_13500x6750.jpg` — lumières nocturnes
-- `terre_clouds_2048x1024.jpg` — masque de gris (pas d'alpha réel dans le fichier), à utiliser
-  comme alpha map en shader
-- `lune_albedo_8k.jpg`
-- `etoiles_8k.jpg`
+Toutes les valeurs sont relatives à la longueur totale du vaisseau `L = 1.0`.
+
+## Points clés pour la modélisation
+- Coque : fuselage effilé, diamètre max 0.22 L à 0.35 L depuis l'avant.
+- Coupole (centre de commande) : diamètre 0.30 L, centrée à 0.55 L, sommet à 0.30 L au-dessus de
+  l'axe du fuselage. Armature seule à modéliser (12 montants radiaux espacés de 30°, 3 cerclages
+  horizontaux) : aucune vitre côté intérieur (contrainte tri de rendu, cf. Phase D3).
+- Cockpit : section fermée à l'avant (0 à 0.15 L), sans ligne de vue vers le reste de la coque.
+- Structures externes : 2 panneaux solaires (0.40 L x 0.15 L, centrés à 0.45-0.85 L), 2 antennes
+  (0.10 L, arrière), 2 nacelles moteur (diamètre 0.08 L, longueur 0.12 L, arrière).
 
 ## Écarts au périmètre initial
-- Relief/normal de la Terre retiré : aucune source NASA en téléchargement direct trouvée.
-  Non bloquant pour l'environnement de base.
-- Couche nuageuse en 2048x1024 seulement (résolution NASA officielle la plus haute disponible en
-  téléchargement direct), très inférieure à l'albédo. À traiter comme masque, pas comme texture
-  couleur.
-
-## Licence
-Toutes les textures Terre/nuit/nuages sont NASA (domaine public, crédit NASA obligatoire, pas
-d'usage impliquant un endossement NASA). Lune et étoiles sont Solar System Scope, CC-BY 4.0.
+Aucun. Proportions proposées par `design` et validées par l'utilisateur en session.
 
 ## Test manuel à ajouter dans `DEV/tests_manuels.md`
-- « L'albédo jour ouvert à 100 % reste net, aucun flou de suréchantillonnage. »
+- « Depuis le centre de commande sous coupole, la coque et les structures externes sont visibles
+  et lisibles entre les montants de l'armature. »

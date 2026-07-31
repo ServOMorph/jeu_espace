@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" font-family="sans-serif" font-size="14">
+  <rect width="900" height="500" fill="white"/>
+  <text x="450" y="30" text-anchor="middle" font-size="18" font-weight="bold">Vaisseau — vue de face (L = 600px = 1.0 L)</text>
+
+  <!-- axes -->
+  <line x1="450" y1="60" x2="450" y2="440" stroke="#999" stroke-dasharray="6,4"/>
+  <line x1="250" y1="250" x2="650" y2="250" stroke="#999" stroke-dasharray="6,4"/>
+
+  <!-- fuselage : section maximale -->
+  <circle cx="450" cy="250" r="66" fill="none" stroke="black" stroke-width="2"/>
+
+  <!-- coupole -->
+  <path d="M 360,184 Q 360,70 450,70 Q 540,70 540,184" fill="none" stroke="black" stroke-width="2"/>
+
+  <!-- armature (montants schematiques) -->
+  <line x1="390" y1="150" x2="410" y2="80" stroke="black" stroke-width="1"/>
+  <line x1="450" y1="180" x2="450" y2="70" stroke="black" stroke-width="1"/>
+  <line x1="510" y1="150" x2="490" y2="80" stroke="black" stroke-width="1"/>
+
+  <!-- panneaux (vus par la tranche) -->
+  <line x1="384" y1="250" x2="294" y2="250" stroke="black" stroke-width="3"/>
+  <line x1="516" y1="250" x2="606" y2="250" stroke="black" stroke-width="3"/>
+  <text x="450" y="470" text-anchor="middle">panneaux vus par la tranche (0.15 L de saillie de chaque cote)</text>
+
+  <!-- cockpit (masque par le fuselage, ligne cachee) -->
+  <circle cx="450" cy="250" r="36" fill="none" stroke="black" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="450" y="253" text-anchor="middle">Cockpit</text>
+
+  <!-- nacelles (masquees, lignes cachees) -->
+  <circle cx="396" cy="250" r="24" fill="none" stroke="black" stroke-width="1" stroke-dasharray="4,3"/>
+  <circle cx="504" cy="250" r="24" fill="none" stroke="black" stroke-width="1" stroke-dasharray="4,3"/>
+
+  <!-- cotation diametre fuselage -->
+  <line x1="384" y1="340" x2="516" y2="340" stroke="black" stroke-width="1"/>
+  <line x1="384" y1="334" x2="384" y2="346" stroke="black" stroke-width="1"/>
+  <line x1="516" y1="334" x2="516" y2="346" stroke="black" stroke-width="1"/>
+  <text x="450" y="360" text-anchor="middle">Diametre max fuselage 0.22 L</text>
+
+  <!-- cotation hauteur coupole -->
+  <line x1="600" y1="70" x2="600" y2="250" stroke="black" stroke-width="1"/>
+  <line x1="594" y1="70" x2="606" y2="70" stroke="black" stroke-width="1"/>
+  <line x1="594" y1="250" x2="606" y2="250" stroke="black" stroke-width="1"/>
+  <text x="620" y="160" text-anchor="middle" transform="rotate(90 620,160)">Coupole 0.30 L</text>
+</svg>

@@ -1,3 +1,15 @@
+## v0.6 — 2026-07-31
+
+### Ajouté
+- DESIGN/vaisseau/proportions.md : dimensionnement chiffré du vaisseau (coque, coupole, cockpit,
+  structures externes, armature), validé par l'utilisateur.
+- DESIGN/vaisseau/vue_face.svg, vue_cote.svg, vue_dessus.svg : planches de forme, schémas
+  techniques cotés.
+
+### Modifié
+- DESIGN/roadmap_design.md : Phase D2 marquée [FAIT], Phase D3 [EN COURS].
+- DESIGN/MANIFEST.md, DESIGN/_handoff.md : mis à jour, handoff Phase D2 envoyé vers `dev`.
+
 ## v0.5 — 2026-07-31
 
 ### Ajouté

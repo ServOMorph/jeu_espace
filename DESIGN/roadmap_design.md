@@ -97,7 +97,7 @@ Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmati
 
 ---
 
-## Phase D2 — Forme du vaisseau  [EN COURS]
+## Phase D2 — Forme du vaisseau  [FAIT]
 
 `design` fixe la forme, `dev` produit le mesh. La frontière est ici : **aucun fichier `.tscn`,
 aucun script de génération côté design.**
@@ -124,7 +124,7 @@ Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmati
 
 ---
 
-## Phase D3 — Intérieur du centre de commande et volet  [TODO]
+## Phase D3 — Intérieur du centre de commande et volet  [EN COURS]
 
 - Planches de l'intérieur sous coupole : sol, structure porteuse, mobilier minimal low poly.
   Volume simple — l'intérêt visuel est dehors, pas dedans.

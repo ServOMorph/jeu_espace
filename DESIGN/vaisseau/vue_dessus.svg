@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" font-family="sans-serif" font-size="14">
+  <rect width="900" height="500" fill="white"/>
+  <text x="450" y="30" text-anchor="middle" font-size="18" font-weight="bold">Vaisseau — vue de dessus (L = 600px = 1.0 L)</text>
+
+  <!-- axe -->
+  <line x1="80" y1="250" x2="740" y2="250" stroke="#999" stroke-dasharray="6,4"/>
+
+  <!-- fuselage : contour gauche/droit -->
+  <polyline points="100,232 190,202 310,184 460,196 610,208 700,208"
+            fill="none" stroke="black" stroke-width="2"/>
+  <polyline points="100,268 190,298 310,316 460,304 610,292 700,292"
+            fill="none" stroke="black" stroke-width="2"/>
+  <line x1="100" y1="232" x2="100" y2="268" stroke="black" stroke-width="2"/>
+  <line x1="700" y1="208" x2="700" y2="292" stroke="black" stroke-width="2"/>
+
+  <!-- panneaux solaires -->
+  <polygon points="370,189 610,208 610,118 370,99" fill="none" stroke="black" stroke-width="2"/>
+  <polygon points="370,311 610,292 610,382 370,401" fill="none" stroke="black" stroke-width="2"/>
+  <text x="490" y="80" text-anchor="middle">panneau (x2)</text>
+
+  <!-- cockpit -->
+  <rect x="100" y="214" width="90" height="72" fill="none" stroke="black" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="145" y="205" text-anchor="middle">Cockpit</text>
+
+  <!-- coupole (empreinte) -->
+  <circle cx="430" cy="250" r="90" fill="none" stroke="black" stroke-width="1" stroke-dasharray="3,3"/>
+  <text x="430" y="253" text-anchor="middle">Coupole</text>
+
+  <!-- nacelles moteur -->
+  <circle cx="655" cy="196" r="24" fill="none" stroke="black" stroke-width="2"/>
+  <circle cx="655" cy="304" r="24" fill="none" stroke="black" stroke-width="2"/>
+  <text x="700" y="253" text-anchor="middle">nacelles</text>
+
+  <!-- antennes -->
+  <circle cx="640" cy="220" r="2" fill="black"/>
+  <circle cx="640" cy="280" r="2" fill="black"/>
+  <text x="640" y="410" text-anchor="middle">antennes (x2)</text>
+
+  <!-- cotations -->
+  <line x1="100" y1="440" x2="700" y2="440" stroke="black" stroke-width="1"/>
+  <line x1="100" y1="434" x2="100" y2="446" stroke="black" stroke-width="1"/>
+  <line x1="700" y1="434" x2="700" y2="446" stroke="black" stroke-width="1"/>
+  <text x="400" y="460" text-anchor="middle">Longueur totale L = 1.0</text>
+
+  <line x1="370" y1="470" x2="610" y2="470" stroke="black" stroke-width="1"/>
+  <line x1="370" y1="464" x2="370" y2="476" stroke="black" stroke-width="1"/>
+  <line x1="610" y1="464" x2="610" y2="476" stroke="black" stroke-width="1"/>
+  <text x="490" y="490" text-anchor="middle">Envergure panneaux 0.40 L</text>
+</svg>
