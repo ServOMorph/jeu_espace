@@ -1,2 +1,4 @@
 DESIGN/textures/
 !DESIGN/textures/.gitkeep
+__pycache__/
+*.pyc
