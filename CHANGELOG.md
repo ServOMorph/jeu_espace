@@ -1,3 +1,17 @@
+## v0.3 — 2026-07-31
+
+### Ajouté
+- Phase 0 dev : project.godot (Forward+, 1920x1080, input map), arborescence scripts/core,
+  scripts/nodes, scenes, tests, addons ; GdUnit4 v6.2.0 installé et validé en headless.
+- DEV/tests_manuels.md : fichier de contrôles manuels propre à la zone dev.
+
+### Modifié
+- DEV/roadmap_dev.md : commandes de référence (GdUnit4 headless, flux check_scope.py).
+
+### Corrigé
+- tools/check_scope.py identifié comme bloquant en environnement multi-zone (lit l'arbre de
+  travail entier) : correction arbitrée (vérifier l'index git), passation envoyée à orchestrateur.
+
 ## v0.2 — 2026-07-31
 
 ### Ajouté

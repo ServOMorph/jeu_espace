@@ -2,3 +2,10 @@ DESIGN/textures/
 !DESIGN/textures/.gitkeep
 __pycache__/
 *.pyc
+
+.godot/
+.import/
+export_presets.cfg
+build/
+export/
+reports/

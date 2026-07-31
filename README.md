@@ -19,5 +19,6 @@ fenêtré, contrôle caméra à la souris.
 - `tools/` — scripts Python : passation inter-agents, couverture de tests, contrôle de périmètre, téléchargement de textures.
 
 ## État actuel
-Roadmap MVP (7 phases) déclinée en roadmaps de zone et conventions communes. Outillage Python
-en place. Phase 0 (fondations Godot) prête à démarrer côté zone `dev`. Aucun code produit.
+Phase 0 (fondations Godot) terminée côté zone `dev` : project.godot, arborescence, GdUnit4
+opérationnel en headless, scène triviale. Gate visuel en attente utilisateur. Phase 1 bloquée
+par la dépendance design D1.

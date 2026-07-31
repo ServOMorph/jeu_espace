@@ -44,10 +44,21 @@ python tools/handoff.py --to design --file DEV/_handoff.md
 et annoncer en dernière ligne de la réponse : **📋 ✅ Prompt copié dans le presse-papier.**
 Ne jamais l'annoncer si le script n'a pas retourné 0.
 
-## Avant chaque commit
+## Commandes de référence
+
+Tests unitaires (GdUnit4 refuse le mode headless sans `--ignoreHeadlessMode` et sort en 103) :
 ```
+D:\Godot\godot.exe --headless --path . -s addons/gdUnit4/bin/GdUnitCmdTool.gd --ignoreHeadlessMode -a tests
+```
+
+Avant chaque commit — `check_scope.py` vérifie l'index, pas l'arbre de travail. Stager d'abord,
+sinon le script échoue sur les fichiers en cours des autres zones :
+```
+git add <fichiers de la zone>
 python tools/check_scope.py dev
 ```
+
+Contrôles manuels : `DEV/tests_manuels.md` (un fichier par zone, cf. CONVENTIONS.md §5).
 
 ---
 
@@ -73,7 +84,7 @@ python tools/check_scope.py dev
 **Gate**
 1. `D:\Godot\godot.exe --headless --path . --quit` retourne 0, sortie sans erreur.
 2. Le test trivial GdUnit4 passe en headless.
-3. Lancement fenêtré à 1920x1080 vérifié à l'œil, entrée ajoutée à `tests_manuels.md`.
+3. Lancement fenêtré à 1920x1080 vérifié à l'œil, entrée ajoutée à `DEV/tests_manuels.md`.
 
 **⏸ Checkpoint** — Demander à l'utilisateur de faire `/compact` avant de continuer.
 Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmation.
@@ -125,7 +136,7 @@ Gate 1c : nuages lisibles, pas de scintillement au bord, ombre portée non requi
   nuages. C'est la phase la moins coûteuse pour découvrir un problème d'ordre de rendu.
 
 Gate 1d : halo visible par la tranche, aucune inversion d'ordre entre halo, nuages et sphère
-factice. Contrôle visuel dans `tests_manuels.md`. Retirer la sphère factice avant de clôturer.
+factice. Contrôle visuel dans `DEV/tests_manuels.md`. Retirer la sphère factice avant de clôturer.
 
 **⏸ Checkpoint** — Demander à l'utilisateur de faire `/compact` avant de continuer.
 Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmation.
@@ -185,7 +196,7 @@ Livrables :
 1. Test unitaire sur `orbit.tangent_at` (orthogonalité au rayon, continuité sur une période).
 2. `python tools/coverage_check.py` ≥ 85 %.
 3. Depuis une caméra externe : le vaisseau suit l'orbite, éclairage cohérent, coupole distincte
-   de la coque. Contrôle visuel dans `tests_manuels.md`.
+   de la coque. Contrôle visuel dans `DEV/tests_manuels.md`.
 
 > Dette à évaluer en fin de phase : couplage orbite/vaisseau et profondeur de hiérarchie.
 > Décider au vu du code réel, pas par principe.
@@ -221,7 +232,7 @@ Dépend de design D3.
 2. `python tools/coverage_check.py` ≥ 85 %.
 3. Rotation 360° fluide sans clipping ni disparition de la Terre ; extérieur visible volet
    ouvert, occulté volet fermé ; état du volet préservé après aller-retour vers le cockpit.
-   Contrôle visuel dans `tests_manuels.md`.
+   Contrôle visuel dans `DEV/tests_manuels.md`.
 
 **⏸ Checkpoint** — Demander à l'utilisateur de faire `/compact` avant de continuer.
 Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmation.
@@ -246,7 +257,7 @@ Dépend de design D4.
    hors du cône avant).
 2. `python tools/coverage_check.py` ≥ 85 %.
 3. Balayage complet du débattement sans clipping ; instruments lisibles en 1920x1080.
-   Contrôle visuel dans `tests_manuels.md`.
+   Contrôle visuel dans `DEV/tests_manuels.md`.
 
 **⏸ Checkpoint** — Demander à l'utilisateur de faire `/compact` avant de continuer.
 Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmation.
@@ -271,7 +282,7 @@ Appui de design D5.
    absence de fuite d'état.
 2. `python tools/coverage_check.py` ≥ 85 % sur l'ensemble de `scripts/core/`.
 3. Parcours MVP complet : lancement, une orbite observée, bascules répétées dans les deux sens,
-   framerate stable. Contrôle manuel complet dans `tests_manuels.md`.
+   framerate stable. Contrôle manuel complet dans `DEV/tests_manuels.md`.
 
 **⏸ Checkpoint** — Demander à l'utilisateur de faire `/compact` avant de continuer.
 Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmation.
