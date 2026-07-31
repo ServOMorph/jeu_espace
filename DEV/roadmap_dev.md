@@ -51,6 +51,13 @@ Tests unitaires (GdUnit4 refuse le mode headless sans `--ignoreHeadlessMode` et 
 D:\Godot\godot.exe --headless --path . -s addons/gdUnit4/bin/GdUnitCmdTool.gd --ignoreHeadlessMode -a tests
 ```
 
+Après tout ajout d'un `class_name`, lancer `--import` **avant** les tests : tant que la classe
+n'est pas dans `.godot/global_script_class_cache.cfg`, GdUnit4 crashe au scan (signal 11) ou
+annonce « No test cases found » au lieu de signaler l'erreur. Constaté en phase 1a.
+```
+D:\Godot\godot.exe --headless --path . --import
+```
+
 Avant chaque commit — `check_scope.py` vérifie l'index, pas l'arbre de travail. Stager d'abord,
 sinon le script échoue sur les fichiers en cours des autres zones :
 ```
@@ -62,7 +69,7 @@ Contrôles manuels : `DEV/tests_manuels.md` (un fichier par zone, cf. CONVENTION
 
 ---
 
-## Phase 0 — Fondations du projet Godot  [EN COURS]
+## Phase 0 — Fondations du projet Godot  [FAIT]
 
 - `project.godot` : Godot 4.5, renderer Forward+, nom de projet, scène principale déclarée.
 - Fenêtre : `display/window/size/viewport_width=1920`, `viewport_height=1080`, mode fenêtré,
@@ -91,7 +98,7 @@ Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmati
 
 ---
 
-## Phase 1 — Intégration de l'environnement spatial  [TODO]
+## Phase 1 — Intégration de l'environnement spatial  [EN COURS]
 
 Dépend de design D1. Les textures **ne sont pas dans git** : les obtenir avec
 `python tools/fetch_textures.py` avant de commencer. Démarrer dès que l'albédo jour et le fond

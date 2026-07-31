@@ -22,6 +22,14 @@ window/stretch/aspect="keep"
 
 enabled=PackedStringArray("res://addons/gdUnit4/plugin.cfg")
 
+[importer_defaults]
+
+texture={
+"compress/high_quality": true,
+"compress/mode": 2,
+"mipmaps/generate": true
+}
+
 [input]
 
 toggle_lieu={

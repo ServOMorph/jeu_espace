@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/nodes/lune.gd" id="1_lune"]
+[ext_resource type="Texture2D" path="res://DESIGN/textures/lune_albedo_8k.jpg" id="2_albedo"]
+
+[sub_resource type="StandardMaterial3D" id="mat_lune"]
+albedo_texture = ExtResource("2_albedo")
+texture_filter = 4
+metallic = 0.0
+roughness = 1.0
+
+[sub_resource type="SphereMesh" id="mesh_lune"]
+material = SubResource("mat_lune")
+radial_segments = 96
+rings = 48
+
+[node name="Lune" type="MeshInstance3D"]
+mesh = SubResource("mesh_lune")
+script = ExtResource("1_lune")

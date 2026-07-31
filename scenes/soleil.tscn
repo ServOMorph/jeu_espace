@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/nodes/soleil.gd" id="1_soleil"]
+
+[sub_resource type="StandardMaterial3D" id="mat_soleil"]
+shading_mode = 0
+albedo_color = Color(1, 0.97, 0.88, 1)
+disable_receive_shadows = true
+
+[sub_resource type="SphereMesh" id="mesh_soleil"]
+material = SubResource("mat_soleil")
+radial_segments = 48
+rings = 24
+
+[node name="Soleil" type="Node3D"]
+script = ExtResource("1_soleil")
+
+[node name="Lumiere" type="DirectionalLight3D" parent="."]
+light_energy = 1.0
+shadow_enabled = false
+
+[node name="Disque" type="MeshInstance3D" parent="."]
+mesh = SubResource("mesh_soleil")

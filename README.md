@@ -20,9 +20,9 @@ fenêtré, contrôle caméra à la souris.
 - `run.py` — lance le projet Godot (fenêtré ou `--headless`).
 
 ## État actuel
-Phase 0 (fondations Godot) quasi close côté zone `dev` : project.godot, arborescence, GdUnit4
-opérationnel en headless, scène triviale, gate visuel (fenêtré 1920x1080, sans erreur) validé par
-l'utilisateur — reste à clôturer formellement via une session `dev`. Côté zone `design`, phases D0,
-D1 et D2 closes : charte, SOURCES.md, MANIFEST.md renseignés, textures Terre/Lune/étoiles livrées,
-proportions du vaisseau chiffrées et planches livrées, handoff D2 envoyé vers `dev`. Phase D3
-(intérieur centre de commande + volet) à démarrer.
+Côté zone `dev` : Phase 0 (fondations Godot) close, gate 3 validé. Phase 1a (géométrie et échelle
+de l'environnement spatial, sans shader) livrée : échelle unique du projet (`world_scale.gd`),
+scènes Terre/Lune/Soleil/test_env, tests unitaires et couverture validés — contrôle visuel
+restant. Côté zone `design`, phases D0, D1 et D2 closes : charte, SOURCES.md, MANIFEST.md
+renseignés, textures Terre/Lune/étoiles livrées, proportions du vaisseau chiffrées et planches
+livrées, handoff D2 envoyé vers `dev`. Phase D3 (intérieur centre de commande + volet) à démarrer.

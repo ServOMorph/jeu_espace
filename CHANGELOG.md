@@ -1,3 +1,18 @@
+## v0.7 — 2026-07-31
+
+### Ajouté
+- Phase 1a dev (géométrie et échelle, sans shader) : `scripts/core/world_scale.gd` (échelle
+  unique du projet, RefCounted statique), 14 tests unitaires, couverture 100%.
+- scenes/terre.tscn, lune.tscn, soleil.tscn, test_env.tscn : environnement spatial de base,
+  caméra libre de debug.
+
+### Modifié
+- project.godot : import textures forcé en BPTC + mipmaps ([importer_defaults]), VRAM albédo
+  Terre 939 Mo -> 354 Mo.
+- DEV/roadmap_dev.md : Phase 0 [FAIT] (gate 3 validé), Phase 1 [EN COURS] ; piège GdUnit4
+  (crash si `class_name` non enregistré avant `--import`) documenté.
+- DEV/tests_manuels.md : contrôle visuel gate 0 retiré (validé), contrôle visuel gate 1a ajouté.
+
 ## v0.6 — 2026-07-31
 
 ### Ajouté
