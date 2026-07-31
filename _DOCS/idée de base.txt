@@ -1,0 +1,5 @@
+Créer un jeux en 3d avec godot. Toutes les images 2D seront faite par chatgpt dans codex.
+Objectif : le joueur est dans un vaisseau avec 2 lieux : le cockpit pour diriger le vaisseau et le centre de commande . Dans le cockpit on ne voit que des instruments et l'espace devant le vaisseau. Dans le centre de commande on peut voir à 360degré et on peut lever le ciel, on est sous une coupole en verre. Je veux que de la coupole on puisse voir le vaisseau et l'extérieur. Du coté cockpit on ne voit pas le vaisseau.
+Je veux qu'on soit en orbite autour de la terre. Je veux qu'on est une vision complètement réaliste de la terre, On se met vraiement à la place d'astronauet dans un vaisseau qui peux évoluer en oprbite, voir sortir de l'orbite ou redescendre. 
+3 agents : orchestrateur, codeur, design
+MVP : graphisme low poly pour le vaisseau mais pour l'extérieur vu réaliste avec planète terre et espace ainsi que soleil et lune. possibilité de tuorner la tête dans la salle de commandement pour voir e paysage, vaisseau en mouvement lent comme en orbite réél. Déplacement de la caméra avec la souris, 1920x1080 px fenêtré

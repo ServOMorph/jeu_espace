@@ -3,3 +3,5 @@
 | Alias | Dossier |
 |-------|---------|
 | orchestrateur | D:\ServOMorph\jeu_espace |
+| dev | D:\ServOMorph\jeu_espace\DEV |
+| design | D:\ServOMorph\jeu_espace\DESIGN |
