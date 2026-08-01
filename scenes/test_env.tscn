@@ -25,6 +25,7 @@ tonemap_mode = 2
 environment = SubResource("env")
 
 [node name="Terre" parent="." instance=ExtResource("2_terre")]
+soleil_path = NodePath("../Soleil")
 
 [node name="Soleil" parent="." instance=ExtResource("3_soleil")]
 transform = Transform3D(0.766044, 0, -0.642788, 0, 1, 0, 0.642788, 0, 0.766044, 0, 0, 0)

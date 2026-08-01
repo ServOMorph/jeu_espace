@@ -1,13 +1,17 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://scripts/nodes/terre.gd" id="1_terre"]
 [ext_resource type="Texture2D" path="res://DESIGN/textures/terre_albedo_21600x10800.jpg" id="2_albedo"]
+[ext_resource type="Shader" path="res://shaders/terre.gdshader" id="3_shader"]
+[ext_resource type="Texture2D" path="res://DESIGN/textures/terre_nightlights_13500x6750.jpg" id="4_nightlights"]
 
-[sub_resource type="StandardMaterial3D" id="mat_terre"]
-albedo_texture = ExtResource("2_albedo")
-texture_filter = 4
-metallic = 0.0
-roughness = 1.0
+[sub_resource type="ShaderMaterial" id="mat_terre"]
+shader = ExtResource("3_shader")
+shader_parameter/albedo_jour = ExtResource("2_albedo")
+shader_parameter/lumieres_nuit = ExtResource("4_nightlights")
+shader_parameter/direction_soleil = Vector3(0, 0, 1)
+shader_parameter/largeur_terminateur = 0.15
+shader_parameter/intensite_nuit = 1.0
 
 [sub_resource type="SphereMesh" id="mesh_terre"]
 material = SubResource("mat_terre")

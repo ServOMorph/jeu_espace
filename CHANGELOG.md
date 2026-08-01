@@ -1,3 +1,23 @@
+## v0.10 — 2026-08-01
+
+### Ajouté
+- shaders/terre.gdshader : shader jour/nuit de la Terre (albédo diurne, lumières urbaines en
+  émission côté nuit), gate 1b validé par contrôle visuel.
+- scripts/core/eclairage.gd : logique jour/nuit pure et testable, miroir du shader ; 11 tests
+  unitaires (tests/test_eclairage.gd).
+
+### Modifié
+- scenes/terre.tscn, scripts/nodes/terre.gd, scenes/test_env.tscn : Terre câblée en
+  ShaderMaterial, direction du Soleil poussée depuis le nœud Soleil.
+- DEV/tests_manuels.md : gate 1b retiré (validé) ; tests manuels phase 5 ajoutés (lisibilité
+  instruments cockpit, conflit de visibilité de la coque à trancher).
+- DEV/roadmap_dev.md : sous-phase 1b marquée [FAIT], dossier `shaders/` documenté.
+
+### Notes
+- Phase 1 reste en cours : 1c (nuages) et 1d (halo) restent à livrer.
+- Conflit ouvert entre `roadmap_dev.md` phase 5 et le handoff design D4 sur la visibilité de la
+  coque depuis le cockpit — à trancher avant l'ouverture de la phase 5.
+
 ## v0.9 — 2026-08-01
 
 ### Ajouté

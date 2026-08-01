@@ -74,7 +74,9 @@ Contrôles manuels : `DEV/tests_manuels.md` (un fichier par zone, cf. CONVENTION
 - `project.godot` : Godot 4.5, renderer Forward+, nom de projet, scène principale déclarée.
 - Fenêtre : `display/window/size/viewport_width=1920`, `viewport_height=1080`, mode fenêtré,
   `stretch/mode=canvas_items`, `stretch/aspect=keep`.
-- Arborescence : `scripts/core/`, `scripts/nodes/`, `scenes/`, `tests/`. Rien d'autre.
+- Arborescence : `scripts/core/`, `scripts/nodes/`, `scenes/`, `tests/`. Plus `shaders/` (ajouté
+  en phase 1b, décision du 2026-08-01 : un `.gdshader` ne rentre dans aucun des quatre dossiers
+  initiaux, versionné séparément pour rester diffable et éditable dans l'éditeur de shader).
 - `.gitignore` Godot : `.godot/`, `.import/`, `export_presets.cfg`, dossiers d'export.
 - Installer GdUnit4 dans `addons/` et vérifier qu'un test trivial passe en headless. Le faire
   maintenant : l'installer en phase 2 sous pression de livraison est le scénario où les tests
@@ -121,15 +123,17 @@ découpage existe précisément pour que l'échec du shader ne remette pas en ca
 Gate 1a : tests unitaires sur `world_scale` (conversions aller-retour, valeurs limites),
 couverture ≥ 85 %, et à l'œil depuis 400 km : courbure crédible, pas de facettage visible.
 
-### 1b — Shader jour/nuit  [risque élevé]
-- Matériau Terre : **shader personnalisé**, pas `StandardMaterial3D` — le mélange jour/nuit
-  selon l'incidence de la lumière n'est pas exprimable autrement. Entrées : albédo, lumières
-  nocturnes, normal map.
-- **Sous-phase à traiter en session Opus**, pas Sonnet. Décision du 2026-07-31 : c'est le seul
-  point du projet où l'écart de modèle change l'issue.
+### 1b — Shader jour/nuit  [FAIT]
+- Matériau Terre : **shader personnalisé** (`shaders/terre.gdshader`), pas `StandardMaterial3D`.
+  Entrées : albédo, lumières nocturnes. Normal map non livrée (retirée du périmètre D1), uniform
+  non ajouté tant qu'aucune source n'existe.
+- Logique de facteur jour/nuit dupliquée en pur GDScript testable (`scripts/core/eclairage.gd`,
+  `direction_vers_soleil`/`facteur_jour`/`facteur_nuit`) — toute modification du shader doit être
+  reportée sur ce module, et inversement.
+- Traité en session Opus conformément à la décision du 2026-07-31.
 
 Gate 1b : terminateur jour/nuit net, transition progressive et non abrupte, lumières urbaines
-visibles côté nuit uniquement.
+visibles côté nuit uniquement. **Validé par contrôle visuel utilisateur le 2026-08-01.**
 
 ### 1c — Couche nuageuse
 - Sphère légèrement plus grande, texture alpha, rotation propre lente.
