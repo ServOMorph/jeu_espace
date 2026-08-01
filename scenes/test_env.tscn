@@ -56,7 +56,7 @@ script = ExtResource("4_camera")
 
 [node name="VueOrbitale" type="Node" parent="."]
 script = ExtResource("5_vue")
-camera_locale_path = NodePath("../CameraLibre")
+camera_locale_path = NodePath("../Vaisseau/CentreCommande/Interieur/Camera3D")
 camera_lointaine_path = NodePath("../LointainViewport/MondeLointain/CameraLointaine")
 soleil_lointain_path = NodePath("../LointainViewport/MondeLointain/Soleil")
 soleil_local_path = NodePath("../SoleilLocal")

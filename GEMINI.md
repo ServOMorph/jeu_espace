@@ -1,8 +1,10 @@
-# AGENTS.md
+# GEMINI.md
 
-Instructions pour les agents non-Claude (Codex, Gemini, etc.) intervenant sur ce projet.
-Ce fichier ne duplique pas `.claude/CLAUDE.md` (protocole vibecoding start/close, réservé à
-Claude Code) : il ne couvre que ce qui s'applique à tout agent, indépendamment de l'outil.
+Instructions pour Gemini intervenant sur ce projet. Miroir de `AGENTS.md` (instructions
+communes aux agents non-Claude) — ce fichier existe séparément car les outils Gemini lisent
+`GEMINI.md`, pas `AGENTS.md`. Ce fichier ne duplique pas `.claude/CLAUDE.md` (protocole
+vibecoding start/close, réservé à Claude Code) : il ne couvre que ce qui s'applique à tout
+agent, indépendamment de l'outil.
 
 ## Base de connaissances
 
@@ -22,7 +24,7 @@ inclure cette commande dans l'entrée. Après validation d'un test, supprimer im
 section. Lorsque tous les tests en attente sont validés, vider intégralement le fichier, sans
 en conserver le titre ni les consignes.
 
-## Synchronisation CLAUDE.md / GEMINI.md
+## Synchronisation CLAUDE.md / AGENTS.md
 À chaque modification de ce fichier, proposer à l'utilisateur de reporter le changement dans
-`.claude/CLAUDE.md` et dans `GEMINI.md`. Si l'un de ces fichiers n'existe pas, proposer de le
+`.claude/CLAUDE.md` et dans `AGENTS.md`. Si l'un de ces fichiers n'existe pas, proposer de le
 créer plutôt que de le créer directement.

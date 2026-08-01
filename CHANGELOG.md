@@ -1,3 +1,32 @@
+## v0.14 — 2026-08-02
+
+### Ajouté
+- Phase 4 dev (implémentée, gate visuel en attente) : `scripts/core/camera_rig.gd` (état pur
+  yaw/pitch, paramétré par des vecteurs `avant`/`haut`, découplé du repère du vaisseau) et
+  `scripts/core/volet_state.gd` (machine à états fermé/ouverture/ouvert/fermeture, inversion en
+  cours d'animation sans saut) — 18 tests.
+- `scripts/nodes/camera_rig_node.gd`, `scripts/nodes/volet_panneaux.gd` (génération procédurale
+  des 12 panneaux du volet, géométrie dérivée de `CoupoleArmature`).
+- `scenes/centre_commande.tscn` (sol, console, sièges, rangement, caméra), instanciée sous
+  `CentreCommande` dans `vaisseau.tscn` ; `Volet` ajouté sous `Coupole`.
+- `GEMINI.md` créé (miroir d'`AGENTS.md` pour l'outillage Gemini).
+
+### Modifié
+- `scripts/nodes/coupole_armature.gd` : `class_name CoupoleArmature` ajouté, pour partager ses
+  constantes de géométrie avec `volet_panneaux.gd`.
+- `scripts/nodes/vue_orbitale.gd` : lit `cam_locale.global_transform.orthonormalized()` au lieu
+  de `.transform` — nécessaire dès qu'une caméra de jeu est imbriquée dans la hiérarchie du
+  vaisseau (mise à l'échelle ×60), plus seulement une caméra sœur comme `CameraLibre`.
+- `scenes/test_env.tscn` : `VueOrbitale.camera_locale_path` pointe temporairement vers la caméra
+  du centre de commande (contrôle visuel phase 4), en l'absence de `lieu_state`/`lieu_manager`.
+- `.claude/CLAUDE.md`, `AGENTS.md` : toute entrée `tests_manuels.md` doit inclure la commande de
+  lancement du contrôle ; toute modification de `CLAUDE.md`/`AGENTS.md`/`GEMINI.md` doit être
+  proposée en synchronisation aux deux autres fichiers.
+
+### Notes
+- 97/97 tests, couverture fonctionnelle 100 %. Gate visuel phase 4 non exécuté cette session —
+  entrée dans `DEV/tests_manuels.md`, commande de lancement incluse.
+
 ## v0.13 — 2026-08-01
 
 ### Ajouté

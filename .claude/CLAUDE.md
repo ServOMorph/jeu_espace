@@ -70,7 +70,7 @@ Si aucun de ces critères n'est rempli, le signaler avant de créer le fichier.
   à N cas verrouillés plutôt que des tests unitaires classiques.
 
 ## Tests manuels
-Utiliser `tests_manuels.md` à la racine de la zone (`DEV/tests_manuels.md`, `DESIGN/tests_manuels.md`) comme file d'attente exhaustive des contrôles manuels non validés. Lorsqu'un test manuel reste à effectuer, l'ajouter à ce fichier, même si d'autres tests y sont déjà en attente. Après validation d'un test, supprimer immédiatement sa section. Lorsque tous les tests en attente sont validés, vider intégralement le fichier, sans en conserver le titre ni les consignes.
+Utiliser `tests_manuels.md` à la racine de la zone (`DEV/tests_manuels.md`, `DESIGN/tests_manuels.md`) comme file d'attente exhaustive des contrôles manuels non validés. Lorsqu'un test manuel reste à effectuer, l'ajouter à ce fichier, même si d'autres tests y sont déjà en attente. Si le contrôle nécessite de lancer une commande (exécutable, scène, script), inclure cette commande dans l'entrée. Après validation d'un test, supprimer immédiatement sa section. Lorsque tous les tests en attente sont validés, vider intégralement le fichier, sans en conserver le titre ni les consignes.
 
 ## Contrôle du contexte
 
@@ -107,3 +107,6 @@ Pour les tâches répétitives et templated (commits, posts, changelogs, donnée
 ## Spécificités projet
 
 Section réservée aux règles propres à ce projet, hors périmètre du kit. Cette section est préservée intégralement par `/update` (jamais écrasée ni fusionnée avec le contenu du kit). Convention : toute règle liée à une section précise du fichier doit la référencer explicitement par son titre (ex: "Section Roadmap : ..."), plutôt que compter sur la position physique de cette section (toujours en fin de fichier).
+
+### Synchronisation AGENTS.md / GEMINI.md
+À chaque modification de `.claude/CLAUDE.md` (ce fichier), proposer à l'utilisateur de reporter le changement dans `AGENTS.md` et `GEMINI.md` à la racine du projet. Si l'un de ces fichiers n'existe pas, proposer à l'utilisateur de le créer plutôt que de le créer directement.

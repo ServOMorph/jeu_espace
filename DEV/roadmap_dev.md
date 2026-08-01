@@ -259,7 +259,7 @@ Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmati
 
 ---
 
-## Phase 4 — Centre de commande et volet de coupole  [TODO]
+## Phase 4 — Centre de commande et volet de coupole  [EN COURS]
 
 Dépend de design D3.
 
@@ -290,6 +290,13 @@ unités planétaires.
 3. Rotation 360° fluide sans clipping ni disparition de la Terre ; extérieur visible volet
    ouvert, occulté volet fermé ; état du volet préservé après aller-retour vers le cockpit.
    Contrôle visuel dans `DEV/tests_manuels.md`.
+
+**État (2026-08-02)** : gates 1 et 2 validés — 97/97 tests, couverture 100 %. Gate 3 (contrôle
+visuel) en attente, entrée dans `DEV/tests_manuels.md`. Caméra du centre de commande câblée
+temporairement dans `test_env.tscn` (`VueOrbitale.camera_locale_path`) pour ce contrôle, en
+l'absence de `lieu_state`/`lieu_manager` (phase 6). `vue_orbitale.gd` adapté pour lire
+`global_transform.orthonormalized()` : nécessaire dès qu'une caméra est imbriquée dans la
+hiérarchie du vaisseau (mise à l'échelle ×60), plus seulement une caméra sœur.
 
 **⏸ Checkpoint** — Demander à l'utilisateur de faire `/compact` avant de continuer.
 Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmation.

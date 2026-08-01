@@ -1,3 +1,4 @@
+class_name CoupoleArmature
 extends Node3D
 
 ## Armature de la coupole (montants + cerclages), generee proceduralement depuis les
@@ -6,6 +7,9 @@ extends Node3D
 ## pas les trois hauteurs de cerclage independamment du rayon de la coupole ; le cerclage
 ## "mi-hauteur" est donc interprete comme le point median geometrique de l'arc plutot que
 ## reproduit litteralement.
+##
+## RAYON/HAUTEUR_SOMMET/HAUTEUR_BASE/NB_MONTANTS font office de source unique pour toute
+## geometrie devant s'aligner sur les baies de la coupole (cf. volet_panneaux.gd).
 
 const RAYON := 0.15
 const HAUTEUR_SOMMET := 0.30

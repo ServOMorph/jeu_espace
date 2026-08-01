@@ -44,7 +44,7 @@ func _process(_delta: float) -> void:
 	var repere := orbite.frame_at(t)
 	cam_lointaine.fov = cam_locale.fov
 	cam_lointaine.transform = RepereVaisseau.transform_camera_lointaine(
-		repere, cam_locale.transform
+		repere, cam_locale.global_transform.orthonormalized()
 	)
 	_orienter_soleil_local(repere)
 
