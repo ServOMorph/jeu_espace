@@ -1,3 +1,15 @@
+## v0.8 — 2026-08-01
+
+### Modifié
+- DEV/tests_manuels.md : contrôle visuel gate 1a validé par l'utilisateur, section retirée ; test
+  manuel phase 4 (lisibilité de l'armature de coupole) ajouté suite handoff design D2.
+
+### Notes
+- Phase 1a intégralement close (tests, couverture, contrôle visuel).
+- Écarts relevés sur handoff design D2 (position panneaux solaires, statut `proportions.md` non
+  mis à jour, chevauchement coupole/panneaux) signalés, non résolus — à trancher avant phase 3.
+- Sous-phase 1b (shader jour/nuit) à traiter en session Opus, pas Sonnet.
+
 ## v0.7 — 2026-07-31
 
 ### Ajouté

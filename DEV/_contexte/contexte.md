@@ -7,10 +7,10 @@ Développement du jeu Godot : scripts, scènes, mécaniques de jeu (contrôle va
 Godot 4 (3D). Résolution cible MVP : 1920x1080 fenêtré, contrôle caméra à la souris. Deux lieux à scripter : cockpit (vue extérieure sur l'espace devant le vaisseau, vaisseau non visible) et centre de commande sous coupole en verre (vue à 360°, tête tournable, vaisseau visible en mouvement lent comme en orbite réelle). Vaisseau capable d'évoluer en orbite terrestre, d'en sortir ou de redescendre.
 
 ## État actuel (réécrit intégralement à chaque /close)
-Phase 0 close (gate 3 validé). Phase 1a (géométrie/échelle sans shader) livrée : `world_scale.gd`
-(échelle unique du projet), scènes Terre/Lune/Soleil/test_env, tests unitaires et couverture
-validés (100%). Gate 1a : contrôle visuel restant. Phase 1b (shader jour/nuit) à traiter en
-session Opus ensuite.
+Phase 0 close (gate 3 validé). Phase 1a close : `world_scale.gd` (échelle unique du projet),
+scènes Terre/Lune/Soleil/test_env, tests unitaires, couverture (100%) et contrôle visuel gate 1a
+tous validés. Phase 1 reste EN COURS : sous-phase 1b (shader jour/nuit) à traiter en session Opus.
+Handoff design D2 (proportions vaisseau) reçu, 3 écarts signalés à trancher avant phase 3.
 
 ## Décisions structurantes (append only — 10 entrées max, 5 lignes max/entrée, archiver au-delà)
 - 2026-07-31 : Initialisation du protocole vibecoding.
@@ -18,3 +18,4 @@ session Opus ensuite.
 - 2026-07-31 : `check_scope.py` doit vérifier l'index git (`diff --cached`), pas l'arbre de travail — corrigé côté orchestrateur.
 - 2026-07-31 : `world_scale.gd` en RefCounted statique (pas d'autoload), pour rester testable sans SceneTree.
 - 2026-07-31 : Import textures forcé en BPTC + mipmaps via `project.godot` (DESIGN/textures/ gitignoré, réglages par fichier `.import` non reproductibles).
+- 2026-08-01 : Gate 1a validé par contrôle visuel utilisateur — phase 1a intégralement close.

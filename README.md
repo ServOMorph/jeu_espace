@@ -21,8 +21,10 @@ fenêtré, contrôle caméra à la souris.
 
 ## État actuel
 Côté zone `dev` : Phase 0 (fondations Godot) close, gate 3 validé. Phase 1a (géométrie et échelle
-de l'environnement spatial, sans shader) livrée : échelle unique du projet (`world_scale.gd`),
-scènes Terre/Lune/Soleil/test_env, tests unitaires et couverture validés — contrôle visuel
-restant. Côté zone `design`, phases D0, D1 et D2 closes : charte, SOURCES.md, MANIFEST.md
-renseignés, textures Terre/Lune/étoiles livrées, proportions du vaisseau chiffrées et planches
-livrées, handoff D2 envoyé vers `dev`. Phase D3 (intérieur centre de commande + volet) à démarrer.
+de l'environnement spatial, sans shader) close : échelle unique du projet (`world_scale.gd`),
+scènes Terre/Lune/Soleil/test_env, tests unitaires, couverture et contrôle visuel gate 1a tous
+validés. Phase 1 reste en cours : sous-phase 1b (shader jour/nuit) à traiter en session Opus.
+Handoff design D2 (proportions vaisseau) reçu, écarts signalés à trancher avant phase 3. Côté zone
+`design`, phases D0, D1 et D2 closes : charte, SOURCES.md, MANIFEST.md renseignés, textures
+Terre/Lune/étoiles livrées, proportions du vaisseau chiffrées et planches livrées. Phase D3
+(intérieur centre de commande + volet) à démarrer.
