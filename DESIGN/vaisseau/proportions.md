@@ -50,5 +50,5 @@ coque : conforme à la contrainte « le vaisseau n'est pas visible depuis le coc
 | Nacelles moteur (x2) | diamètre 0.08 L, longueur 0.12 L | arrière, 0.85 L à 1.0 L |
 
 ## Statut
-Proposition initiale non encore validée par l'utilisateur. Les planches (`vue_face.svg`,
+Validé par l'utilisateur le 2026-07-31, sans modification. Les planches (`vue_face.svg`,
 `vue_cote.svg`, `vue_dessus.svg`) illustrent ce chiffrage sous forme de schémas techniques cotés.

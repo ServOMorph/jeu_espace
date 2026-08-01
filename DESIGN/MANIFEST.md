@@ -13,6 +13,21 @@
 | vue_cote.svg | 900x500 | svg (schéma technique coté) | D2 | livré |
 | vue_dessus.svg | 900x500 | svg (schéma technique coté) | D2 | livré |
 
+| notes.md | — | md | D3 | livré |
+| vue_plan.svg | 900x500 | svg (schéma technique coté, plan) | D3 | livré |
+| vue_coupe.svg | 900x500 | svg (schéma technique coté, coupe) | D3 | livré |
+| volet_ferme.svg | 900x500 | svg (schéma technique, état fermé) | D3 | livré |
+| volet_ouvert.svg | 900x500 | svg (schéma technique, état ouvert) | D3 | livré |
+
+| vue_console.svg | 900x500 | svg (schéma technique coté, plan) | D4 | livré |
+| instrument_ecran.svg | 1920x1080 (vectoriel) | svg (fond opaque, texture console) | D4 | livré |
+| instrument_cadran.svg | 400x400 (vectoriel) | svg (fond transparent, overlay/texture individuelle) | D4 | livré |
+| notes.md (instruments) | — | md | D4 | livré |
+
 ## Notes
 - Relief/normal Terre : retiré du périmètre D1 (aucune source NASA statique trouvée). Non bloquant pour dev phase 1.
 - Planches D2 : schémas techniques cotés (pas de rendu artistique ChatGPT/Codex), décision de session du 2026-07-31.
+- Planches D3 : même traitement schéma technique coté que D2, continuité de style.
+- D4 : `vue_console.svg` en schéma technique coté (continuité de style), `instrument_ecran.svg`
+  et `instrument_cadran.svg` en assets vectoriels directement utilisables (pas de rendu
+  ChatGPT/Codex — décision de session du 2026-08-01, cohérente avec D2/D3).

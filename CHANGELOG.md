@@ -1,3 +1,19 @@
+## v0.9 — 2026-08-01
+
+### Ajouté
+- DESIGN/interieur/ : planches intérieur sous coupole (plan, coupe), volet blindé fermé/ouvert,
+  palette intérieure chiffrée dans `charte.md` (Phase D3).
+- DESIGN/instruments/ : console avant, écran central et cadran (set minimal générique), palette
+  chiffrée dans `charte.md` (Phase D4).
+
+### Corrigé
+- DESIGN/vaisseau/proportions.md : § Statut reflète désormais la validation utilisateur du
+  2026-07-31 (non mise à jour lors de la clôture D2).
+
+### Notes
+- Handoffs D3 et D4 envoyés vers `dev` (phases 4 centre de commande, 5 cockpit).
+- Phase D5 (passe visuelle finale) non démarrée : dépend d'un rendu `dev` en situation.
+
 ## v0.8 — 2026-08-01
 
 ### Modifié

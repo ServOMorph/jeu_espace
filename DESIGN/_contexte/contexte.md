@@ -7,10 +7,11 @@ Design artistique et UX du jeu : direction visuelle (vaisseau low poly, environn
 Assets 2D générés par ChatGPT via Codex. Vaisseau en low poly. Extérieur en vue réaliste : Terre, soleil, lune, espace. Centre de commande sous coupole en verre laissant voir le vaisseau et l'extérieur ; côté cockpit, le vaisseau n'est pas visible.
 
 ## État actuel (réécrit intégralement à chaque /close)
-Phases D0, D1 et D2 closes. Charte, SOURCES.md, MANIFEST.md renseignés. Textures Terre/Lune/étoiles
-livrées (cf. historique D1). `DESIGN/vaisseau/proportions.md` chiffré et validé, planches
-`vue_face.svg`/`vue_cote.svg`/`vue_dessus.svg` livrées en schémas techniques cotés. Handoff D2
-envoyé vers `dev`. Phase D3 (intérieur centre de commande + volet) à démarrer.
+Phases D0 à D4 closes. Charte, SOURCES.md, MANIFEST.md renseignés. Textures Terre/Lune/étoiles
+livrées (D1). Proportions du vaisseau chiffrées et validées (D2). Intérieur sous coupole, volet
+blindé fermé/ouvert et palette intérieure livrés (D3). Instruments 2D du cockpit (set minimal
+générique) livrés (D4). Handoffs D3 et D4 envoyés vers `dev`. Phase D5 (passe visuelle finale)
+bloquée : dépend d'un rendu `dev` en situation, pas encore disponible.
 
 ## Décisions structurantes (append only — 10 entrées max, 5 lignes max/entrée, archiver au-delà)
 - 2026-07-31 : Initialisation du protocole vibecoding.
@@ -22,3 +23,7 @@ envoyé vers `dev`. Phase D3 (intérieur centre de commande + volet) à démarre
   artistique ChatGPT/Codex (choix utilisateur en session).
 - 2026-07-31 : Proportions du vaisseau (fuselage, coupole 0.30 L, cockpit 0.15 L, structures
   externes) validées par l'utilisateur sans modification.
+- 2026-08-01 : Pas de surface de verre vue de l'intérieur de la coupole (tri de rendu) ; l'armature
+  opaque porte seule la sensation de bulle.
+- 2026-08-01 : Set d'instruments cockpit limité à un minimal générique (écran + 2 cadrans +
+  bandeau de voyants), aucune fonction pilotée n'existant au MVP.

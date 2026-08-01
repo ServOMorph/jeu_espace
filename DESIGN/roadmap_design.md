@@ -124,7 +124,7 @@ Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmati
 
 ---
 
-## Phase D3 — Intérieur du centre de commande et volet  [EN COURS]
+## Phase D3 — Intérieur du centre de commande et volet  [FAIT]
 
 - Planches de l'intérieur sous coupole : sol, structure porteuse, mobilier minimal low poly.
   Volume simple — l'intérêt visuel est dehors, pas dedans.
@@ -147,7 +147,7 @@ Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmati
 
 ---
 
-## Phase D4 — Instruments 2D du cockpit  [TODO]
+## Phase D4 — Instruments 2D du cockpit  [FAIT]
 
 - Planches d'instruments générées via ChatGPT/Codex, dans `DESIGN/instruments/`.
 - **Statiques** : aucune donnée live au MVP, puisqu'il n'y a pas de pilotage. Ne pas concevoir

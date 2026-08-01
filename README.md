@@ -25,6 +25,7 @@ de l'environnement spatial, sans shader) close : échelle unique du projet (`wor
 scènes Terre/Lune/Soleil/test_env, tests unitaires, couverture et contrôle visuel gate 1a tous
 validés. Phase 1 reste en cours : sous-phase 1b (shader jour/nuit) à traiter en session Opus.
 Handoff design D2 (proportions vaisseau) reçu, écarts signalés à trancher avant phase 3. Côté zone
-`design`, phases D0, D1 et D2 closes : charte, SOURCES.md, MANIFEST.md renseignés, textures
-Terre/Lune/étoiles livrées, proportions du vaisseau chiffrées et planches livrées. Phase D3
-(intérieur centre de commande + volet) à démarrer.
+`design`, phases D0 à D4 closes : charte, SOURCES.md, MANIFEST.md renseignés, textures
+Terre/Lune/étoiles livrées, proportions du vaisseau chiffrées, intérieur/volet et instruments 2D
+du cockpit livrés (handoffs D3/D4 envoyés). Phase D5 (passe visuelle finale) bloquée, dépend d'un
+rendu `dev` en situation.

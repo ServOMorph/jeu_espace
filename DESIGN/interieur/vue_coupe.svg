@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" font-family="sans-serif" font-size="14">
+  <rect width="900" height="500" fill="white"/>
+  <text x="450" y="30" text-anchor="middle" font-size="18" font-weight="bold">Centre de commande — coupe (armature + sol)</text>
+
+  <!-- axe fuselage / niveau du sol -->
+  <line x1="120" y1="400" x2="780" y2="400" stroke="black" stroke-width="2"/>
+  <text x="790" y="404" text-anchor="start" font-size="12">sol</text>
+
+  <!-- anneau de base (housing volet) -->
+  <line x1="220" y1="400" x2="680" y2="400" stroke="black" stroke-width="6" stroke-dasharray="1,0"/>
+  <text x="450" y="420" text-anchor="middle" font-size="12">anneau de base — logement du volet retracte (volet ouvert)</text>
+
+  <!-- coupole (demi-spere tronquee) -->
+  <path d="M 220,400 Q 220,110 450,110 Q 680,110 680,400" fill="none" stroke="black" stroke-width="2"/>
+
+  <!-- cerclages horizontaux -->
+  <line x1="220" y1="400" x2="680" y2="400" stroke="black" stroke-width="1" stroke-dasharray="3,3"/>
+  <path d="M 268,250 Q 450,215 632,250" fill="none" stroke="black" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="410" y1="110" x2="490" y2="110" stroke="black" stroke-width="1" stroke-dasharray="3,3"/>
+  <text x="700" y="250" text-anchor="start" font-size="11">cerclage mi-hauteur (0.15 L)</text>
+  <text x="700" y="115" text-anchor="start" font-size="11">cerclage sommet</text>
+  <text x="700" y="400" text-anchor="start" font-size="11">cerclage base</text>
+
+  <!-- montants verticaux (schema, 4 visibles en coupe) -->
+  <line x1="270" y1="395" x2="290" y2="130" stroke="black" stroke-width="1"/>
+  <line x1="360" y1="400" x2="400" y2="112" stroke="black" stroke-width="1"/>
+  <line x1="540" y1="400" x2="500" y2="112" stroke="black" stroke-width="1"/>
+  <line x1="630" y1="395" x2="610" y2="130" stroke="black" stroke-width="1"/>
+  <text x="450" y="95" text-anchor="middle" font-size="12">montant (rail du volet integre)</text>
+
+  <!-- console -->
+  <rect x="410" y="360" width="80" height="40" fill="none" stroke="black" stroke-width="2"/>
+  <text x="450" y="350" text-anchor="middle" font-size="12">console (haut. 0.10 coupole)</text>
+
+  <!-- volet : position fermee en surimpression (trait pointille) -->
+  <path d="M 270,395 Q 280,260 400,150" fill="none" stroke="#C97A2E" stroke-width="3" stroke-dasharray="5,4"/>
+  <text x="230" y="230" text-anchor="middle" font-size="11" fill="#C97A2E" transform="rotate(-60 230,230)">volet — trajectoire de retraction</text>
+
+  <!-- cotations -->
+  <line x1="220" y1="450" x2="680" y2="450" stroke="black" stroke-width="1"/>
+  <line x1="220" y1="444" x2="220" y2="456" stroke="black" stroke-width="1"/>
+  <line x1="680" y1="444" x2="680" y2="456" stroke="black" stroke-width="1"/>
+  <text x="450" y="470" text-anchor="middle" font-size="12">Diametre coupole = 0.30 L</text>
+
+  <line x1="120" y1="400" x2="120" y2="110" stroke="black" stroke-width="1"/>
+  <line x1="114" y1="400" x2="126" y2="400" stroke="black" stroke-width="1"/>
+  <line x1="114" y1="110" x2="126" y2="110" stroke="black" stroke-width="1"/>
+  <text x="90" y="255" text-anchor="middle" font-size="12" transform="rotate(-90 90,255)">Hauteur sommet = 0.30 L</text>
+</svg>

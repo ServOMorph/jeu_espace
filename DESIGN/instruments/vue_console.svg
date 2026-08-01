@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" font-family="sans-serif" font-size="14">
+  <rect width="900" height="500" fill="white"/>
+  <text x="450" y="30" text-anchor="middle" font-size="18" font-weight="bold">Console avant cockpit — vue de face, schéma technique coté</text>
+
+  <!-- cadre console -->
+  <rect x="200" y="120" width="500" height="220" fill="none" stroke="black" stroke-width="2"/>
+  <text x="450" y="365" text-anchor="middle" font-size="12">console avant — largeur 0.10 L, hauteur 0.03 L</text>
+
+  <!-- ecran central -->
+  <rect x="370" y="150" width="160" height="80" fill="none" stroke="black" stroke-width="2"/>
+  <text x="450" y="245" text-anchor="middle" font-size="11">écran central statique — 0.04 L x 0.02 L</text>
+
+  <!-- cadrans -->
+  <circle cx="270" cy="190" r="30" fill="none" stroke="black" stroke-width="2"/>
+  <text x="270" y="230" text-anchor="middle" font-size="11">cadran G</text>
+  <text x="270" y="245" text-anchor="middle" font-size="10">Ø 0.015 L</text>
+
+  <circle cx="630" cy="190" r="30" fill="none" stroke="black" stroke-width="2"/>
+  <text x="630" y="230" text-anchor="middle" font-size="11">cadran D</text>
+  <text x="630" y="245" text-anchor="middle" font-size="10">Ø 0.015 L</text>
+
+  <!-- bandeau voyants -->
+  <rect x="370" y="255" width="160" height="20" fill="none" stroke="black" stroke-width="1.5"/>
+  <g fill="black">
+    <circle cx="390" cy="265" r="3"/>
+    <circle cx="415" cy="265" r="3"/>
+    <circle cx="440" cy="265" r="3"/>
+    <circle cx="465" cy="265" r="3"/>
+    <circle cx="490" cy="265" r="3"/>
+    <circle cx="510" cy="265" r="3"/>
+  </g>
+  <text x="450" y="292" text-anchor="middle" font-size="11">bandeau de voyants ponctuels — 0.04 L x 0.005 L, 6 points</text>
+
+  <!-- cotation hauteur -->
+  <line x1="170" y1="120" x2="170" y2="340" stroke="black" stroke-width="1"/>
+  <line x1="165" y1="120" x2="175" y2="120" stroke="black" stroke-width="1"/>
+  <line x1="165" y1="340" x2="175" y2="340" stroke="black" stroke-width="1"/>
+  <text x="150" y="235" text-anchor="middle" font-size="11" transform="rotate(-90 150 235)">0.03 L</text>
+
+  <!-- cotation largeur -->
+  <line x1="200" y1="365" x2="700" y2="365" stroke="black" stroke-width="1"/>
+  <line x1="200" y1="360" x2="200" y2="370" stroke="black" stroke-width="1"/>
+  <line x1="700" y1="360" x2="700" y2="370" stroke="black" stroke-width="1"/>
+  <text x="450" y="385" text-anchor="middle" font-size="11">0.10 L</text>
+
+  <text x="450" y="440" text-anchor="middle" font-size="12">Contenu statique uniquement — aucune donnée live (pas de pilotage au MVP)</text>
+  <text x="450" y="460" text-anchor="middle" font-size="11" fill="#557">Palette et assets détaillés : instruments/notes.md et charte.md</text>
+</svg>

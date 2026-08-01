@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" font-family="sans-serif" font-size="14">
+  <rect width="900" height="500" fill="white"/>
+  <text x="450" y="30" text-anchor="middle" font-size="18" font-weight="bold">Centre de commande — vue en plan (sous coupole)</text>
+
+  <!-- axe fuselage -->
+  <line x1="100" y1="260" x2="800" y2="260" stroke="#999" stroke-dasharray="6,4"/>
+  <text x="810" y="264" text-anchor="start" font-size="12">axe fuselage</text>
+
+  <!-- floor : oval suivant courbure fuselage -->
+  <ellipse cx="450" cy="260" rx="230" ry="190" fill="none" stroke="black" stroke-width="2"/>
+  <text x="450" y="465" text-anchor="middle" font-size="12">Sol — ovale, diametre 0.30 L (suit la base de la coupole)</text>
+
+  <!-- anneau de base coupole (housing volet) -->
+  <ellipse cx="450" cy="260" rx="230" ry="190" fill="none" stroke="black" stroke-width="4" stroke-dasharray="2,3"/>
+  <text x="620" y="80" text-anchor="middle" font-size="12">Anneau de base — logement du volet retracte</text>
+
+  <!-- 12 montants a 30 deg, projetes sur l'ellipse -->
+  <g stroke="black" stroke-width="2">
+    <!-- montants marked as radial ticks around ellipse at 12 positions -->
+  </g>
+  <g id="montants">
+    <!-- computed positions: cx=450 cy=260 rx=230 ry=190, angle steps of 30deg starting at 0 -->
+    <circle cx="680" cy="260" r="5" fill="black"/>
+    <circle cx="649" cy="165" r="5" fill="black"/>
+    <circle cx="565" cy="110" r="5" fill="black"/>
+    <circle cx="450" cy="90" r="5" fill="black"/>
+    <circle cx="335" cy="110" r="5" fill="black"/>
+    <circle cx="251" cy="165" r="5" fill="black"/>
+    <circle cx="220" cy="260" r="5" fill="black"/>
+    <circle cx="251" cy="355" r="5" fill="black"/>
+    <circle cx="335" cy="410" r="5" fill="black"/>
+    <circle cx="450" cy="430" r="5" fill="black"/>
+    <circle cx="565" cy="410" r="5" fill="black"/>
+    <circle cx="649" cy="355" r="5" fill="black"/>
+  </g>
+  <text x="700" y="230" text-anchor="start" font-size="12">montant (x12, 30 deg)</text>
+  <line x1="695" y1="235" x2="682" y2="258" stroke="black" stroke-width="1"/>
+
+  <!-- console centrale -->
+  <rect x="410" y="230" width="80" height="60" fill="none" stroke="black" stroke-width="2"/>
+  <text x="450" y="265" text-anchor="middle" font-size="12">console</text>
+
+  <!-- coursive / walkway entre console et perimetre -->
+  <ellipse cx="450" cy="260" rx="150" ry="120" fill="none" stroke="black" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="450" y="150" text-anchor="middle" font-size="12">coursive</text>
+
+  <!-- mobilier minimal : 2 sieges -->
+  <rect x="380" y="300" width="30" height="20" fill="none" stroke="black" stroke-width="1.5"/>
+  <text x="395" y="335" text-anchor="middle" font-size="11">siege</text>
+  <rect x="490" y="300" width="30" height="20" fill="none" stroke="black" stroke-width="1.5"/>
+  <text x="505" y="335" text-anchor="middle" font-size="11">siege</text>
+
+  <!-- rangement -->
+  <rect x="410" y="190" width="80" height="20" fill="none" stroke="black" stroke-width="1.5"/>
+  <text x="450" y="185" text-anchor="middle" font-size="11">rangement bas</text>
+
+  <!-- cotation diametre -->
+  <line x1="220" y1="460" x2="680" y2="460" stroke="black" stroke-width="1"/>
+  <line x1="220" y1="454" x2="220" y2="466" stroke="black" stroke-width="1"/>
+  <line x1="680" y1="454" x2="680" y2="466" stroke="black" stroke-width="1"/>
+  <text x="450" y="480" text-anchor="middle" font-size="12">Diametre coupole = 0.30 L (cf. vaisseau/proportions.md)</text>
+</svg>
