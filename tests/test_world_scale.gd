@@ -53,6 +53,19 @@ func test_nuages_sous_l_orbite_basse() -> void:
 	assert_float(WorldScale.rayon_nuages_unites()).is_less(WorldScale.rayon_orbite_unites())
 
 
+func test_halo_au_dessus_de_la_surface() -> void:
+	var halo := WorldScale.rayon_halo_unites()
+	assert_float(halo).is_greater(WorldScale.rayon_terre_unites())
+	assert_float(WorldScale.unites_vers_km(halo - WorldScale.rayon_terre_unites())).is_equal_approx(
+		WorldScale.ALTITUDE_HALO_KM, 0.001
+	)
+
+
+func test_halo_au_dessus_des_nuages_et_sous_l_orbite() -> void:
+	assert_float(WorldScale.rayon_halo_unites()).is_greater(WorldScale.rayon_nuages_unites())
+	assert_float(WorldScale.rayon_halo_unites()).is_less(WorldScale.rayon_orbite_unites())
+
+
 func test_lune_hors_de_l_orbite_basse() -> void:
 	assert_float(WorldScale.distance_lune_unites()).is_greater(WorldScale.rayon_orbite_unites())
 	assert_float(WorldScale.rayon_lune_unites()).is_less(WorldScale.rayon_terre_unites())

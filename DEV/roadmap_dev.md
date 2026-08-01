@@ -100,7 +100,7 @@ Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmati
 
 ---
 
-## Phase 1 — Intégration de l'environnement spatial  [EN COURS]
+## Phase 1 — Intégration de l'environnement spatial  [FAIT]
 
 Dépend de design D1. Les textures **ne sont pas dans git** : les obtenir avec
 `python tools/fetch_textures.py` avant de commencer. Démarrer dès que l'albédo jour et le fond
@@ -144,7 +144,7 @@ visibles côté nuit uniquement. **Validé par contrôle visuel utilisateur le 2
 Gate 1c : nuages lisibles, pas de scintillement au bord, ombre portée non requise au MVP.
 **Validé par contrôle visuel utilisateur le 2026-08-01.**
 
-### 1d — Halo atmosphérique et vérification du tri
+### 1d — Halo atmosphérique et vérification du tri  [FAIT]
 - Sphère englobante en shader, épaisseur visible par la tranche.
 - **Test de tri de rendu à faire ici, pas en phase 4** : placer temporairement une sphère
   transparente factice entre la caméra et la Terre, vérifier l'ordre avec le halo et les
@@ -152,6 +152,8 @@ Gate 1c : nuages lisibles, pas de scintillement au bord, ombre portée non requi
 
 Gate 1d : halo visible par la tranche, aucune inversion d'ordre entre halo, nuages et sphère
 factice. Contrôle visuel dans `DEV/tests_manuels.md`. Retirer la sphère factice avant de clôturer.
+**Validé par contrôle visuel utilisateur le 2026-08-01** ; sphère factice retirée de
+`scenes/test_env.tscn` après validation.
 
 **⏸ Checkpoint** — Demander à l'utilisateur de faire `/compact` avant de continuer.
 Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmation.

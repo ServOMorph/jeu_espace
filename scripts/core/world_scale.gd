@@ -15,6 +15,10 @@ const DISTANCE_LUNE_KM := 384400.0
 
 const ALTITUDE_NUAGES_KM := 15.0
 
+## Ligne de Karman, altitude conventionnelle de la limite de l'atmosphere :
+## sert de rayon au halo atmospherique visuel.
+const ALTITUDE_HALO_KM := 100.0
+
 ## Le Soleil n'est pas a sa distance reelle : elle placerait la geometrie hors du
 ## far plane utilisable. Il est place a une distance arbitraire, son rayon etant
 ## derive pour conserver le diametre apparent reel vu depuis la Terre.
@@ -46,6 +50,11 @@ static func rayon_lune_unites() -> float:
 ## Rayon de la sphere de nuages, legerement au-dessus de la surface terrestre.
 static func rayon_nuages_unites() -> float:
 	return rayon_terre_unites() + km_vers_unites(ALTITUDE_NUAGES_KM)
+
+
+## Rayon du halo atmospherique, au-dessus de la couche nuageuse.
+static func rayon_halo_unites() -> float:
+	return rayon_terre_unites() + km_vers_unites(ALTITUDE_HALO_KM)
 
 
 static func distance_lune_unites() -> float:

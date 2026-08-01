@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" path="res://scenes/lune.tscn" id="4_lune"]
 [ext_resource type="Script" path="res://scripts/nodes/camera_libre.gd" id="5_camera"]
 [ext_resource type="PackedScene" path="res://scenes/nuages.tscn" id="6_nuages"]
+[ext_resource type="PackedScene" path="res://scenes/halo.tscn" id="7_halo"]
 
 [sub_resource type="PanoramaSkyMaterial" id="sky_mat"]
 panorama = ExtResource("1_etoiles")
@@ -29,6 +30,8 @@ environment = SubResource("env")
 soleil_path = NodePath("../Soleil")
 
 [node name="Nuages" parent="." instance=ExtResource("6_nuages")]
+
+[node name="Halo" parent="." instance=ExtResource("7_halo")]
 
 [node name="Soleil" parent="." instance=ExtResource("3_soleil")]
 transform = Transform3D(0.766044, 0, -0.642788, 0, 1, 0, 0.642788, 0, 0.766044, 0, 0, 0)

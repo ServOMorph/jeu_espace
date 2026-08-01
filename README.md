@@ -20,12 +20,13 @@ fenêtré, contrôle caméra à la souris.
 - `run.py` — lance le projet Godot (fenêtré ou `--headless`).
 
 ## État actuel
-Côté zone `dev` : Phase 0 (fondations Godot) close, gate 3 validé. Phase 1 en cours : 1a
-(géométrie/échelle), 1b (shader jour/nuit Terre, `shaders/terre.gdshader`) et 1c (couche
-nuageuse, `shaders/nuages.gdshader`) closes, gates validés par contrôle visuel. Reste 1d (halo
-atmosphérique) avant clôture de la phase 1. Handoffs design D2 (vaisseau), D3 (intérieur/volet) et
-D4 (instruments cockpit) reçus ; un conflit entre `roadmap_dev.md` et le handoff D4 sur la
-visibilité de la coque depuis le cockpit reste à trancher avant la phase 5. Côté zone `design`, phases D0 à D4 closes :
+Côté zone `dev` : Phase 0 (fondations Godot) close, gate 3 validé. Phase 1 (environnement spatial)
+intégralement close : 1a (géométrie/échelle), 1b (shader jour/nuit Terre, `shaders/terre.gdshader`),
+1c (couche nuageuse, `shaders/nuages.gdshader`) et 1d (halo atmosphérique, `shaders/halo.gdshader`,
+tri de rendu vérifié) — gates tous validés par contrôle visuel. Phase 2 (horloge de simulation,
+orbite sur rail) à ouvrir. Handoffs design D2 (vaisseau), D3 (intérieur/volet) et D4 (instruments
+cockpit) reçus ; un conflit entre `roadmap_dev.md` et le handoff D4 sur la visibilité de la coque
+depuis le cockpit reste à trancher avant la phase 5. Côté zone `design`, phases D0 à D4 closes :
 charte, SOURCES.md, MANIFEST.md renseignés, textures Terre/Lune/étoiles livrées, proportions du
 vaisseau chiffrées, intérieur/volet et instruments 2D du cockpit livrés. Phase D5 (passe visuelle
 finale) bloquée, dépend d'un rendu `dev` en situation.

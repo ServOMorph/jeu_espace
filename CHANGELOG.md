@@ -1,3 +1,23 @@
+## v0.12 — 2026-08-01
+
+### Ajouté
+- shaders/halo.gdshader : halo atmosphérique (glow Fresnel additif, `cull_front`), gate 1d validé
+  par contrôle visuel.
+- scripts/core/world_scale.gd : constante `ALTITUDE_HALO_KM` (ligne de Karman) et
+  `rayon_halo_unites()`, 2 tests unitaires (tests/test_world_scale.gd).
+- scripts/nodes/halo.gd, scenes/halo.tscn : câblée dans scenes/test_env.tscn.
+
+### Modifié
+- scenes/test_env.tscn : sphère factice translucide temporaire ajoutée puis retirée après
+  validation du test de tri de rendu (halo / nuages / sphère factice, ordre correct).
+- DEV/roadmap_dev.md : sous-phase 1d et Phase 1 marquées [FAIT].
+
+### Notes
+- Phase 1 (environnement spatial) intégralement close. Phase 2 (horloge de simulation, orbite sur
+  rail) à ouvrir en prochaine session.
+- Conflit toujours ouvert (P1) entre `roadmap_dev.md` phase 5 et le handoff design D4 sur la
+  visibilité de la coque depuis le cockpit — à trancher avant l'ouverture de la phase 5.
+
 ## v0.11 — 2026-08-01
 
 ### Ajouté

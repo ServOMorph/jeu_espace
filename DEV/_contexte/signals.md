@@ -8,13 +8,11 @@
 - [P2|ouvert] Handoff dev -> orchestrateur (check_scope.py à corriger, tests_manuels.md par zone) — fait quand: `tools/check_scope.py` vérifie l'index et non l'arbre de travail, CONVENTIONS.md/CLAUDE.md mis à jour. réf: `DEV/_handoff.md`.
 
 ## Dernière session (2026-08-01)
-Sous-phase 1c (couche nuageuse) livrée et gate validé par contrôle visuel utilisateur : constante
-`ALTITUDE_NUAGES_KM` + `rayon_nuages_unites()` ajoutées à `scripts/core/world_scale.gd` (2 tests),
-shader `shaders/nuages.gdshader` (alpha depuis le masque de gris `terre_clouds_2048x1024.jpg` livré
-par design), `scripts/nodes/nuages.gd` (rotation propre lente), `scenes/nuages.tscn`, câblée dans
-`scenes/test_env.tscn`. 27/27 tests passent. Phase 1a+1b+1c closes ; reste 1d (halo + tri de rendu)
-avant clôture phase 1. Correction de fonctionnement demandée par l'utilisateur : `DEV/tests_manuels.md`
-ne doit plus contenir d'entrées pour des phases futures non implémentées (scène inexistante = rien à
-valider) — les 3 entrées phase 4/5 prématurément ajoutées ont été retirées, à réintroduire à
-l'ouverture de ces phases avec la commande de lancement associée. Fichier vidé, pas de test manuel en
-attente actuellement.
+Sous-phase 1d (halo atmosphérique + vérification du tri de rendu) livrée et gate validé par
+contrôle visuel utilisateur : constante `ALTITUDE_HALO_KM` (100 km, ligne de Karman) +
+`rayon_halo_unites()` ajoutées à `scripts/core/world_scale.gd` (2 tests), shader
+`shaders/halo.gdshader` (glow Fresnel additif, `cull_front` pour rester visible en silhouette
+complète), `scripts/nodes/halo.gd`, `scenes/halo.tscn`, câblée dans `scenes/test_env.tscn`. Test de
+tri de rendu effectué avec une sphère factice translucide temporaire entre caméra et Terre : ordre
+correct (sphère visible devant les nuages), sphère factice retirée après validation. 29/29 tests
+passent. Phase 1 intégralement close (1a, 1b, 1c, 1d).
