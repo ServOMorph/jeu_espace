@@ -41,6 +41,18 @@ func test_orbite_altitude_parametrable() -> void:
 	assert_float(haute).is_greater(WorldScale.rayon_orbite_unites(400.0))
 
 
+func test_nuages_au_dessus_de_la_surface() -> void:
+	var nuages := WorldScale.rayon_nuages_unites()
+	assert_float(nuages).is_greater(WorldScale.rayon_terre_unites())
+	assert_float(WorldScale.unites_vers_km(nuages - WorldScale.rayon_terre_unites())).is_equal_approx(
+		WorldScale.ALTITUDE_NUAGES_KM, 0.001
+	)
+
+
+func test_nuages_sous_l_orbite_basse() -> void:
+	assert_float(WorldScale.rayon_nuages_unites()).is_less(WorldScale.rayon_orbite_unites())
+
+
 func test_lune_hors_de_l_orbite_basse() -> void:
 	assert_float(WorldScale.distance_lune_unites()).is_greater(WorldScale.rayon_orbite_unites())
 	assert_float(WorldScale.rayon_lune_unites()).is_less(WorldScale.rayon_terre_unites())

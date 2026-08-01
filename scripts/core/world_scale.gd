@@ -13,6 +13,8 @@ const ALTITUDE_ORBITE_KM := 400.0
 const RAYON_LUNE_KM := 1737.4
 const DISTANCE_LUNE_KM := 384400.0
 
+const ALTITUDE_NUAGES_KM := 15.0
+
 ## Le Soleil n'est pas a sa distance reelle : elle placerait la geometrie hors du
 ## far plane utilisable. Il est place a une distance arbitraire, son rayon etant
 ## derive pour conserver le diametre apparent reel vu depuis la Terre.
@@ -39,6 +41,11 @@ static func rayon_orbite_unites(altitude_km: float = ALTITUDE_ORBITE_KM) -> floa
 
 static func rayon_lune_unites() -> float:
 	return km_vers_unites(RAYON_LUNE_KM)
+
+
+## Rayon de la sphere de nuages, legerement au-dessus de la surface terrestre.
+static func rayon_nuages_unites() -> float:
+	return rayon_terre_unites() + km_vers_unites(ALTITUDE_NUAGES_KM)
 
 
 static func distance_lune_unites() -> float:

@@ -135,10 +135,14 @@ couverture ≥ 85 %, et à l'œil depuis 400 km : courbure crédible, pas de fac
 Gate 1b : terminateur jour/nuit net, transition progressive et non abrupte, lumières urbaines
 visibles côté nuit uniquement. **Validé par contrôle visuel utilisateur le 2026-08-01.**
 
-### 1c — Couche nuageuse
+### 1c — Couche nuageuse  [FAIT]
 - Sphère légèrement plus grande, texture alpha, rotation propre lente.
+- `shaders/nuages.gdshader` : alpha depuis le masque de gris `terre_clouds_2048x1024.jpg` (canal
+  rouge, pas d'alpha réel dans le fichier livré). Rayon dérivé de `WorldScale.rayon_nuages_unites()`
+  (constante `ALTITUDE_NUAGES_KM` ajoutée à `world_scale.gd`, aucune valeur en dur).
 
 Gate 1c : nuages lisibles, pas de scintillement au bord, ombre portée non requise au MVP.
+**Validé par contrôle visuel utilisateur le 2026-08-01.**
 
 ### 1d — Halo atmosphérique et vérification du tri
 - Sphère englobante en shader, épaisseur visible par la tranche.

@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=10 format=3]
 
 [ext_resource type="Texture2D" path="res://DESIGN/textures/etoiles_8k.jpg" id="1_etoiles"]
 [ext_resource type="PackedScene" path="res://scenes/terre.tscn" id="2_terre"]
 [ext_resource type="PackedScene" path="res://scenes/soleil.tscn" id="3_soleil"]
 [ext_resource type="PackedScene" path="res://scenes/lune.tscn" id="4_lune"]
 [ext_resource type="Script" path="res://scripts/nodes/camera_libre.gd" id="5_camera"]
+[ext_resource type="PackedScene" path="res://scenes/nuages.tscn" id="6_nuages"]
 
 [sub_resource type="PanoramaSkyMaterial" id="sky_mat"]
 panorama = ExtResource("1_etoiles")
@@ -26,6 +27,8 @@ environment = SubResource("env")
 
 [node name="Terre" parent="." instance=ExtResource("2_terre")]
 soleil_path = NodePath("../Soleil")
+
+[node name="Nuages" parent="." instance=ExtResource("6_nuages")]
 
 [node name="Soleil" parent="." instance=ExtResource("3_soleil")]
 transform = Transform3D(0.766044, 0, -0.642788, 0, 1, 0, 0.642788, 0, 0.766044, 0, 0, 0)

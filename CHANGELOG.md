@@ -1,3 +1,23 @@
+## v0.11 — 2026-08-01
+
+### Ajouté
+- shaders/nuages.gdshader : couche nuageuse (alpha depuis le masque de gris livré par design),
+  gate 1c validé par contrôle visuel.
+- scripts/core/world_scale.gd : constante `ALTITUDE_NUAGES_KM` et `rayon_nuages_unites()`, 2
+  tests unitaires (tests/test_world_scale.gd).
+- scripts/nodes/nuages.gd, scenes/nuages.tscn : rotation propre lente, câblée dans
+  scenes/test_env.tscn.
+
+### Modifié
+- DEV/tests_manuels.md : 3 entrées prématurées (phases 4/5, scènes inexistantes) retirées ;
+  le fichier ne doit contenir que des tests exécutables immédiatement.
+- DEV/roadmap_dev.md : sous-phase 1c marquée [FAIT].
+
+### Notes
+- Phase 1 reste en cours : seule 1d (halo atmosphérique) reste à livrer.
+- Conflit toujours ouvert (P1) entre `roadmap_dev.md` phase 5 et le handoff design D4 sur la
+  visibilité de la coque depuis le cockpit — à trancher avant l'ouverture de la phase 5.
+
 ## v0.10 — 2026-08-01
 
 ### Ajouté

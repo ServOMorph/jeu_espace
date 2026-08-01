@@ -1,0 +1,18 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/nodes/nuages.gd" id="1_nuages"]
+[ext_resource type="Texture2D" path="res://DESIGN/textures/terre_clouds_2048x1024.jpg" id="2_masque"]
+[ext_resource type="Shader" path="res://shaders/nuages.gdshader" id="3_shader"]
+
+[sub_resource type="ShaderMaterial" id="mat_nuages"]
+shader = ExtResource("3_shader")
+shader_parameter/masque_nuages = ExtResource("2_masque")
+
+[sub_resource type="SphereMesh" id="mesh_nuages"]
+material = SubResource("mat_nuages")
+radial_segments = 256
+rings = 128
+
+[node name="Nuages" type="MeshInstance3D"]
+mesh = SubResource("mesh_nuages")
+script = ExtResource("1_nuages")
