@@ -20,11 +20,13 @@ fenêtré, contrôle caméra à la souris.
 - `run.py` — lance le projet Godot (fenêtré ou `--headless`).
 
 ## État actuel
-Côté zone `dev` : Phase 0 (fondations Godot) close, gate 3 validé. Phase 1 (environnement spatial)
-intégralement close : 1a (géométrie/échelle), 1b (shader jour/nuit Terre, `shaders/terre.gdshader`),
-1c (couche nuageuse, `shaders/nuages.gdshader`) et 1d (halo atmosphérique, `shaders/halo.gdshader`,
-tri de rendu vérifié) — gates tous validés par contrôle visuel. Phase 2 (horloge de simulation,
-orbite sur rail) à ouvrir. Handoffs design D2 (vaisseau), D3 (intérieur/volet) et D4 (instruments
+Côté zone `dev` : Phases 0 à 3 closes, gates tous validés par contrôle visuel. Phase 2 : horloge
+de simulation et orbite sur rail (`sim_clock`, `orbit`, `sun_direction`). Phase 3 : vaisseau
+modélisé (`scenes/vaisseau.tscn`) et rendu en orbite avec cycle jour/nuit correct (occultation par
+la Terre). Rendu passé en double échelle pour cette phase : monde lointain en unités planétaires
+composé en fond, vaisseau dans un repère métrique local (`scripts/core/repere_vaisseau.gd`) — un
+vaisseau à taille réelle est ininterprétable en unités planétaires. Phase 4 (centre de commande,
+volet de coupole) à ouvrir. Handoffs design D2 (vaisseau), D3 (intérieur/volet) et D4 (instruments
 cockpit) reçus ; un conflit entre `roadmap_dev.md` et le handoff D4 sur la visibilité de la coque
 depuis le cockpit reste à trancher avant la phase 5. Côté zone `design`, phases D0 à D4 closes :
 charte, SOURCES.md, MANIFEST.md renseignés, textures Terre/Lune/étoiles livrées, proportions du

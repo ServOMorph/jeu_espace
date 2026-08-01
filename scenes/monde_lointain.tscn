@@ -1,0 +1,42 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Texture2D" path="res://DESIGN/textures/etoiles_8k.jpg" id="1_etoiles"]
+[ext_resource type="PackedScene" path="res://scenes/terre.tscn" id="2_terre"]
+[ext_resource type="PackedScene" path="res://scenes/soleil.tscn" id="3_soleil"]
+[ext_resource type="PackedScene" path="res://scenes/lune.tscn" id="4_lune"]
+[ext_resource type="PackedScene" path="res://scenes/nuages.tscn" id="5_nuages"]
+[ext_resource type="PackedScene" path="res://scenes/halo.tscn" id="6_halo"]
+
+[sub_resource type="PanoramaSkyMaterial" id="sky_mat"]
+panorama = ExtResource("1_etoiles")
+energy_multiplier = 1.0
+
+[sub_resource type="Sky" id="sky"]
+sky_material = SubResource("sky_mat")
+
+[sub_resource type="Environment" id="env"]
+background_mode = 2
+sky = SubResource("sky")
+ambient_light_source = 1
+tonemap_mode = 2
+
+[node name="MondeLointain" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("env")
+
+[node name="Terre" parent="." instance=ExtResource("2_terre")]
+soleil_path = NodePath("../Soleil")
+
+[node name="Nuages" parent="." instance=ExtResource("5_nuages")]
+
+[node name="Halo" parent="." instance=ExtResource("6_halo")]
+
+[node name="Soleil" parent="." instance=ExtResource("3_soleil")]
+transform = Transform3D(0.766044, 0, -0.642788, 0, 1, 0, 0.642788, 0, 0.766044, 0, 0, 0)
+
+[node name="Lune" parent="." instance=ExtResource("4_lune")]
+
+[node name="CameraLointaine" type="Camera3D" parent="."]
+near = 0.1
+far = 12000.0

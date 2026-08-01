@@ -1,42 +1,62 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="Texture2D" path="res://DESIGN/textures/etoiles_8k.jpg" id="1_etoiles"]
-[ext_resource type="PackedScene" path="res://scenes/terre.tscn" id="2_terre"]
-[ext_resource type="PackedScene" path="res://scenes/soleil.tscn" id="3_soleil"]
-[ext_resource type="PackedScene" path="res://scenes/lune.tscn" id="4_lune"]
-[ext_resource type="Script" path="res://scripts/nodes/camera_libre.gd" id="5_camera"]
-[ext_resource type="PackedScene" path="res://scenes/nuages.tscn" id="6_nuages"]
-[ext_resource type="PackedScene" path="res://scenes/halo.tscn" id="7_halo"]
+[ext_resource type="Script" path="res://scripts/nodes/sim_clock_node.gd" id="1_horloge"]
+[ext_resource type="PackedScene" path="res://scenes/monde_lointain.tscn" id="2_lointain"]
+[ext_resource type="PackedScene" path="res://scenes/vaisseau.tscn" id="3_vaisseau"]
+[ext_resource type="Script" path="res://scripts/nodes/camera_libre.gd" id="4_camera"]
+[ext_resource type="Script" path="res://scripts/nodes/vue_orbitale.gd" id="5_vue"]
 
-[sub_resource type="PanoramaSkyMaterial" id="sky_mat"]
-panorama = ExtResource("1_etoiles")
-energy_multiplier = 1.0
-
-[sub_resource type="Sky" id="sky"]
-sky_material = SubResource("sky_mat")
-
-[sub_resource type="Environment" id="env"]
-background_mode = 2
-sky = SubResource("sky")
-ambient_light_source = 1
+[sub_resource type="Environment" id="env_proche"]
+background_mode = 3
+background_canvas_max_layer = 0
+ambient_light_source = 2
+ambient_light_color = Color(0.05, 0.06, 0.09, 1)
+ambient_light_energy = 1.0
 tonemap_mode = 2
+
+[sub_resource type="ViewportTexture" id="tex_lointain"]
+viewport_path = NodePath("LointainViewport")
 
 [node name="TestEnv" type="Node3D"]
 
+[node name="Horloge" type="Node" parent="." groups=["horloge"]]
+script = ExtResource("1_horloge")
+
+[node name="LointainViewport" type="SubViewport" parent="."]
+own_world_3d = true
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="MondeLointain" parent="LointainViewport" instance=ExtResource("2_lointain")]
+
+[node name="FondLointain" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Fond" type="TextureRect" parent="FondLointain"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("tex_lointain")
+expand_mode = 1
+stretch_mode = 0
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("env")
+environment = SubResource("env_proche")
 
-[node name="Terre" parent="." instance=ExtResource("2_terre")]
-soleil_path = NodePath("../Soleil")
+[node name="Vaisseau" parent="." instance=ExtResource("3_vaisseau")]
 
-[node name="Nuages" parent="." instance=ExtResource("6_nuages")]
-
-[node name="Halo" parent="." instance=ExtResource("7_halo")]
-
-[node name="Soleil" parent="." instance=ExtResource("3_soleil")]
-transform = Transform3D(0.766044, 0, -0.642788, 0, 1, 0, 0.642788, 0, 0.766044, 0, 0, 0)
-
-[node name="Lune" parent="." instance=ExtResource("4_lune")]
+[node name="SoleilLocal" type="DirectionalLight3D" parent="."]
+shadow_enabled = false
 
 [node name="CameraLibre" type="Camera3D" parent="."]
-script = ExtResource("5_camera")
+script = ExtResource("4_camera")
+
+[node name="VueOrbitale" type="Node" parent="."]
+script = ExtResource("5_vue")
+camera_locale_path = NodePath("../CameraLibre")
+camera_lointaine_path = NodePath("../LointainViewport/MondeLointain/CameraLointaine")
+soleil_lointain_path = NodePath("../LointainViewport/MondeLointain/Soleil")
+soleil_local_path = NodePath("../SoleilLocal")

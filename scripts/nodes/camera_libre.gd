@@ -1,19 +1,27 @@
 extends Camera3D
 
 ## Camera de debug reservee a scenes/test_env.tscn, exclue du build final.
+## Opere dans le repere metrique du vaisseau (1 unite = 1 m, cf. RepereVaisseau) :
+## vitesses et plans de coupure sont exprimes en metres.
 ## La camera de jeu est scripts/core/camera_rig.gd (phase 4) : ne pas reprendre ce code.
 
-@export var vitesse := 20.0
-@export var vitesse_rapide := 200.0
+## Dans le repere du vaisseau, +Y est l'avant et +Z le dorsal : Vector3.UP y designe le
+## nez, pas le haut. Toute reference verticale passe par cette constante.
+const DORSAL := Vector3(0.0, 0.0, 1.0)
+
+@export var vitesse := 25.0
+@export var vitesse_rapide := 250.0
 @export var sensibilite := 0.003
 
 var _capture := false
 
 
 func _ready() -> void:
-	position = Vector3(0.0, 0.0, WorldScale.rayon_orbite_unites())
-	near = 0.05
-	far = WorldScale.SOLEIL_DISTANCE_UNITES * 1.5
+	near = 0.1
+	far = 5000.0
+	var longueur := RepereVaisseau.echelle_modele_metres()
+	position = Vector3(longueur * 1.4, longueur * 1.3, longueur * 0.7)
+	look_at(Vector3(0.0, longueur * 0.5, longueur * 0.15), DORSAL)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	_capture = true
 
@@ -44,9 +52,9 @@ func _process(delta: float) -> void:
 	if Input.is_key_pressed(KEY_D):
 		direction += basis.x
 	if Input.is_key_pressed(KEY_SPACE):
-		direction += Vector3.UP
+		direction += DORSAL
 	if Input.is_key_pressed(KEY_CTRL):
-		direction -= Vector3.UP
+		direction -= DORSAL
 
 	if direction != Vector3.ZERO:
 		var v := vitesse_rapide if Input.is_key_pressed(KEY_SHIFT) else vitesse

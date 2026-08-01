@@ -1,7 +1,10 @@
 extends GdUnitTestSuite
 
+
 const EPSILON := 0.0001
 const LARGEUR := Eclairage.LARGEUR_TERMINATEUR_DEFAUT
+const RAYON_TERRE := 63.71
+const RAYON_ORBITE := 67.71
 
 
 func test_direction_vers_soleil_est_le_z_de_la_base() -> void:
@@ -89,6 +92,86 @@ func test_facteur_nuit_est_le_complement() -> void:
 			+ Eclairage.facteur_nuit(normale, soleil, LARGEUR)
 		)
 		assert_float(somme).is_equal_approx(1.0, EPSILON)
+
+
+func test_eclipse_pleine_lumiere_cote_soleil() -> void:
+	var soleil := Vector3(0.0, 0.0, 1.0)
+	var position := Vector3(0.0, 0.0, RAYON_ORBITE)
+	assert_float(Eclairage.facteur_eclipse(position, soleil, RAYON_TERRE)).is_equal_approx(
+		1.0, EPSILON
+	)
+
+
+## Meme rasant sous la surface, le cote jour ne doit jamais tomber dans l'ombre.
+func test_eclipse_cote_soleil_jamais_dans_l_ombre() -> void:
+	var soleil := Vector3(0.0, 0.0, 1.0)
+	for hauteur in [0.01, 5.0, 40.0, RAYON_ORBITE]:
+		var reste := sqrt(maxf(RAYON_ORBITE * RAYON_ORBITE - hauteur * hauteur, 0.0))
+		var position := Vector3(reste, 0.0, hauteur)
+		assert_float(Eclairage.facteur_eclipse(position, soleil, RAYON_TERRE)).is_equal_approx(
+			1.0, EPSILON
+		)
+
+
+func test_eclipse_totale_dans_l_axe_de_l_ombre() -> void:
+	var soleil := Vector3(0.0, 0.0, 1.0)
+	var position := Vector3(0.0, 0.0, -RAYON_ORBITE)
+	assert_float(Eclairage.facteur_eclipse(position, soleil, RAYON_TERRE)).is_equal_approx(
+		0.0, EPSILON
+	)
+
+
+## Derriere la Terre mais hors du cylindre d'ombre : le vaisseau reste eclaire.
+func test_eclipse_hors_du_cylindre_reste_eclaire() -> void:
+	var soleil := Vector3(0.0, 0.0, 1.0)
+	var position := Vector3(RAYON_TERRE + 5.0, 0.0, -30.0)
+	assert_float(Eclairage.facteur_eclipse(position, soleil, RAYON_TERRE)).is_equal_approx(
+		1.0, EPSILON
+	)
+
+
+func test_eclipse_transition_monotone_sur_le_bord() -> void:
+	var soleil := Vector3(0.0, 0.0, 1.0)
+	var precedent := -1.0
+	for i in range(21):
+		var distance := lerpf(RAYON_TERRE - 2.0, RAYON_TERRE + 2.0, float(i) / 20.0)
+		var facteur := Eclairage.facteur_eclipse(Vector3(distance, 0.0, -40.0), soleil, RAYON_TERRE)
+		assert_float(facteur).is_greater_equal(precedent)
+		precedent = facteur
+
+
+func test_eclipse_penombre_strictement_intermediaire() -> void:
+	var soleil := Vector3(0.0, 0.0, 1.0)
+	var facteur := Eclairage.facteur_eclipse(Vector3(RAYON_TERRE, 0.0, -40.0), soleil, RAYON_TERRE)
+	assert_float(facteur).is_between(0.0 + EPSILON, 1.0 - EPSILON)
+
+
+func test_eclipse_independante_de_la_norme_du_soleil() -> void:
+	var position := Vector3(10.0, 0.0, -RAYON_ORBITE)
+	var reference := Eclairage.facteur_eclipse(position, Vector3(0.0, 0.0, 1.0), RAYON_TERRE)
+	assert_float(
+		Eclairage.facteur_eclipse(position, Vector3(0.0, 0.0, 42.0), RAYON_TERRE)
+	).is_equal_approx(reference, EPSILON)
+
+
+## Exigence du gate phase 3 : sur une orbite complete, le vaisseau doit connaitre une
+## portion pleinement eclairee et une portion pleinement dans l'ombre.
+func test_eclipse_alterne_sur_une_orbite_complete() -> void:
+	var soleil := Vector3(-0.642788, 0.0, 0.766044)
+	var inclinaison := deg_to_rad(51.6)
+	var orbite := Orbit.new(
+		RAYON_ORBITE, 5400.0, inclinaison, Orbit.phase_pour_direction(soleil, inclinaison)
+	)
+	var maximum := 0.0
+	var minimum := 1.0
+	for i in 200:
+		var facteur := Eclairage.facteur_eclipse(
+			orbite.position_at(orbite.periode_s * i / 200.0), soleil, RAYON_TERRE
+		)
+		maximum = maxf(maximum, facteur)
+		minimum = minf(minimum, facteur)
+	assert_float(maximum).is_equal_approx(1.0, EPSILON)
+	assert_float(minimum).is_equal_approx(0.0, EPSILON)
 
 
 func test_largeur_par_defaut_utilisee_sans_argument() -> void:

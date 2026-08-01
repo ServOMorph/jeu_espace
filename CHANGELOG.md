@@ -1,3 +1,35 @@
+## v0.13 — 2026-08-01
+
+### Ajouté
+- Phase 2 dev : `scripts/core/sim_clock.gd`, `orbit.gd` (`position_at`/`tangent_at`/`frame_at`),
+  `sun_direction.gd` ; rotation propre de la Terre pilotée par l'horloge de simulation.
+- Phase 3 dev : `scenes/vaisseau.tscn` (CSGPolygon3D spin pour la coque, conforme à
+  `DESIGN/vaisseau/proportions.md`), hiérarchie `Vaisseau`/`Cockpit`/`CentreCommande`.
+- `scripts/core/repere_vaisseau.gd` : conversion entre repère planétaire et repère métrique local
+  du vaisseau. Rendu passé en double échelle : `scenes/monde_lointain.tscn` rendu dans un
+  `SubViewport` composé en fond, vaisseau et caméra locale en unités métriques,
+  `scripts/nodes/vue_orbitale.gd` reproduisant le déplacement orbital côté caméra lointaine.
+- `scripts/core/eclairage.gd` : `facteur_eclipse` (ombre cylindrique portée par la Terre +
+  pénombre) — l'assombrissement en orbite vient de l'occultation, pas de la direction du Soleil.
+- `Orbit.phase_pour_direction` : phase de départ calculée depuis la direction du Soleil, pour
+  démarrer la simulation de jour (exigence phase 2, non vérifiable avant la phase 3).
+
+### Corrigé
+- Période de rotation propre de la Terre recalée sur 5400 s (période orbitale du projet) au lieu
+  du jour sidéral réel (86164 s), imperceptible même en x60.
+- Vaisseau invisible au premier rendu : near plane et précision flottante incompatibles avec un
+  objet à taille réelle en unités planétaires — architecture double échelle adoptée.
+- Vaisseau démarrant côté nuit, puis restant éclairé en permanence sur toute l'orbite — deux bugs
+  distincts, corrigés respectivement par `phase_pour_direction` et `facteur_eclipse`.
+
+### Notes
+- 79/79 tests, couverture fonctionnelle 100 %. Gates 2 et 3 validés par contrôle visuel
+  utilisateur (captures d'écran, pas déduction).
+- Pivot architectural à lire avant la phase 4 : `DEV/roadmap_dev.md` Phase 3, bloc « Pivot
+  architectural majeur » — `camera_rig.gd` doit s'écrire dans le repère métrique local.
+- Conflit toujours ouvert (P1) entre `roadmap_dev.md` phase 5 et le handoff design D4 sur la
+  visibilité de la coque depuis le cockpit — à trancher avant l'ouverture de la phase 5.
+
 ## v0.12 — 2026-08-01
 
 ### Ajouté

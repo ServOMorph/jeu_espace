@@ -1,0 +1,106 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://scripts/nodes/vaisseau.gd" id="1_vaisseau"]
+[ext_resource type="Script" path="res://scripts/nodes/coupole_armature.gd" id="2_armature"]
+
+[sub_resource type="StandardMaterial3D" id="mat_coque"]
+albedo_color = Color(0.72, 0.74, 0.78, 1.0)
+metallic = 0.2
+roughness = 0.6
+
+[sub_resource type="StandardMaterial3D" id="mat_armature"]
+albedo_color = Color(0.15, 0.15, 0.17, 1.0)
+metallic = 0.6
+roughness = 0.4
+
+[sub_resource type="StandardMaterial3D" id="mat_vitre"]
+albedo_color = Color(0.4, 0.7, 0.9, 0.35)
+metallic = 0.0
+roughness = 0.05
+cull_mode = 0
+transparency = 1
+
+[sub_resource type="StandardMaterial3D" id="mat_panneau"]
+albedo_color = Color(0.08, 0.1, 0.35, 1.0)
+metallic = 0.3
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="mat_detail"]
+albedo_color = Color(0.5, 0.5, 0.55, 1.0)
+metallic = 0.4
+roughness = 0.5
+
+[sub_resource type="SphereMesh" id="mesh_vitre"]
+material = SubResource("mat_vitre")
+radius = 0.15
+height = 0.15
+is_hemisphere = true
+
+[sub_resource type="BoxMesh" id="mesh_panneau"]
+material = SubResource("mat_panneau")
+size = Vector3(0.4, 0.15, 0.01)
+
+[sub_resource type="CylinderMesh" id="mesh_antenne"]
+top_radius = 0.006
+bottom_radius = 0.006
+height = 0.1
+
+[sub_resource type="CylinderMesh" id="mesh_nacelle"]
+top_radius = 0.04
+bottom_radius = 0.04
+height = 0.12
+
+[node name="Vaisseau" type="Node3D"]
+script = ExtResource("1_vaisseau")
+
+[node name="Coque" type="CSGPolygon3D" parent="."]
+material = SubResource("mat_coque")
+polygon = PackedVector2Array(0, 1, 0.03, 1, 0.11, 0.65, 0.07, 0, 0, 0)
+mode = 1
+spin_degrees = 360.0
+spin_sides = 24
+
+[node name="Coupole" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+
+[node name="Armature" type="Node3D" parent="Coupole"]
+script = ExtResource("2_armature")
+materiau = SubResource("mat_armature")
+
+[node name="Vitre" type="MeshInstance3D" parent="Coupole"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.15)
+mesh = SubResource("mesh_vitre")
+
+[node name="Cockpit" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.925, 0)
+
+[node name="CentreCommande" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+
+[node name="PanneauSolaireTribord" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.304, 0.55, 0)
+mesh = SubResource("mesh_panneau")
+
+[node name="PanneauSolaireBabord" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.304, 0.55, 0)
+mesh = SubResource("mesh_panneau")
+
+[node name="AntenneTribord" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0.03, 0.1, 0.076)
+mesh = SubResource("mesh_antenne")
+surface_material_override/0 = SubResource("mat_detail")
+
+[node name="AntenneBabord" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, -0.03, 0.1, 0.076)
+mesh = SubResource("mesh_antenne")
+surface_material_override/0 = SubResource("mat_detail")
+
+[node name="NacelleTribord" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09, 0.075, 0)
+mesh = SubResource("mesh_nacelle")
+surface_material_override/0 = SubResource("mat_detail")
+
+[node name="NacelleBabord" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.09, 0.075, 0)
+mesh = SubResource("mesh_nacelle")
+surface_material_override/0 = SubResource("mat_detail")

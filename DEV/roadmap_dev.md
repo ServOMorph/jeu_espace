@@ -160,7 +160,7 @@ Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmati
 
 ---
 
-## Phase 2 — Horloge de simulation et orbite sur rail  [TODO]
+## Phase 2 — Horloge de simulation et orbite sur rail  [FAIT]
 
 L'horloge vient avant l'orbite : sans elle, rien n'est observable en temps raisonnable.
 C'est la phase la plus testable du projet — elle doit tirer la couverture vers le haut.
@@ -184,12 +184,18 @@ C'est la phase la plus testable du projet — elle doit tirer la couverture vers
 2. `python tools/coverage_check.py` ≥ 85 %.
 3. Une orbite complète observée en x60, transition jour/nuit visible.
 
+**Livré** (2026-08-01) : `sim_clock.gd`/`sim_clock_node.gd`, `orbit.gd` (`position_at`/`tangent_at`),
+`sun_direction.gd`, rotation propre de la Terre pilotée par l'horloge. 49/49 tests, couverture
+100 %. Bug de pacing découvert au contrôle visuel : la période de rotation terrestre était calée
+sur le jour sidéral réel (86164 s), imperceptible même en x60 — recalée sur 5400 s (~90 min,
+période orbitale de référence du projet). `PERIODE_ROTATION_TERRE_S` documente ce choix.
+
 **⏸ Checkpoint** — Demander à l'utilisateur de faire `/compact` avant de continuer.
 Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmation.
 
 ---
 
-## Phase 3 — Vaisseau et hiérarchie de scène  [TODO]
+## Phase 3 — Vaisseau et hiérarchie de scène  [FAIT]
 
 Dépend de design D2 (`DESIGN/vaisseau/proportions.md`). Ne pas modéliser sans ce fichier.
 
@@ -218,6 +224,36 @@ Livrables :
 > Dette à évaluer en fin de phase : couplage orbite/vaisseau et profondeur de hiérarchie.
 > Décider au vu du code réel, pas par principe.
 
+**Livré** (2026-08-01) : arbitrage retenu = assemblage `.tscn` (CSGPolygon3D en mode spin pour la
+coque effilée, primitives Godot pour le reste) — aucune forme du chiffrage D2 ne sortait du
+répertoire des primitives/CSG. `scenes/vaisseau.tscn` conforme à `proportions.md`, hiérarchie
+`Vaisseau` → `Cockpit`/`CentreCommande` en place.
+
+**Pivot architectural majeur, à connaître avant d'ouvrir la phase 4** : un vaisseau à taille
+réelle (~60 m) est ininterprétable dans le système d'unités planétaire du projet (1 unité =
+100 km) — near plane et précision flottante le rendent invisible ou tremblant. Rendu passé en
+**double échelle, deux caméras/deux viewports composités** :
+- `scenes/monde_lointain.tscn` (Terre, Lune, Soleil, ciel) reste en unités planétaires, rendu
+  dans un `SubViewport` (`LointainViewport`) composé en fond via `CanvasLayer`.
+- Le vaisseau et sa caméra locale (`scripts/nodes/camera_libre.gd`) sont en unités métriques
+  (1 unité = 1 m), **le vaisseau reste fixe à l'origine locale** — c'est la caméra lointaine qui
+  reproduit son déplacement orbital (`scripts/nodes/vue_orbitale.gd`, câblé sur `Orbit.frame_at`,
+  pas `vaisseau.gd`). Conversion entre repères : `scripts/core/repere_vaisseau.gd`.
+- Conséquence directe pour la phase 4 : `camera_rig.gd`/`camera_rig_node.gd` opéreront dans le
+  repère métrique local, pas planétaire. Le clivage « aucun code de synchronisation de position »
+  reste vrai *à l'intérieur* d'un repère, mais la synchronisation *entre* les deux repères
+  (`RepereVaisseau.transform_camera_lointaine`) est nécessairement du câblage explicite.
+- Limite assumée : le lointain composé en fond ne partage pas le z-buffer du proche (la Terre ne
+  peut jamais occulter le vaisseau). Sans effet une fois la caméra à bord (phases 4-5), pertinent
+  seulement pour une caméra externe libre — non testable en pratique avec les plans de coupure
+  actuels et retiré des tests manuels pour cette raison.
+
+Bug corrigé au contrôle visuel : le vaisseau démarrait côté nuit (exigence « démarrer de jour »
+de la phase 2, non vérifiable avant l'existence d'un vaisseau) — `Orbit.phase_pour_direction`
+ajouté, calcule la phase de départ depuis la direction du Soleil. Second bug : la lumière locale
+du vaisseau était orientée mais jamais éteinte par l'ombre de la Terre — `Eclairage.facteur_eclipse`
+ajouté (ombre cylindrique + pénombre), câblé dans `vue_orbitale.gd`. 79/79 tests, couverture 100 %.
+
 **⏸ Checkpoint** — Demander à l'utilisateur de faire `/compact` avant de continuer.
 Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmation.
 
@@ -226,6 +262,10 @@ Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmati
 ## Phase 4 — Centre de commande et volet de coupole  [TODO]
 
 Dépend de design D3.
+
+Lire le bloc « Pivot architectural majeur » en fin de phase 3 avant d'écrire `camera_rig.gd` :
+la caméra de jeu opère dans le repère métrique local du vaisseau (`RepereVaisseau`), pas en
+unités planétaires.
 
 - `scenes/centre_commande.tscn` — sol, structure, mobilier minimal, **armature de coupole
   opaque**.
