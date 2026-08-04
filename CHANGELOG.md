@@ -1,3 +1,22 @@
+## v0.15 — 2026-08-04
+
+### Corrigé
+- `scenes/vaisseau.tscn` : coupole et centre de commande repositionnés côté ventral (nadir) au
+  lieu de dorsal (zenith) — `orbit.gd::frame_at` fixe `dorsal = zenith`, donc une coupole côté
+  dorsal ne pouvait jamais donner vue sur la Terre. Rotation 180° des nœuds `Coupole` et
+  `CentreCommande` (transform `(-1,0,0, 0,1,0, 0,0,-1)`), aucun script modifié — `coupole_armature.gd`
+  et `volet_panneaux.gd` construisent toute leur géométrie en `+Z` local. Terre visible au nadir,
+  volet ouvert, validé par contrôle visuel utilisateur.
+
+### Notes
+- Sol vitré/translucide écarté comme solution alternative : relance le risque de tri de rendu
+  évité en phase 1d/4, et la coque pleine du vaisseau aurait de toute façon bloqué la vue nadir
+  depuis la position dorsale d'origine.
+- `DESIGN/vaisseau/proportions.md` reste désynchronisé (« dessus du fuselage ») — correction hors
+  périmètre dev, passation à préparer vers `design`.
+- Gate 3 phase 4 non close : 4 points restent à recontrôler dans la nouvelle configuration
+  (`DEV/tests_manuels.md`).
+
 ## v0.14 — 2026-08-02
 
 ### Ajouté

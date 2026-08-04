@@ -23,10 +23,13 @@ fenêtré, contrôle caméra à la souris.
 Côté zone `dev` : Phases 0 à 3 closes, gates validés par contrôle visuel. Phase 4 (centre de
 commande, volet de coupole) implémentée côté code — `camera_rig.gd`/`volet_state.gd` (core,
 testés), `scenes/centre_commande.tscn`, volet procédural sous `Coupole` dans `vaisseau.tscn` —
-97/97 tests, couverture 100 %, mais gate visuel non encore effectué : phase non close (voir
-`DEV/tests_manuels.md`). Handoffs design D2 (vaisseau), D3 (intérieur/volet) et D4 (instruments
-cockpit) reçus ; un conflit entre `roadmap_dev.md` et le handoff D4 sur la visibilité de la coque
-depuis le cockpit reste à trancher avant la phase 5. Côté zone `design`, phases D0 à D4 closes :
-charte, SOURCES.md, MANIFEST.md renseignés, textures Terre/Lune/étoiles livrées, proportions du
-vaisseau chiffrées, intérieur/volet et instruments 2D du cockpit livrés. Phase D5 (passe visuelle
-finale) bloquée, dépend d'un rendu `dev` en situation.
+97/97 tests, couverture 100 %. Coupole/centre de commande repositionnés côté ventral (nadir) le
+2026-08-04 (rotation 180° dans `vaisseau.tscn`) : la Terre, invisible depuis le poste dans la
+position dorsale d'origine, est désormais visible et validée par contrôle visuel. Phase non
+close : 4 points du gate visuel restent à recontrôler dans cette nouvelle configuration (voir
+`DEV/tests_manuels.md`). `DESIGN/vaisseau/proportions.md` désynchronisé (toujours « dessus du
+fuselage »), correction à passer côté design. Un conflit entre `roadmap_dev.md` et le handoff D4
+sur la visibilité de la coque depuis le cockpit reste aussi à trancher avant la phase 5. Côté zone
+`design`, phases D0 à D4 closes : charte, SOURCES.md, MANIFEST.md renseignés, textures
+Terre/Lune/étoiles livrées, proportions du vaisseau chiffrées, intérieur/volet et instruments 2D
+du cockpit livrés. Phase D5 (passe visuelle finale) bloquée, dépend d'un rendu `dev` en situation.

@@ -298,6 +298,16 @@ l'absence de `lieu_state`/`lieu_manager` (phase 6). `vue_orbitale.gd` adapté po
 `global_transform.orthonormalized()` : nécessaire dès qu'une caméra est imbriquée dans la
 hiérarchie du vaisseau (mise à l'échelle ×60), plus seulement une caméra sœur.
 
+**État (2026-08-04)** : bug trouvé au contrôle visuel — la Terre restait invisible depuis le
+centre de commande quelle que soit la rotation. Cause : `orbit.gd::frame_at` fixe
+`dorsal = zenith` (direction opposée à la Terre) ; la coupole, placée « dessus du fuselage » par
+`DESIGN/vaisseau/proportions.md`, n'ouvrait donc que sur l'espace/zénith. Corrigé en repositionnant
+la coupole et le centre de commande côté ventral (nadir) : rotation 180° des nœuds `Coupole` et
+`CentreCommande` dans `scenes/vaisseau.tscn`, aucun script modifié (armature et volet construits
+en `+Z` local, sans référence au monde). Terre visible au nadir, validé par contrôle visuel.
+`DESIGN/vaisseau/proportions.md` reste à corriger côté design (toujours « dessus »). Gate 3 non
+close : 4 points restent à recontrôler dans cette nouvelle configuration (`DEV/tests_manuels.md`).
+
 **⏸ Checkpoint** — Demander à l'utilisateur de faire `/compact` avant de continuer.
 Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmation.
 

@@ -12,3 +12,5 @@ premier ci-dessous.
 - 2026-08-01 : Dossier racine `shaders/` ajouté (hors arborescence phase 0 initiale) pour les `.gdshader`.
 - 2026-08-01 : Shader Terre sans normal map (retirée du périmètre D1) ; logique jour/nuit dupliquée en GDScript pur pour rester testable, à synchroniser manuellement avec le shader.
 - 2026-08-01 : Gate 1b validé par contrôle visuel utilisateur — phase 1b close.
+- 2026-08-01 : `tests_manuels.md` ne doit contenir que des tests exécutables immédiatement (scène existante) — pas d'entrées pour des phases futures non implémentées.
+- 2026-08-01 : Gate 1d validé par contrôle visuel utilisateur — phase 1 intégralement close. Halo en glow Fresnel additif `cull_front` (visible en silhouette complète depuis l'extérieur).

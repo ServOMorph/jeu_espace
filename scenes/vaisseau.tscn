@@ -69,7 +69,7 @@ spin_degrees = 360.0
 spin_sides = 24
 
 [node name="Coupole" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0.45, 0)
 
 [node name="Armature" type="Node3D" parent="Coupole"]
 script = ExtResource("2_armature")
@@ -87,7 +87,7 @@ materiau = SubResource("mat_volet")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.925, 0)
 
 [node name="CentreCommande" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0.45, 0)
 
 [node name="Interieur" parent="CentreCommande" instance=ExtResource("3_interieur")]
 

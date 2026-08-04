@@ -1,33 +1,57 @@
-# Signals — dev   (MAJ 2026-08-02)
+# Signals — dev   (MAJ 2026-08-04)
 
 ## Actions ouvertes
-- [P1|ouvert] Valider le gate visuel de la phase 4 (centre de commande, volet de coupole) — code livré et testé (97/97, couverture 100 %), contrôle visuel utilisateur non encore effectué — fait quand: les 6 points de `DEV/tests_manuels.md` validés, phase 4 passée à `[FAIT]` dans `roadmap_dev.md`. réf: `DEV/tests_manuels.md`, `DEV/roadmap_dev.md` Phase 4.
-- [P1|ouvert] Trancher le conflit coque/cockpit avant d'ouvrir la phase 5 : handoff design D4 exige « aucun élément de coque visible dans tout le débattement », `roadmap_dev.md` phase 5 acte l'inverse (« voir une partie de la coque est acceptable, ne pas tordre cadrage ni géométrie pour l'éviter ») — fait quand: une seule formulation retenue dans `roadmap_dev.md` Phase 5. réf: `DEV/roadmap_dev.md` Phase 5, `DESIGN/vaisseau/proportions.md`.
-- [P2|ouvert] Bandeau de voyants (phase 5) sans asset livré par design (dimensionné dans `notes.md` mais absent du MANIFEST) — fait quand: confirmé que dev le produit en géométrie + matériau émissif, ou asset reçu de design. réf: `DESIGN/instruments/notes.md`.
-- [P3|ouvert] Compression BPTC (forcée par `project.godot`) appliquée aux SVG d'instruments (traits fins 3-5px) : risque d'artefacts de bloc sur la lisibilité — fait quand: contrôlé visuellement à l'ouverture de la phase 5, `compress/mode=0` appliqué côté design si besoin. réf: `DESIGN/MANIFEST.md`, `project.godot`.
-- [P2|ouvert] Handoff dev -> orchestrateur (check_scope.py à corriger, tests_manuels.md par zone) — fait quand: `tools/check_scope.py` vérifie l'index et non l'arbre de travail, CONVENTIONS.md/CLAUDE.md mis à jour. réf: `DEV/_handoff.md`.
+- [P1|ouvert] Achever le gate visuel de la phase 4 dans la nouvelle configuration ventrale — volet
+  fermé (aucune vue extérieure) et vue Terre au nadir validés par contrôle visuel utilisateur ;
+  rotation 360° sans clipping, inversion du volet en cours d'animation, coque visible, absence de
+  vitre restent à recontrôler (géométrie déplacée depuis leur dernière vérification). fait quand:
+  les 4 points restants de `DEV/tests_manuels.md` validés, phase 4 passée à `[FAIT]` dans
+  `roadmap_dev.md`. réf: `DEV/tests_manuels.md`, `DEV/roadmap_dev.md` Phase 4.
+- [P1|ouvert] Faire corriger `DESIGN/vaisseau/proportions.md` par la zone design : le document dit
+  encore « coupole dessus du fuselage », alors que le code place désormais la coupole/centre de
+  commande côté ventral (nadir) — décalage entre la spec et l'implémentation. fait quand: passation
+  envoyée à design (`DEV/_handoff.md` + `tools/handoff.py --to design`), document corrigé. réf:
+  `DESIGN/vaisseau/proportions.md` § Coupole, `scenes/vaisseau.tscn` (nœuds `Coupole`/
+  `CentreCommande`).
+- [P1|ouvert] Trancher le conflit coque/cockpit avant d'ouvrir la phase 5 : handoff design D4 exige
+  « aucun élément de coque visible dans tout le débattement », `roadmap_dev.md` phase 5 acte
+  l'inverse (« voir une partie de la coque est acceptable »). fait quand: une seule formulation
+  retenue dans `roadmap_dev.md` Phase 5. réf: `DEV/roadmap_dev.md` Phase 5,
+  `DESIGN/vaisseau/proportions.md`.
+- [P2|ouvert] Bandeau de voyants (phase 5) sans asset livré par design (dimensionné dans
+  `notes.md` mais absent du MANIFEST). fait quand: confirmé que dev le produit en géométrie +
+  matériau émissif, ou asset reçu de design. réf: `DESIGN/instruments/notes.md`.
+- [P3|ouvert] Compression BPTC (forcée par `project.godot`) appliquée aux SVG d'instruments (traits
+  fins 3-5px) : risque d'artefacts de bloc sur la lisibilité. fait quand: contrôlé visuellement à
+  l'ouverture de la phase 5, `compress/mode=0` appliqué côté design si besoin. réf:
+  `DESIGN/MANIFEST.md`, `project.godot`.
+- [P2|ouvert] Handoff dev -> orchestrateur (check_scope.py à corriger, tests_manuels.md par zone).
+  fait quand: `tools/check_scope.py` vérifie l'index et non l'arbre de travail, CONVENTIONS.md/
+  CLAUDE.md mis à jour. réf: `DEV/_handoff.md`.
 
-## Dernière session (2026-08-02)
-Phase 4 (centre de commande et volet de coupole) implémentée côté code, non close — gate visuel
-en attente. `scripts/core/camera_rig.gd` : état pur yaw/pitch paramétré par des vecteurs
-`avant`/`haut`, découplé du repère Z-dorsal du vaisseau, réutilisable en phase 5. 8 tests.
-`scripts/core/volet_state.gd` : machine à états fermé/ouverture/ouvert/fermeture, inversion en
-cours d'animation sans saut. 10 tests. `scripts/nodes/volet_panneaux.gd` génère les 12 panneaux
-proceduralement à partir des constantes de `CoupoleArmature` (désormais `class_name` pour être
-partagée). `scenes/centre_commande.tscn` créée et instanciée sous `CentreCommande` dans
-`vaisseau.tscn` ; `Volet` ajouté sous `Coupole`.
+## Dernière session (2026-08-04)
+Bug remonté au contrôle visuel de la phase 4 : depuis le centre de commande, volet ouvert, la
+Terre restait invisible quelle que soit la rotation. Cause identifiée par lecture de
+`orbit.gd::frame_at` : `dorsal = zenith` (direction opposée à la Terre) — la coupole, placée
+« dessus du fuselage » par `proportions.md`, ouvre donc sur l'espace/zénith, jamais sur la Terre ;
+le sol du centre de commande n'était qu'un symptôme (la coque pleine du vaisseau aurait de toute
+façon bloqué la vue nadir, coupole ou pas).
 
-Correction nécessaire dans `vue_orbitale.gd` : la caméra du centre de commande est la première
-caméra de jeu imbriquée dans la hiérarchie du vaisseau (mise à l'échelle ×60 en `_ready`) — lire
-`cam_locale.transform` (local à l'immédiat parent) comme le faisait le code d'origine ignorait
-cette échelle et l'offset de `CentreCommande`. Corrigé en lisant
-`cam_locale.global_transform.orthonormalized()`. Caméra câblée temporairement dans
-`test_env.tscn` pour le contrôle visuel (décision utilisateur), en l'absence de
-`lieu_state`/`lieu_manager` (phase 6) — voir `DEV/roadmap_dev.md` Phase 4, bloc « État ».
+Option retenue avec l'utilisateur (écartées : sol vitré translucide — relance le risque de tri de
+rendu explicitement évité en phase 1d/4 pour la coupole, et n'aurait probablement pas suffi, la
+coque étant directement sous le module ; écran nadir sur moniteur — solution de repli non
+choisie) : repositionner la coupole et le centre de commande côté ventral (nadir) plutôt que
+dorsal (zenith), à l'image d'une cupola ISS.
 
-97/97 tests, couverture fonctionnelle 100 %, import et chargement de scène sans erreur.
+Implémentation : `coupole_armature.gd`/`volet_panneaux.gd` construisent toute leur géométrie en
+`+Z` local sans référence au monde — le repositionnement se limite à une rotation de 180° autour
+de Y sur les nœuds `Coupole` et `CentreCommande` dans `scenes/vaisseau.tscn` (transform
+`(-1,0,0, 0,1,0, 0,0,-1)`), aucun script modifié. Réimport (`--import`) sans erreur. Contrôle
+visuel utilisateur : Terre visible au nadir, volet ouvert — validé (« c'est parfait »).
 
-Règle ajoutée (hors périmètre dev strict, mais appliquée ici) : toute entrée de
-`tests_manuels.md` doit inclure la commande de lancement du contrôle, et toute modification de
-`.claude/CLAUDE.md` doit être proposée en synchronisation dans `AGENTS.md`/`GEMINI.md` (et
-inversement) — `GEMINI.md` créé ce jour, absent jusqu'ici.
+`DEV/tests_manuels.md` : point Terre-nadir ajouté puis retiré après validation ; les 4 points du
+gate 3 non re-testés dans cette session (rotation fluide, inversion volet, coque visible, absence
+de vitre) restent en attente, la géométrie ayant changé de côté depuis leur dernière vérification.
+
+`DESIGN/vaisseau/proportions.md` (« dessus du fuselage ») n'a pas été corrigé — hors périmètre
+dev, passation à préparer.
