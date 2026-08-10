@@ -1,6 +1,10 @@
-# Signals — dev   (MAJ 2026-08-04)
+# Signals — dev   (MAJ 2026-08-11)
 
 ## Actions ouvertes
+- [P2|ouvert] Contrôler visuellement les correctifs de cette session : nuages (dérive lente,
+  cohérente avec x1/x10/x60), halo (liseret + diffus, atténuation jour/nuit), vue Drone (armature
+  du vaisseau invisible, contrôle souris opérationnel). fait quand: les entrées correspondantes de
+  `DEV/tests_manuels.md` validées et supprimées. réf: `DEV/tests_manuels.md`.
 - [P1|ouvert] Achever le gate visuel de la phase 4 dans la nouvelle configuration ventrale — volet
   fermé (aucune vue extérieure) et vue Terre au nadir validés par contrôle visuel utilisateur ;
   rotation 360° sans clipping, inversion du volet en cours d'animation, coque visible, absence de
@@ -9,10 +13,12 @@
   `roadmap_dev.md`. réf: `DEV/tests_manuels.md`, `DEV/roadmap_dev.md` Phase 4.
 - [P1|ouvert] Faire corriger `DESIGN/vaisseau/proportions.md` par la zone design : le document dit
   encore « coupole dessus du fuselage », alors que le code place désormais la coupole/centre de
-  commande côté ventral (nadir) — décalage entre la spec et l'implémentation. fait quand: passation
-  envoyée à design (`DEV/_handoff.md` + `tools/handoff.py --to design`), document corrigé. réf:
-  `DESIGN/vaisseau/proportions.md` § Coupole, `scenes/vaisseau.tscn` (nœuds `Coupole`/
-  `CentreCommande`).
+  commande côté ventral (nadir) — décalage entre la spec et l'implémentation. Une correction est
+  présente non commitée dans le working tree au 2026-08-11 (session tierce, hors périmètre de
+  cette clôture) : vérifier son état avant de relancer une passation. fait quand: passation
+  envoyée à design (`DEV/_handoff.md` + `tools/handoff.py --to design`), document corrigé et
+  commité. réf: `DESIGN/vaisseau/proportions.md` § Coupole, `scenes/vaisseau.tscn` (nœuds
+  `Coupole`/`CentreCommande`).
 - [P1|ouvert] Trancher le conflit coque/cockpit avant d'ouvrir la phase 5 : handoff design D4 exige
   « aucun élément de coque visible dans tout le débattement », `roadmap_dev.md` phase 5 acte
   l'inverse (« voir une partie de la coque est acceptable »). fait quand: une seule formulation
@@ -29,29 +35,29 @@
   fait quand: `tools/check_scope.py` vérifie l'index et non l'arbre de travail, CONVENTIONS.md/
   CLAUDE.md mis à jour. réf: `DEV/_handoff.md`.
 
-## Dernière session (2026-08-04)
-Bug remonté au contrôle visuel de la phase 4 : depuis le centre de commande, volet ouvert, la
-Terre restait invisible quelle que soit la rotation. Cause identifiée par lecture de
-`orbit.gd::frame_at` : `dorsal = zenith` (direction opposée à la Terre) — la coupole, placée
-« dessus du fuselage » par `proportions.md`, ouvre donc sur l'espace/zénith, jamais sur la Terre ;
-le sol du centre de commande n'était qu'un symptôme (la coque pleine du vaisseau aurait de toute
-façon bloqué la vue nadir, coupole ou pas).
+## Dernière session (2026-08-11)
 
-Option retenue avec l'utilisateur (écartées : sol vitré translucide — relance le risque de tri de
-rendu explicitement évité en phase 1d/4 pour la coupole, et n'aurait probablement pas suffi, la
-coque étant directement sous le module ; écran nadir sur moniteur — solution de repli non
-choisie) : repositionner la coupole et le centre de commande côté ventral (nadir) plutôt que
-dorsal (zenith), à l'image d'une cupola ISS.
+### Décisions prises
+- Nuages recalés sur l'horloge de simulation (bug : tournaient en temps réel, découplés de x1/x10/x60).
+- Halo enrichi : double Fresnel (liseret + diffus) et atténuation jour/nuit via `direction_soleil`.
+- Vue Drone (outil de test) : armature du vaisseau visible par erreur (résidu de promotion de
+  caméra Godot) — corrigé en masquant `Vaisseau` pendant cette vue.
+- Vue Drone : souris inopérante (`_input()` jamais appelé sur `CameraDrone`, `LointainViewport`
+  sans `SubViewportContainer`) — corrigé par relais explicite depuis `selecteur_camera.gd`.
 
-Implémentation : `coupole_armature.gd`/`volet_panneaux.gd` construisent toute leur géométrie en
-`+Z` local sans référence au monde — le repositionnement se limite à une rotation de 180° autour
-de Y sur les nœuds `Coupole` et `CentreCommande` dans `scenes/vaisseau.tscn` (transform
-`(-1,0,0, 0,1,0, 0,0,-1)`), aucun script modifié. Réimport (`--import`) sans erreur. Contrôle
-visuel utilisateur : Terre visible au nadir, volet ouvert — validé (« c'est parfait »).
+### Livrables produits ou modifiés
+- `shaders/halo.gdshader`, `scripts/nodes/halo.gd`, `scripts/nodes/nuages.gd`,
+  `scenes/halo.tscn`, `scenes/monde_lointain.tscn` : livrés, déjà commités (615c557).
+- `scripts/nodes/camera_drone.gd`, `scripts/nodes/selecteur_camera.gd`, `scenes/test_env.tscn`,
+  `DEV/tests_manuels.md` : livrés, à committer par cette clôture.
 
-`DEV/tests_manuels.md` : point Terre-nadir ajouté puis retiré après validation ; les 4 points du
-gate 3 non re-testés dans cette session (rotation fluide, inversion volet, coque visible, absence
-de vitre) restent en attente, la géométrie ayant changé de côté depuis leur dernière vérification.
+### Hypothèses validées / invalidées
+- VALIDE : 118/118 tests unitaires après chaque correctif, aucune régression.
+- EN ATTENTE : contrôle visuel utilisateur des 4 correctifs (aucun testé en jeu cette session).
 
-`DESIGN/vaisseau/proportions.md` (« dessus du fuselage ») n'a pas été corrigé — hors périmètre
-dev, passation à préparer.
+### Prochaine étape exacte
+Contrôle visuel des entrées ajoutées à `DEV/tests_manuels.md` (halo, nuages, vue Drone armature,
+vue Drone souris).
+
+### Question bloquante pour la session suivante
+Aucune

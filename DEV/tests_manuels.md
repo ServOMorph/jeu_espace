@@ -1,5 +1,27 @@
 # Tests manuels — dev
 
+## Vue Drone — contrôle souris
+
+Lancer :
+```
+python run.py
+```
+Choisir **Drone**.
+
+- La souris oriente la caméra (regard libre autour de la Terre), en plus du déplacement
+  clavier (ZQSD/WASD).
+- Clic après un Échap (`quit`) recapture la souris et rend l'orientation à nouveau active.
+
+## Vue Drone — armature du vaisseau ne doit plus apparaître
+
+Lancer :
+```
+python run.py
+```
+Choisir **Drone** depuis le menu. Vérifier qu'aucun élément du vaisseau (armature de
+coupole, coque) n'apparaît, y compris en revenant d'une autre vue (Observatoire/Cockpit)
+puis en repassant sur Drone plusieurs fois de suite.
+
 ## Halo atmosphérique et vitesse des nuages
 
 Lancer :

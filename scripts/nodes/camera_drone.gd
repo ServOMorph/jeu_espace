@@ -5,6 +5,14 @@ extends Camera3D
 ## sans etre liee a l'orbite ni synchronisee par vue_orbitale.gd. Vit dans LointainViewport
 ## (World3D propre a ce sous-viewport), rendue plein ecran via FondLointain des lors
 ## qu'aucune camera du monde proche n'est active (cf. selecteur_camera.gd).
+##
+## Pas de _input() ici : LointainViewport n'a pas de SubViewportContainer qui lui
+## relaie les evenements (handle_input_locally = false, delibere pour un simple
+## rendu hors-ecran compose manuellement) — un _input() sur un noeud qui y vit
+## n'est donc jamais appele. Le clavier fonctionne quand meme (_process interroge
+## Input.is_key_pressed en polling, hors circuit d'evenements), mais la souris a
+## besoin d'un relais explicite : selecteur_camera.gd, qui vit dans l'arbre
+## principal, transmet les evenements via appliquer_delta_souris/gerer_clic.
 
 @export var vitesse := 15.0
 @export var vitesse_rapide := 150.0
@@ -41,16 +49,21 @@ func desactiver() -> void:
 	current = false
 
 
-func _input(event: InputEvent) -> void:
-	if not _actif:
+func appliquer_delta_souris(relative: Vector2) -> void:
+	if not _actif or not _capture:
 		return
-	if event is InputEventMouseMotion and _capture:
-		rotate_y(-event.relative.x * sensibilite)
-		rotate_object_local(Vector3.RIGHT, -event.relative.y * sensibilite)
-	elif event is InputEventMouseButton and not _capture:
+	rotate_y(-relative.x * sensibilite)
+	rotate_object_local(Vector3.RIGHT, -relative.y * sensibilite)
+
+
+func gerer_clic_recapture() -> void:
+	if _actif and not _capture:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		_capture = true
-	elif event.is_action_pressed("quit") and _capture:
+
+
+func gerer_relachement_capture() -> void:
+	if _actif and _capture:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		_capture = false
 

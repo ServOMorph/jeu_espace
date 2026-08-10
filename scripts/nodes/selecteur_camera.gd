@@ -40,8 +40,22 @@ extends CanvasLayer
 @export var camera_drone_path: NodePath
 @export var controleur_drone_path: NodePath
 
+## Masque en vue Drone : le monde proche (vaisseau) n'a alors plus aucune camera
+## courante, et Godot peut promouvoir automatiquement une camera encore enregistree
+## dans ce monde (Observatoire/Cockpit) des qu'une autre y est desactivee — elle se
+## retrouve rendue depuis l'origine locale, au milieu du vaisseau. Masquer le
+## vaisseau rend ce residu sans effet visuel, quelle que soit la camera promue.
+@export var vaisseau_path: NodePath
+
+## Relais d'entree souris vers le Drone : ce noeud vit dans l'arbre principal et
+## recoit donc _input() normalement, contrairement a CameraDrone (cf. commentaire
+## en tete de camera_drone.gd).
+var _drone: Node
+var _drone_actif := false
+
 
 func _ready() -> void:
+	_drone = get_node_or_null(controleur_drone_path)
 	_desactiver_tous()
 	_afficher_selection()
 	(get_node(bouton_vaisseau_path) as Button).pressed.connect(
@@ -65,6 +79,15 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_F1:
 		_retour_menu()
+		return
+	if not _drone_actif or _drone == null:
+		return
+	if event is InputEventMouseMotion:
+		_drone.appliquer_delta_souris(event.relative)
+	elif event is InputEventMouseButton:
+		_drone.gerer_clic_recapture()
+	elif event.is_action_pressed("quit"):
+		_drone.gerer_relachement_capture()
 
 
 func _desactiver_tous() -> void:
@@ -92,11 +115,19 @@ func _choisir(controleur_path: NodePath, camera_path: NodePath) -> void:
 	if controleur != null:
 		controleur.activer()
 	get_node(indice_observatoire_path).visible = controleur_path == controleur_observatoire_path
+	var vaisseau := get_node_or_null(vaisseau_path) as Node3D
+	if vaisseau != null:
+		vaisseau.visible = controleur_path != controleur_drone_path
+	_drone_actif = controleur_path == controleur_drone_path
 	_afficher_jeu()
 
 
 func _retour_menu() -> void:
 	_desactiver_tous()
+	var vaisseau := get_node_or_null(vaisseau_path) as Node3D
+	if vaisseau != null:
+		vaisseau.visible = true
+	_drone_actif = false
 	_afficher_selection()
 
 

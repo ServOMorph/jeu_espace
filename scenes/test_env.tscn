@@ -86,6 +86,7 @@ camera_cockpit_path = NodePath("../Vaisseau/Cockpit/Interieur/Camera3D")
 controleur_cockpit_path = NodePath("../Vaisseau/Cockpit/Interieur/CameraRig")
 camera_drone_path = NodePath("../LointainViewport/CameraDrone")
 controleur_drone_path = NodePath("../LointainViewport/CameraDrone")
+vaisseau_path = NodePath("../Vaisseau")
 
 [node name="Fond" type="ColorRect" parent="MenuCameras"]
 anchors_preset = 15

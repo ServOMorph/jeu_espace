@@ -7,20 +7,18 @@ Développement du jeu Godot : scripts, scènes, mécaniques de jeu (contrôle va
 Godot 4 (3D). Résolution cible MVP : 1920x1080 fenêtré, contrôle caméra à la souris. Deux lieux à scripter : cockpit (vue extérieure sur l'espace devant le vaisseau, vaisseau non visible) et centre de commande sous coupole en verre (vue à 360°, tête tournable, vaisseau visible en mouvement lent comme en orbite réelle). Vaisseau capable d'évoluer en orbite terrestre, d'en sortir ou de redescendre.
 
 ## État actuel (réécrit intégralement à chaque /close)
-Phases 0 à 3 closes. Phase 4 (centre de commande, volet de coupole) implémentée côté code —
-97/97 tests, couverture 100 %. Coupole/centre de commande repositionnés côté ventral (nadir) le
-2026-08-04 (rotation 180° des nœuds dans `vaisseau.tscn`, aucun script modifié) : la Terre est
-désormais visible depuis le poste, validé par contrôle visuel. Gate 3 restant : 4 points à
-recontrôler dans cette nouvelle configuration (`DEV/tests_manuels.md`) avant de clore la phase.
-Conflit non tranché entre `roadmap_dev.md` phase 5 et handoff D4 sur la visibilité de la coque
-depuis le cockpit. `DESIGN/vaisseau/proportions.md` désynchronisé (« dessus du fuselage »), à
-corriger côté design.
+Phases 0 à 4 closes. Phase 5 (cockpit) : gates 1 et 2 validés (118/118 tests, couverture 100 %),
+gate 3 (contrôle visuel) en attente (`DEV/tests_manuels.md`). Nuages et halo affinés cette
+session (rotation recalée sur l'horloge de simulation, rendu du halo plus réaliste), déjà
+commités. Vue Drone (outil de test `test_env.tscn`) : bug d'armature résiduelle et bug de
+contrôle souris corrigés cette session, contrôle visuel en attente. Conflit non tranché entre
+`roadmap_dev.md` phase 5 et handoff D4 sur la visibilité de la coque depuis le cockpit ;
+correction de `DESIGN/vaisseau/proportions.md` toujours en suspens côté design.
 
 ## Décisions structurantes (append only — 10 entrées max, 5 lignes max/entrée, archiver au-delà)
-Entrées antérieures au 2026-08-01 (et gates 1a/1b/1d) archivées dans `_contexte/archive_decisions.md`.
+Entrées antérieures au 2026-08-01 (et gates 1a/1b/1d/2/vaisseau CSG) archivées dans
+`_contexte/archive_decisions.md`.
 
-- 2026-08-01 : Gate 2 validé — période de rotation propre de la Terre calée sur 5400 s (période orbitale du projet), pas le jour sidéral réel (86164 s, imperceptible même en x60).
-- 2026-08-01 : Vaisseau modélisé par assemblage `.tscn`/CSG (pas de générateur `.obj` scripté) — toutes les formes du chiffrage D2 restent dans le répertoire des primitives.
 - 2026-08-01 : Rendu passé en double échelle (planétaire pour le lointain, métrique local pour le vaisseau) — un vaisseau à taille réelle est ininterprétable en unités planétaires (near plane, précision flottante). Impacte `camera_rig.gd` en phase 4, cf. `repere_vaisseau.gd`.
 - 2026-08-01 : L'assombrissement en orbite vient de l'occultation par la Terre (`Eclairage.facteur_eclipse`), pas de la direction du Soleil qui est fixe — nécessaire pour tout objet en orbite, pas seulement le vaisseau.
 - 2026-08-02 : `camera_rig.gd` conçu générique (yaw/pitch paramétrés par des vecteurs `avant`/`haut`), découplé du repère Z-dorsal du vaisseau — réutilisable tel quel en phase 5 (cockpit) avec bornes plus serrées.
@@ -29,3 +27,5 @@ Entrées antérieures au 2026-08-01 (et gates 1a/1b/1d) archivées dans `_contex
 - 2026-08-02 : Caméra du centre de commande câblée temporairement dans `test_env.tscn` (`VueOrbitale`) pour le gate visuel phase 4, en attendant `lieu_state`/`lieu_manager` (phase 6).
 - 2026-08-04 : `orbit.gd::frame_at` fixe `dorsal = zenith` (opposé à la Terre) — une coupole côté dorsal ne peut jamais donner vue sur la Terre, quelle que soit la géométrie du sol. Coupole/centre de commande déplacés côté ventral (nadir) dans `vaisseau.tscn` pour corriger.
 - 2026-08-04 : Sol vitré/translucide écarté comme solution — relance le risque de tri de rendu évité en phase 1d/4, et la coque pleine du vaisseau aurait de toute façon bloqué la vue nadir depuis la position dorsale d'origine.
+- 2026-08-11 : Nuages recalés sur l'horloge de simulation (tournaient en temps réel via `_process(delta)`, découplés de x1/x10/x60) ; halo enrichi (double Fresnel liseret+diffus, atténuation jour/nuit via `direction_soleil` poussée comme dans `terre.gd`).
+- 2026-08-11 : Vue Drone — deux bugs distincts corrigés. Armature du vaisseau visible : Godot promeut automatiquement une autre caméra du même monde quand la courante est désactivée ; `Vaisseau` masqué en vue Drone pour neutraliser ce résidu. Souris inopérante : `LointainViewport` n'a pas de `SubViewportContainer` (`handle_input_locally=false`), donc `_input()` n'y est jamais appelé sur `CameraDrone` ; relayé depuis `selecteur_camera.gd` (arbre principal).

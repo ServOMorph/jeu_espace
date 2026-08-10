@@ -25,7 +25,10 @@ implémentée côté code — bornes de yaw ajoutées à `camera_rig.gd` (réuti
 livré — 118/118 tests, couverture 100 %. Gate visuel (contrôle manuel) restant à valider, voir
 `DEV/tests_manuels.md`. Outillage de test étoffé : `python run.py` lance `scenes/test_env.tscn`
 avec un menu de sélection de caméra (Vaisseau en orbite+zoom, Observatoire, Cockpit, Drone en vol
-libre planétaire), retour au menu par F1. Côté zone `design`, phases D0 à D4 closes : charte,
+libre planétaire), retour au menu par F1. Vue Drone corrigée le 2026-08-11 : armature du vaisseau
+masquée pendant cette vue (résidu de promotion de caméra Godot) et contrôle souris opérationnel
+(relayé depuis l'arbre principal, `LointainViewport` n'ayant pas de `SubViewportContainer`).
+Côté zone `design`, phases D0 à D4 closes : charte,
 SOURCES.md, MANIFEST.md renseignés, textures Terre/Lune/étoiles livrées, proportions du vaisseau
 chiffrées et resynchronisées le 2026-08-11 sur le repositionnement ventral de la coupole,
 intérieur/volet et instruments 2D du cockpit livrés. Phase D5 (passe visuelle finale) bloquée,

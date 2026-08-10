@@ -1,3 +1,21 @@
+## v0.18 — 2026-08-11
+
+### Corrigé
+- Vue **Drone** (`scenes/test_env.tscn`) : l'armature de l'observatoire restait visible en
+  silhouette près de l'origine — Godot promeut automatiquement une autre caméra encore
+  enregistrée dans le même monde 3D quand la caméra courante est désactivée, laissant parfois
+  une caméra du vaisseau active par effet de cascade. Corrigé en masquant le nœud `Vaisseau`
+  tant que la vue Drone est active (`scripts/nodes/selecteur_camera.gd`), indépendamment de la
+  caméra effectivement promue.
+- Vue Drone : la souris n'orientait pas la caméra. `LointainViewport` (SubViewport hors-écran
+  composé manuellement, sans `SubViewportContainer`) ne relaie jamais `_input()` à ses enfants —
+  seul le clavier fonctionnait (`Input.is_key_pressed` en polling). `scripts/nodes/camera_drone.gd`
+  expose désormais des méthodes publiques (`appliquer_delta_souris`, `gerer_clic_recapture`,
+  `gerer_relachement_capture`) relayées par `selecteur_camera.gd`, qui vit dans l'arbre principal
+  et reçoit les événements normalement.
+- 118/118 tests, aucune régression. Contrôle visuel non exécuté cette session, entrées ajoutées
+  dans `DEV/tests_manuels.md`.
+
 ## v0.17 — 2026-08-11
 
 ### Corrigé
