@@ -12,8 +12,9 @@ livrées (D1). Proportions du vaisseau chiffrées et validées (D2), resynchroni
 sur le repositionnement ventral de la coupole (planches `vue_cote.svg`/`vue_face.svg` corrigées
 en miroir). Intérieur sous coupole, volet blindé fermé/ouvert et palette intérieure livrés (D3).
 Instruments 2D du cockpit (set minimal générique) livrés (D4). Handoffs D3 et D4 envoyés vers
-`dev`. Phase D5 (passe visuelle finale) bloquée : dépend d'un rendu `dev` en situation, pas encore
-disponible.
+`dev`. Phase D5 (passe visuelle finale) en cours : retour `dev` en situation reçu, exposition/
+contraste/lisibilité nuit jugés ok, halo atmosphérique corrigé (`shaders/halo.gdshader`). Reste à
+vérifier les autres critères du gate D5 et mettre `charte.md` à jour.
 
 ## Décisions structurantes (append only — 10 entrées max, 5 lignes max/entrée, archiver au-delà)
 - 2026-07-31 : Initialisation du protocole vibecoding.
@@ -32,3 +33,6 @@ disponible.
 - 2026-08-11 : Coupole/observatoire resynchronisés côté ventral (nadir) dans `proportions.md` et
   les planches `vue_cote.svg`/`vue_face.svg`, suite au correctif `dev` du 2026-08-04
   (Terre invisible au zénith).
+- 2026-08-11 : Halo atmosphérique jugé trop uniforme en situation (D5), corrigé directement dans
+  `shaders/halo.gdshader` depuis la session `design` (exception explicite, hors périmètre normal
+  de la zone, autorisée par l'utilisateur plutôt qu'une passation vers `dev`).

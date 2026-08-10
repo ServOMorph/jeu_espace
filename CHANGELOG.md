@@ -1,3 +1,13 @@
+## v0.19 — 2026-08-11
+
+### Corrigé
+- `shaders/halo.gdshader` : halo atmosphérique jugé trop uniforme en revue visuelle (phase D5,
+  zone `design`). `exposant_fresnel_diffus` 1.4→2.2 (dégradé plus marqué), `intensite_nuit_min`
+  0.12→0.0 (plus de halo résiduel côté nuit sans soleil), smoothstep du terminateur
+  -0.3/0.3→-0.15/0.15 (transition jour/nuit plus nette). Aucun asset DESIGN concerné (effet
+  procédural pur) ; correction faite directement par la zone `design`, hors périmètre normal,
+  sur autorisation explicite de l'utilisateur.
+
 ## v0.18 — 2026-08-11
 
 ### Corrigé

@@ -31,5 +31,6 @@ masquée pendant cette vue (résidu de promotion de caméra Godot) et contrôle 
 Côté zone `design`, phases D0 à D4 closes : charte,
 SOURCES.md, MANIFEST.md renseignés, textures Terre/Lune/étoiles livrées, proportions du vaisseau
 chiffrées et resynchronisées le 2026-08-11 sur le repositionnement ventral de la coupole,
-intérieur/volet et instruments 2D du cockpit livrés. Phase D5 (passe visuelle finale) bloquée,
-dépend d'un rendu `dev` en situation.
+intérieur/volet et instruments 2D du cockpit livrés. Phase D5 (passe visuelle finale) en cours :
+retour `dev` en situation reçu, exposition/contraste/lisibilité nuit validés, halo atmosphérique
+corrigé (`shaders/halo.gdshader`).

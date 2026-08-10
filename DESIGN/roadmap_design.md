@@ -166,12 +166,16 @@ Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmati
 
 ---
 
-## Phase D5 — Passe visuelle finale  [TODO]
+## Phase D5 — Passe visuelle finale  [EN COURS]
 
 Phase d'appui : `dev` pilote, `design` juge et corrige les assets.
 
 - Revue du rendu en situation : exposition, contraste Terre/espace, lisibilité de la nuit,
   halo atmosphérique par la tranche.
+  - Exposition, contraste Terre/espace, lisibilité nuit : validés (2026-08-11), aucune correction.
+  - Halo atmosphérique : jugé trop uniforme (2026-08-11) — corrigé dans `shaders/halo.gdshader`
+    (pas d'asset DESIGN derrière cet effet, purement procédural ; correction faite en exception
+    directement par `design`, hors périmètre normal, sur autorisation explicite).
 - Corriger les assets qui ne tiennent pas en situation (re-livraison dans `DESIGN/`), plutôt
   que de demander des compensations dans le shader — un asset faible ne se rattrape pas au
   post-traitement.

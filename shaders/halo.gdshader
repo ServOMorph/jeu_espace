@@ -17,9 +17,9 @@ uniform vec3 couleur_halo : source_color = vec3(0.4, 0.6, 1.0);
 uniform vec3 couleur_halo_diffus : source_color = vec3(0.3, 0.45, 0.9);
 uniform float intensite : hint_range(0.0, 4.0, 0.05) = 1.5;
 uniform float exposant_fresnel : hint_range(0.5, 8.0, 0.1) = 4.0;
-uniform float exposant_fresnel_diffus : hint_range(0.5, 8.0, 0.1) = 1.4;
+uniform float exposant_fresnel_diffus : hint_range(0.5, 8.0, 0.1) = 2.2;
 uniform vec3 direction_soleil = vec3(0.0, 0.0, 1.0);
-uniform float intensite_nuit_min : hint_range(0.0, 1.0, 0.01) = 0.12;
+uniform float intensite_nuit_min : hint_range(0.0, 1.0, 0.01) = 0.0;
 
 varying vec3 normale_monde;
 varying vec3 direction_vue_monde;
@@ -37,7 +37,7 @@ void fragment() {
 	float diffus = pow(bord, exposant_fresnel_diffus);
 
 	float eclairement = dot(normale, normalize(direction_soleil));
-	float facteur_jour = smoothstep(-0.3, 0.3, eclairement);
+	float facteur_jour = smoothstep(-0.15, 0.15, eclairement);
 	float facteur_nuit = intensite_nuit_min + (1.0 - intensite_nuit_min) * facteur_jour;
 
 	vec3 couleur = couleur_halo * liseret + couleur_halo_diffus * diffus * 0.5;

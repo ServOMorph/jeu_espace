@@ -1,29 +1,39 @@
 # Signals — design   (MAJ 2026-08-11)
 
 ## Actions ouvertes
-- [P2|ouvert] Phase D5 (passe visuelle finale) : attendre le retour de `dev` sur le rendu en situation (exposition, contraste Terre/espace, halo atmosphérique) avant de pouvoir juger/corriger les assets.
-  fait quand: `dev` a livré un rendu intégré (phase 6 polish) et signalé les assets insuffisants, ou confirmé qu'aucun ne l'est.
-  réf: DESIGN/roadmap_design.md (Phase D5)
+- [P2|ouvert] Phase D5 (passe visuelle finale) : retour `dev` reçu (exposition, contraste
+  Terre/espace, lisibilité nuit jugés ok ; halo atmosphérique jugé trop uniforme, corrigé cette
+  session). Reste à vérifier si d'autres aspects du gate D5 sont à traiter, puis mettre à jour
+  `charte.md` avec les valeurs finalement retenues pour le halo.
+  fait quand: `charte.md` à jour + aucun autre défaut visuel signalé + `MANIFEST.md` sans ligne
+  `placeholder`.
+  réf: DESIGN/roadmap_design.md (Phase D5), shaders/halo.gdshader
 
 ## Dernière session (2026-08-11)
 # Session du 2026-08-11
 
 ## Décisions prises
-- `proportions.md` § Coupole — observatoire resynchronisé sur le repositionnement ventral (nadir) de la coupole/observatoire, déjà appliqué côté `dev` le 2026-08-04 (`DEV/roadmap_dev.md`, Phase 4).
-- Cerclage mi-hauteur de l'armature (§ Armature de la coupole) corrigé pour cohérence : restait « au-dessus de l'axe », incohérent avec le sommet désormais en dessous.
-- Planches `vue_cote.svg` et `vue_face.svg` corrigées en miroir (coupole, armature, cotations) pour représenter le positionnement ventral. `vue_dessus.svg` jugée non affectée (vue en plan, dorsal/ventral non représenté).
+- Halo atmosphérique jugé trop uniforme (pas de dégradé, aussi visible jour que nuit) lors de la
+  revue en situation (phase D5). Exception explicite : correction effectuée directement dans
+  `shaders/halo.gdshader` depuis la session `design`, hors périmètre normal de la zone (shader/code
+  applicatif), sur autorisation explicite de l'utilisateur plutôt que passation vers `dev`.
+- Exposition, contraste Terre/espace, lisibilité nuit : jugés ok par l'utilisateur, aucune
+  correction requise.
 
 ## Livrables produits ou modifiés
-- DESIGN/vaisseau/proportions.md : § Coupole — observatoire, § Armature, § Statut corrigés
-- DESIGN/vaisseau/vue_cote.svg : coupole/armature/cotation repositionnées côté ventral
-- DESIGN/vaisseau/vue_face.svg : idem
+- shaders/halo.gdshader : `exposant_fresnel_diffus` 1.4→2.2 (resserre le dégradé du halo diffus),
+  `intensite_nuit_min` 0.12→0.0 (supprime le halo résiduel côté nuit sans soleil), smoothstep du
+  terminateur -0.3/0.3→-0.15/0.15 (transition jour/nuit plus marquée). Validé par l'utilisateur
+  ("halo ok").
 
 ## Hypothèses validées / invalidées
-- VALIDE : aucun changement côté `dev` requis, le code (`scenes/vaisseau.tscn`) était déjà conforme depuis le 2026-08-04.
-- VALIDE : `vue_dessus.svg` ne nécessite pas de correction (vue en plan).
+- VALIDE : aucun asset DESIGN n'existe pour le halo (absent de `MANIFEST.md`) — c'est un effet
+  procédural pur (shader Fresnel), la consigne du gate D5 "corriger les assets" ne s'applique pas.
+- VALIDE : correction shader suffisante pour lever le défaut signalé.
 
 ## Prochaine étape exacte
-Phase D5 (passe visuelle finale) toujours bloquée : attendre un rendu `dev` en situation.
+Vérifier s'il reste d'autres défauts à traiter pour la phase D5 ; sinon mettre à jour `charte.md`
+avec les valeurs de halo retenues et clore la phase.
 
 ## Question bloquante pour la session suivante
 Aucune
