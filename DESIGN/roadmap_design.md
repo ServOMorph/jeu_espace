@@ -14,7 +14,7 @@ Concrètement, `design` a une phase d'avance sur `dev` presque tout le long du p
 |---|---|
 | Phase D1 — textures spatiales | dev phase 1 (environnement) |
 | Phase D2 — forme du vaisseau | dev phase 3 (mesh) |
-| Phase D3 — intérieur + volet | dev phase 4 (centre de commande) |
+| Phase D3 — intérieur + volet | dev phase 4 (observatoire) |
 | Phase D4 — instruments 2D | dev phase 5 (cockpit) |
 | Phase D5 — passe visuelle | dev phase 6 (polish) |
 
@@ -31,7 +31,7 @@ DESIGN/_handoff.md`, puis annoncer **📋 ✅ Prompt copié dans le presse-papie
   DESIGN/
     textures/       terre, lune, ciel
     vaisseau/       planches de forme, proportions
-    interieur/      centre de commande, cockpit
+    interieur/      observatoire, cockpit
     instruments/    planches 2D Codex
     charte.md       palette, échelle, style
     SOURCES.md      provenance et licence de chaque asset externe
@@ -110,7 +110,7 @@ aucun script de génération côté design.**
   longueur totale. Sans ce fichier, `dev` ne peut pas modéliser.
 - Depuis le cockpit, voir une partie de la coque est **acceptable** : ne pas contraindre la
   forme pour l'éviter. Décision du 2026-07-31, elle assouplit la formulation d'origine.
-- Contrainte réelle, celle-ci à tenir : depuis le centre de commande sous coupole, la coque et
+- Contrainte réelle, celle-ci à tenir : depuis l'observatoire sous coupole, la coque et
   les structures externes doivent être visibles et lisibles.
 - Coupole : livrer l'**armature** (montants, cerclage) comme élément de forme à part entière.
   Le verre n'est pas modélisé côté intérieur (cf. D3) — c'est l'armature qui porte la lecture
@@ -124,7 +124,7 @@ Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmati
 
 ---
 
-## Phase D3 — Intérieur du centre de commande et volet  [FAIT]
+## Phase D3 — Intérieur de l'observatoire et volet  [FAIT]
 
 - Planches de l'intérieur sous coupole : sol, structure porteuse, mobilier minimal low poly.
   Volume simple — l'intérêt visuel est dehors, pas dedans.

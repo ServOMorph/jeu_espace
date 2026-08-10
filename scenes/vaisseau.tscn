@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3]
+[gd_scene load_steps=15 format=3]
 
 [ext_resource type="Script" path="res://scripts/nodes/vaisseau.gd" id="1_vaisseau"]
 [ext_resource type="Script" path="res://scripts/nodes/coupole_armature.gd" id="2_armature"]
-[ext_resource type="PackedScene" path="res://scenes/centre_commande.tscn" id="3_interieur"]
+[ext_resource type="PackedScene" path="res://scenes/observatoire.tscn" id="3_interieur"]
 [ext_resource type="Script" path="res://scripts/nodes/volet_panneaux.gd" id="4_volet"]
+[ext_resource type="PackedScene" path="res://scenes/cockpit.tscn" id="5_cockpit"]
 
 [sub_resource type="StandardMaterial3D" id="mat_coque"]
 albedo_color = Color(0.72, 0.74, 0.78, 1.0)
@@ -86,10 +87,12 @@ materiau = SubResource("mat_volet")
 [node name="Cockpit" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.925, 0)
 
-[node name="CentreCommande" type="Node3D" parent="."]
+[node name="Interieur" parent="Cockpit" instance=ExtResource("5_cockpit")]
+
+[node name="Observatoire" type="Node3D" parent="."]
 transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0.45, 0)
 
-[node name="Interieur" parent="CentreCommande" instance=ExtResource("3_interieur")]
+[node name="Interieur" parent="Observatoire" instance=ExtResource("3_interieur")]
 
 [node name="PanneauSolaireTribord" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.304, 0.55, 0)

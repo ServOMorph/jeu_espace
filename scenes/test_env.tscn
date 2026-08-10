@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=10 format=3]
 
 [ext_resource type="Script" path="res://scripts/nodes/sim_clock_node.gd" id="1_horloge"]
 [ext_resource type="PackedScene" path="res://scenes/monde_lointain.tscn" id="2_lointain"]
 [ext_resource type="PackedScene" path="res://scenes/vaisseau.tscn" id="3_vaisseau"]
-[ext_resource type="Script" path="res://scripts/nodes/camera_libre.gd" id="4_camera"]
+[ext_resource type="Script" path="res://scripts/nodes/camera_vaisseau.gd" id="4_camera"]
 [ext_resource type="Script" path="res://scripts/nodes/vue_orbitale.gd" id="5_vue"]
+[ext_resource type="Script" path="res://scripts/nodes/selecteur_camera.gd" id="6_menu"]
+[ext_resource type="Script" path="res://scripts/nodes/camera_drone.gd" id="7_drone"]
 
 [sub_resource type="Environment" id="env_proche"]
 background_mode = 3
@@ -30,6 +32,9 @@ render_target_update_mode = 4
 
 [node name="MondeLointain" parent="LointainViewport" instance=ExtResource("2_lointain")]
 
+[node name="CameraDrone" type="Camera3D" parent="LointainViewport"]
+script = ExtResource("7_drone")
+
 [node name="FondLointain" type="CanvasLayer" parent="."]
 layer = -1
 
@@ -51,12 +56,97 @@ environment = SubResource("env_proche")
 [node name="SoleilLocal" type="DirectionalLight3D" parent="."]
 shadow_enabled = false
 
-[node name="CameraLibre" type="Camera3D" parent="."]
+[node name="CameraVaisseau" type="Camera3D" parent="."]
 script = ExtResource("4_camera")
 
 [node name="VueOrbitale" type="Node" parent="."]
 script = ExtResource("5_vue")
-camera_locale_path = NodePath("../Vaisseau/CentreCommande/Interieur/Camera3D")
+camera_locale_path = NodePath("../Vaisseau/Observatoire/Interieur/Camera3D")
 camera_lointaine_path = NodePath("../LointainViewport/MondeLointain/CameraLointaine")
 soleil_lointain_path = NodePath("../LointainViewport/MondeLointain/Soleil")
 soleil_local_path = NodePath("../SoleilLocal")
+
+[node name="MenuCameras" type="CanvasLayer" parent="."]
+script = ExtResource("6_menu")
+vue_orbitale_path = NodePath("../VueOrbitale")
+camera_lointaine_path = NodePath("../LointainViewport/MondeLointain/CameraLointaine")
+fond_path = NodePath("Fond")
+barre_retour_path = NodePath("BarreRetour")
+indice_observatoire_path = NodePath("BarreRetour/IndiceObservatoire")
+bouton_vaisseau_path = NodePath("Fond/Boutons/BoutonVaisseau")
+bouton_observatoire_path = NodePath("Fond/Boutons/BoutonObservatoire")
+bouton_cockpit_path = NodePath("Fond/Boutons/BoutonCockpit")
+bouton_drone_path = NodePath("Fond/Boutons/BoutonDrone")
+bouton_retour_path = NodePath("BarreRetour/BoutonRetour")
+camera_vaisseau_path = NodePath("../CameraVaisseau")
+controleur_vaisseau_path = NodePath("../CameraVaisseau")
+camera_observatoire_path = NodePath("../Vaisseau/Observatoire/Interieur/Camera3D")
+controleur_observatoire_path = NodePath("../Vaisseau/Observatoire/Interieur/CameraRig")
+camera_cockpit_path = NodePath("../Vaisseau/Cockpit/Interieur/Camera3D")
+controleur_cockpit_path = NodePath("../Vaisseau/Cockpit/Interieur/CameraRig")
+camera_drone_path = NodePath("../LointainViewport/CameraDrone")
+controleur_drone_path = NodePath("../LointainViewport/CameraDrone")
+
+[node name="Fond" type="ColorRect" parent="MenuCameras"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0588, 0.0667, 0.0863, 0.85)
+
+[node name="Boutons" type="VBoxContainer" parent="MenuCameras/Fond"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="BoutonVaisseau" type="Button" parent="MenuCameras/Fond/Boutons"]
+custom_minimum_size = Vector2(320, 48)
+text = "Vaisseau"
+
+[node name="BoutonObservatoire" type="Button" parent="MenuCameras/Fond/Boutons"]
+custom_minimum_size = Vector2(320, 48)
+text = "Observatoire"
+
+[node name="BoutonCockpit" type="Button" parent="MenuCameras/Fond/Boutons"]
+custom_minimum_size = Vector2(320, 48)
+text = "Cockpit"
+
+[node name="BoutonDrone" type="Button" parent="MenuCameras/Fond/Boutons"]
+custom_minimum_size = Vector2(320, 48)
+text = "Drone"
+
+[node name="BarreRetour" type="Control" parent="MenuCameras"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+visible = false
+
+[node name="BoutonRetour" type="Button" parent="MenuCameras/BarreRetour"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 236.0
+offset_bottom = 56.0
+text = "Menu (F1)"
+
+[node name="IndiceObservatoire" type="Label" parent="MenuCameras/BarreRetour"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -40.0
+offset_right = 420.0
+offset_bottom = -12.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+text = "V — ouvrir / fermer la coupole"
+visible = false

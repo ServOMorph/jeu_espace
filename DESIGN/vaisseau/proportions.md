@@ -13,7 +13,7 @@ exprimées en unités relatives à la longueur totale de la coque `L = 1.0`.
 | Diamètre à l'arrière | 0.14 L | 1.0 L |
 | Profil | fuselage effilé, section circulaire à ovale | avant fin, arrière renflé (moteurs) |
 
-## Coupole — centre de commande
+## Coupole — observatoire
 
 | Élément | Valeur | Repère |
 |---|---|---|

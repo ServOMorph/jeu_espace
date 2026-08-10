@@ -1,4 +1,4 @@
-# Intérieur du centre de commande — notes de conception
+# Intérieur de l'observatoire — notes de conception
 
 Toutes les valeurs relatives à `L`, cohérentes avec `DESIGN/vaisseau/proportions.md`.
 
@@ -32,4 +32,4 @@ Volume simple, low poly, cf. `interieur/vue_plan.svg` (plan) et `interieur/vue_c
   visibles entre les montants (contrainte D2 tenue). Cf. `volet_ouvert.svg`.
 
 ## Palette
-Voir `DESIGN/charte.md` § Palette > Intérieur centre de commande.
+Voir `DESIGN/charte.md` § Palette > Intérieur observatoire.

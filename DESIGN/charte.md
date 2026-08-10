@@ -2,7 +2,7 @@
 
 ## Palette
 - Coque du vaisseau : à définir (Phase D2)
-- Intérieur centre de commande (Phase D3) :
+- Intérieur observatoire (Phase D3) :
   - Sol : `#22262B` (graphite sombre)
   - Structure porteuse / armature côté intérieur : `#3A4048` (acier mat)
   - Mobilier (console, sièges, rangements) : `#1B2129` (bleu-nuit quasi noir)
@@ -23,5 +23,5 @@
 ## Style
 - Extérieur : vue réaliste (Terre, soleil, lune, espace)
 - Vaisseau : low poly
-- Coupole du centre de commande : armature visible, verre non modélisé côté intérieur (tri de rendu)
+- Coupole de l'observatoire : armature visible, verre non modélisé côté intérieur (tri de rendu)
 - Cockpit : le vaisseau n'est pas visible depuis l'intérieur

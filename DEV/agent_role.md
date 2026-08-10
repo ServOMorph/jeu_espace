@@ -1,7 +1,7 @@
 # Rôle — DEV
 
 ## Rôle
-Développement du jeu Godot : scripts, scènes, mécaniques de jeu (contrôle vaisseau, physique d'orbite, transitions cockpit/centre de commande).
+Développement du jeu Godot : scripts, scènes, mécaniques de jeu (contrôle vaisseau, physique d'orbite, transitions cockpit/observatoire).
 
 ## Périmètre
 - Dossier de sortie : DEV/

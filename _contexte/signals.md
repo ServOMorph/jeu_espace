@@ -1,43 +1,47 @@
-# Signals — orchestrateur   (MAJ 2026-07-31)
+# Signals — orchestrateur   (MAJ 2026-08-11)
 
 ## Actions ouvertes
-- [P1|ouvert] Lancer /start dev pour cocher le gate 3 phase 0 (validé visuellement par l'utilisateur) et clôturer la phase
-  fait quand: DEV/tests_manuels.md a sa section Phase 0 supprimée, phase 0 passée [FAIT] dans DEV/roadmap_dev.md
-  réf: DEV/tests_manuels.md, DEV/roadmap_dev.md (Phase 0)
-- [P1|ouvert] Lancer /start design pour démarrer D0 (structure + charte)
-  fait quand: DESIGN/charte.md rempli, arborescence DESIGN/ créée, MANIFEST.md formaté
-  réf: DESIGN/roadmap_design.md (Phase D0)
-- [P2|ouvert] Renseigner DESIGN/SOURCES.md (URLs NASA réelles) et lancer tools/fetch_textures.py --record
-  fait quand: python tools/fetch_textures.py retourne 0 sur DESIGN/textures/ vidé
-  réf: DESIGN/roadmap_design.md (Phase D1)
-- [P2|ouvert] Vérifier que la NASA propose bien un équirectangulaire 16k en un seul fichier (sinon 8k + dalles)
-  fait quand: constat fait en ouverture de phase D1, noté dans DESIGN/MANIFEST.md
-  réf: roadmap_mvp.md (section "Frictions résiduelles")
-- [P2|ouvert] Trancher la technique de mesh du vaisseau (.tscn assemblage ou .obj scripté)
-  fait quand: décision actée en ouverture de la phase 3 dev, au vu de DESIGN/vaisseau/proportions.md
-  réf: DEV/roadmap_dev.md (Phase 3)
+- [P1|ouvert] Valider le gate 3 (contrôle visuel) de la phase 5 dev (cockpit) et clôturer la phase
+  fait quand: les 3 points de DEV/tests_manuels.md (phase 5) validés, phase 5 passée [FAIT] dans DEV/roadmap_dev.md et roadmap_mvp.md
+  réf: DEV/tests_manuels.md, DEV/roadmap_dev.md (Phase 5), commande `python run.py`
+- [P1|ouvert] Faire corriger DESIGN/vaisseau/proportions.md par la zone design : la position de la coupole y est toujours documentée « dessus du fuselage », alors que le code la place côté ventral (nadir) depuis le 2026-08-04
+  fait quand: passation envoyée à design, DESIGN/vaisseau/proportions.md § Coupole corrigé
+  réf: DESIGN/vaisseau/proportions.md § Coupole — observatoire, DEV/roadmap_dev.md (Phase 4, bloc historique 2026-08-04)
+- [P2|ouvert] Lancer /start design pour démarrer D5 (passe visuelle finale) une fois le gate 3 phase 5 dev validé
+  fait quand: DESIGN/roadmap_design.md Phase D5 passée [FAIT], MANIFEST.md sans ligne placeholder
+  réf: DESIGN/roadmap_design.md (Phase D5)
+- [P2|ouvert] Valider visuellement le halo atmosphérique (double Fresnel, atténuation nuit) et la
+  rotation des nuages recalée sur l'horloge — modifications trouvées non commitées en clôture de
+  session, non testées visuellement dans cette session
+  fait quand: section "Halo atmosphérique et vitesse des nuages" de DEV/tests_manuels.md validée et supprimée
+  réf: DEV/tests_manuels.md, shaders/halo.gdshader, scripts/nodes/nuages.gd
 
-## Dernière session (2026-07-31)
-<!-- Écrasé intégralement par /close. Synthèse < 25 lignes. -->
-# Session du 2026-07-31
+## Dernière session (2026-08-11)
+# Session du 2026-08-11
 
 ## Décisions prises
-- Handoff dev traité : tools/check_scope.py lit désormais l'index seul (git diff --cached), échec explicite si rien n'est stagé.
-- tests_manuels.md confirmé par zone (DEV/, DESIGN/), requalifié dans .claude/CLAUDE.md, CONVENTIONS.md §5, roadmap_mvp.md, DESIGN/roadmap_design.md.
-- Gate 3 phase 0 dev (fenêtré, sans erreur) validé visuellement par l'utilisateur ; la case à cocher dans DEV/tests_manuels.md reste hors périmètre orchestrateur, reportée à une session /start dev.
+- Phase 5 dev (cockpit) implémentée : bornes de yaw ajoutées à `camera_rig.gd` (réutilisé, pas de nouveau module), `scenes/cockpit.tscn` livré.
+- Renommage complet « Centre de commande » → « Observatoire » : code, scènes, docs dev et design (hors CHANGELOG et `_contexte/`, historiques par décision explicite de l'utilisateur).
+- Outillage de test ajouté : `python run.py` lance `scenes/test_env.tscn` avec un menu de sélection de caméra (Vaisseau en orbite+zoom, Observatoire, Cockpit, Drone en vol libre planétaire), retour au menu par F1, indice « V — ouvrir/fermer la coupole » affiché côté Observatoire.
+- Bug corrigé : `Camera3D.current` n'était jamais libéré par `desactiver()`, une caméra du monde proche restait visible par-dessus la vue Drone.
+- Statuts de `roadmap_mvp.md` resynchronisés (phases 0-4 [FAIT], 5 [EN COURS]) — n'avaient jamais été mis à jour depuis la création du fichier.
 
 ## Livrables produits ou modifiés
-- tools/check_scope.py : corrigé (index seul, échec sur index vide).
-- .claude/CLAUDE.md, CONVENTIONS.md, roadmap_mvp.md, DESIGN/roadmap_design.md : références tests_manuels.md requalifiées par zone.
-- run.py : créé à la racine, lance Godot (fenêtré ou --headless), testé.
+- `scripts/core/` : `camera_rig.gd`, `camera_orbite.gd` (neuf), `vol_libre.gd` (neuf).
+- `scripts/nodes/` : `camera_rig_node.gd`, `camera_vaisseau.gd` (ex `camera_libre.gd`), `camera_drone.gd` (neuf), `selecteur_camera.gd` (neuf).
+- `scenes/` : `cockpit.tscn` (neuf), `observatoire.tscn` (ex `centre_commande.tscn`), `vaisseau.tscn`, `test_env.tscn`.
+- `tests/` : +2 fichiers (`test_camera_orbite.gd`, `test_vol_libre.gd`). 118/118 tests, couverture fonctionnelle 100 %.
+- `DEV/vues.md` (neuf), `DEV/roadmap_dev.md`, `DEV/tests_manuels.md`, `DEV/agent_role.md`, `README.md`, `roadmap_mvp.md`, `DESIGN/{charte.md, roadmap_design.md, vaisseau/proportions.md, interieur/notes.md}`.
 
 ## Hypothèses validées / invalidées
-- VALIDE : correction check_scope.py testée (index vide -> échec explicite, fichiers hors périmètre détectés).
-- VALIDE : gate 3 phase 0 dev, confirmé visuellement par l'utilisateur.
-- EN ATTENTE : disponibilité réelle du 16k NASA en un seul fichier ; technique de mesh (.tscn vs .obj).
+- VALIDE : gates 1 et 2 de la phase 5 dev (tests unitaires + couverture 85 %) — exécutés.
+- EN ATTENTE : gate 3 phase 5 (contrôle visuel cockpit) — non exécuté cette session.
+- EN ATTENTE : contrôle visuel utilisateur du menu à 4 vues et du correctif Drone/tableau de bord.
+- EN ATTENTE : halo/nuages (modifications trouvées non commitées, non écrites cette session) —
+  aucun contrôle visuel effectué, à traiter comme le reste du gate 3 phase 5.
 
 ## Prochaine étape exacte
-/start dev pour clôturer la phase 0 (cocher tests_manuels.md), puis /start design pour démarrer D0.
+Lancer `python run.py`, valider visuellement le gate 3 phase 5 (cockpit) et le comportement des 4 vues, puis clôturer la phase dans DEV/roadmap_dev.md et roadmap_mvp.md.
 
 ## Question bloquante pour la session suivante
 Aucune

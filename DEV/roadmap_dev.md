@@ -83,7 +83,7 @@ Contrôles manuels : `DEV/tests_manuels.md` (un fichier par zone, cf. CONVENTION
   sautent.
 - Input map (noms d'actions figés ici, réutilisés dans toutes les phases, ne plus les renommer) :
   - `cam_look` (souris relative, traitée en `_input`, pas d'action déclarée)
-  - `toggle_lieu` — bascule cockpit / centre de commande
+  - `toggle_lieu` — bascule cockpit / observatoire
   - `toggle_volet` — volet de coupole
   - `time_x1`, `time_x10`, `time_x60` — multiplicateur de temps
   - `quit`
@@ -209,8 +209,8 @@ Livrables :
 - Matériaux : coque opaque. Le verre de la coupole est une surface **orientée vers l'extérieur
   uniquement**, présente pour la vue externe de cette phase. Aucune surface de verre n'est
   visible depuis l'intérieur (cf. phase 4) : la modéliser en `cull_back` et ne pas l'inclure
-  dans la scène du centre de commande.
-- Hiérarchie : `Vaisseau` parent, `Cockpit` et `CentreCommande` enfants. **Aucun code de
+  dans la scène de l'observatoire.
+- Hiérarchie : `Vaisseau` parent, `Cockpit` et `Observatoire` enfants. **Aucun code de
   synchronisation de position** — la hiérarchie fait le travail.
 - `scripts/nodes/vaisseau.gd` — câblage au rail orbital de la phase 2, orientation tangente
   calculée dans `scripts/core/orbit.gd` (`tangent_at(t)`), pas dans le nœud.
@@ -227,7 +227,7 @@ Livrables :
 **Livré** (2026-08-01) : arbitrage retenu = assemblage `.tscn` (CSGPolygon3D en mode spin pour la
 coque effilée, primitives Godot pour le reste) — aucune forme du chiffrage D2 ne sortait du
 répertoire des primitives/CSG. `scenes/vaisseau.tscn` conforme à `proportions.md`, hiérarchie
-`Vaisseau` → `Cockpit`/`CentreCommande` en place.
+`Vaisseau` → `Cockpit`/`Observatoire` en place.
 
 **Pivot architectural majeur, à connaître avant d'ouvrir la phase 4** : un vaisseau à taille
 réelle (~60 m) est ininterprétable dans le système d'unités planétaire du projet (1 unité =
@@ -259,7 +259,7 @@ Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmati
 
 ---
 
-## Phase 4 — Centre de commande et volet de coupole  [EN COURS]
+## Phase 4 — Observatoire et volet de coupole  [FAIT]
 
 Dépend de design D3.
 
@@ -267,7 +267,7 @@ Lire le bloc « Pivot architectural majeur » en fin de phase 3 avant d'écrire 
 la caméra de jeu opère dans le repère métrique local du vaisseau (`RepereVaisseau`), pas en
 unités planétaires.
 
-- `scenes/centre_commande.tscn` — sol, structure, mobilier minimal, **armature de coupole
+- `scenes/observatoire.tscn` — sol, structure, mobilier minimal, **armature de coupole
   opaque**.
 - **Aucune surface de verre dans cette scène** (décision du 2026-07-31). Vue de l'intérieur,
   une vitre parfaitement transparente est indiscernable d'une ouverture : on supprime la
@@ -292,21 +292,24 @@ unités planétaires.
    Contrôle visuel dans `DEV/tests_manuels.md`.
 
 **État (2026-08-02)** : gates 1 et 2 validés — 97/97 tests, couverture 100 %. Gate 3 (contrôle
-visuel) en attente, entrée dans `DEV/tests_manuels.md`. Caméra du centre de commande câblée
+visuel) en attente, entrée dans `DEV/tests_manuels.md`. Caméra de l'observatoire câblée
 temporairement dans `test_env.tscn` (`VueOrbitale.camera_locale_path`) pour ce contrôle, en
 l'absence de `lieu_state`/`lieu_manager` (phase 6). `vue_orbitale.gd` adapté pour lire
 `global_transform.orthonormalized()` : nécessaire dès qu'une caméra est imbriquée dans la
 hiérarchie du vaisseau (mise à l'échelle ×60), plus seulement une caméra sœur.
 
-**État (2026-08-04)** : bug trouvé au contrôle visuel — la Terre restait invisible depuis le
-centre de commande quelle que soit la rotation. Cause : `orbit.gd::frame_at` fixe
+**État (2026-08-04)** : bug trouvé au contrôle visuel — la Terre restait invisible depuis
+l'observatoire quelle que soit la rotation. Cause : `orbit.gd::frame_at` fixe
 `dorsal = zenith` (direction opposée à la Terre) ; la coupole, placée « dessus du fuselage » par
 `DESIGN/vaisseau/proportions.md`, n'ouvrait donc que sur l'espace/zénith. Corrigé en repositionnant
-la coupole et le centre de commande côté ventral (nadir) : rotation 180° des nœuds `Coupole` et
-`CentreCommande` dans `scenes/vaisseau.tscn`, aucun script modifié (armature et volet construits
+la coupole et l'observatoire côté ventral (nadir) : rotation 180° des nœuds `Coupole` et
+`Observatoire` dans `scenes/vaisseau.tscn`, aucun script modifié (armature et volet construits
 en `+Z` local, sans référence au monde). Terre visible au nadir, validé par contrôle visuel.
-`DESIGN/vaisseau/proportions.md` reste à corriger côté design (toujours « dessus »). Gate 3 non
-close : 4 points restent à recontrôler dans cette nouvelle configuration (`DEV/tests_manuels.md`).
+`DESIGN/vaisseau/proportions.md` reste à corriger côté design (toujours « dessus »).
+
+**Gate 3 validé** (contrôle visuel utilisateur) : rotation 360° fluide sans clipping ni
+disparition de la Terre, volet réversible en cours d'animation sans saut, coque et structures
+externes visibles, aucune surface de verre visible depuis l'intérieur de la coupole.
 
 **⏸ Checkpoint** — Demander à l'utilisateur de faire `/compact` avant de continuer.
 Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmation.
@@ -332,6 +335,32 @@ Dépend de design D4.
 2. `python tools/coverage_check.py` ≥ 85 %.
 3. Balayage complet du débattement sans clipping ; instruments lisibles en 1920x1080.
    Contrôle visuel dans `DEV/tests_manuels.md`.
+
+**État (2026-08-10)** : gates 1 et 2 validés — `scripts/core/camera_rig.gd` étendu avec des
+bornes de yaw (clamp si bornes < cercle complet, wrap continu sinon — aucune régression sur le
+360° de l'observatoire), réutilisé tel quel pour `scenes/cockpit.tscn` (yaw ±40°, pitch
+±30°). 101/101 tests, couverture 100 %. `scenes/vaisseau.tscn` câblé (`Cockpit/Interieur`).
+Gate 3 (contrôle visuel) en attente, entrée dans `DEV/tests_manuels.md`.
+
+Outillage ajouté à cette occasion, hors périmètre gate : `python run.py` lance désormais
+`scenes/test_env.tscn` avec un menu de sélection de caméra (`scripts/nodes/selecteur_camera.gd`)
+— remplace l'édition manuelle de `VueOrbitale.camera_locale_path` pour choisir entre les
+quatre vues (Vaisseau, Observatoire, Cockpit, Drone). `camera_rig_node.gd` gagne
+`actif_au_demarrage`/`activer()`/`desactiver()` pour permettre cette activation différée ;
+comportement par défaut (`actif_au_demarrage = true`) inchangé pour un usage autonome de
+`observatoire.tscn`/`cockpit.tscn`.
+
+Étoffé le 2026-08-10 (même session) : l'ancienne caméra libre (WASD) est devenue **Vaisseau**,
+une caméra en orbite autour du vaisseau avec zoom molette — `scripts/core/camera_orbite.gd`
+(pur, testé, même famille que `camera_rig.gd`), câblée par `scripts/nodes/camera_vaisseau.gd`
+(reprend le renommage `camera_libre.gd` → `camera_vaisseau.gd`). Nouvelle vue **Drone** : vol
+libre indépendant du vaisseau dans le monde lointain (échelle planétaire), pour retrouver la
+vue d'ensemble de la Terre qu'on avait avant l'arrivée du vaisseau — `scripts/nodes/camera_drone.gd`,
+déplacement factorisé dans `scripts/core/vol_libre.gd` (réutilisé par `camera_drone.gd`, pas
+dupliqué). `selecteur_camera.gd` réactive explicitement `camera_lointaine_path.current` à
+chaque changement de vue : le Drone la rend "current" à sa place le temps de son activation
+(un seul monde/viewport pour la Terre), sans quoi le fond resterait figé sur le dernier point
+de vue du Drone après être revenu sur Observatoire/Cockpit. 118/118 tests, couverture 100 %.
 
 **⏸ Checkpoint** — Demander à l'utilisateur de faire `/compact` avant de continuer.
 Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmation.

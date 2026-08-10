@@ -1,3 +1,46 @@
+## v0.16 — 2026-08-11
+
+### Ajouté
+- Phase 5 dev (cockpit) : `scenes/cockpit.tscn` (console, écran, cadrans, bandeau de voyants),
+  `scripts/core/camera_rig.gd` étendu avec des bornes de yaw (clamp si bornes serrées, wrap
+  continu sinon — aucune régression sur le 360° de l'observatoire), réutilisé pour le cockpit
+  (yaw ±40°, pitch ±30°). `scenes/vaisseau.tscn` câblé (`Cockpit/Interieur`).
+- Outillage de test : `python run.py` lance désormais `scenes/test_env.tscn` avec un menu de
+  sélection de caméra (`scripts/nodes/selecteur_camera.gd`) — 4 vues : **Vaisseau** (orbite
+  autour du vaisseau + zoom molette, `scripts/core/camera_orbite.gd`), **Observatoire**,
+  **Cockpit**, **Drone** (vol libre indépendant dans le monde lointain à échelle planétaire,
+  `scripts/nodes/camera_drone.gd`, déplacement factorisé dans `scripts/core/vol_libre.gd`).
+  Retour au menu par **F1** depuis n'importe quelle vue. Indice « V — ouvrir/fermer la coupole »
+  affiché côté Observatoire.
+- 118/118 tests, couverture fonctionnelle 100 %.
+- Halo atmosphérique (`shaders/halo.gdshader`) : deux termes de Fresnel superposés (liseret net
+  + halo diffus plus large), atténuation côté nuit via `direction_soleil` (poussée par
+  `scripts/nodes/halo.gd`) sans extinction complète. Rotation des nuages (`nuages.gd`) recalée
+  sur l'horloge de simulation (`PERIODE_ROTATION_NUAGES_S`) au lieu d'une vitesse temps réel
+  fixe — suit désormais x1/x10/x60. Contrôle visuel non exécuté cette session, entrée dans
+  `DEV/tests_manuels.md`.
+
+### Modifié
+- Renommage complet « Centre de commande » → « Observatoire » : `scenes/centre_commande.tscn` →
+  `scenes/observatoire.tscn`, nœuds, variables exportées, docs dev et design. CHANGELOG.md et
+  `_contexte/` laissés intacts (historiques).
+- `camera_libre.gd` → `camera_vaisseau.gd` (WASD remplacé par orbite + zoom autour du vaisseau).
+- `roadmap_mvp.md` : statuts resynchronisés avec l'état réel (phases 0-4 [FAIT], 5 [EN COURS]) —
+  n'avaient jamais été mis à jour depuis la création du fichier.
+
+### Corrigé
+- `Camera3D.current` n'était jamais libéré par `desactiver()` (caméras des scripts `nodes/`) :
+  une caméra du monde proche (ex. Cockpit) restait "current" et son rendu s'affichait par-dessus
+  la vue Drone, les deux mondes (proche/lointain) ne se démotant pas mutuellement. `desactiver()`
+  libère désormais `current`, et `selecteur_camera.gd` désactive systématiquement les quatre
+  contrôleurs avant chaque changement de vue.
+
+### Notes
+- Gate 3 phase 5 (contrôle visuel cockpit) non exécuté cette session — entrée dans
+  `DEV/tests_manuels.md`, commande de lancement incluse.
+- `DESIGN/vaisseau/proportions.md` reste désynchronisé sur la position de la coupole (« dessus »
+  au lieu de « ventral ») — correction à passer côté design, non traitée cette session.
+
 ## v0.15 — 2026-08-04
 
 ### Corrigé

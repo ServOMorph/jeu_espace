@@ -5,6 +5,7 @@
 
 [sub_resource type="ShaderMaterial" id="mat_halo"]
 shader = ExtResource("2_shader")
+shader_parameter/direction_soleil = Vector3(0, 0, 1)
 
 [sub_resource type="SphereMesh" id="mesh_halo"]
 material = SubResource("mat_halo")

@@ -2,7 +2,7 @@
 
 ## Objectif
 Jeu spatial 3D sous Godot : le joueur pilote un vaisseau en orbite terrestre réaliste,
-alternant entre le cockpit (vue extérieure sur l'espace) et le centre de commande sous
+alternant entre le cockpit (vue extérieure sur l'espace) et l'observatoire sous
 coupole (vue à 360°, vaisseau visible). MVP : vaisseau low poly, environnement extérieur
 réaliste (Terre, soleil, lune, espace).
 
@@ -20,16 +20,14 @@ fenêtré, contrôle caméra à la souris.
 - `run.py` — lance le projet Godot (fenêtré ou `--headless`).
 
 ## État actuel
-Côté zone `dev` : Phases 0 à 3 closes, gates validés par contrôle visuel. Phase 4 (centre de
-commande, volet de coupole) implémentée côté code — `camera_rig.gd`/`volet_state.gd` (core,
-testés), `scenes/centre_commande.tscn`, volet procédural sous `Coupole` dans `vaisseau.tscn` —
-97/97 tests, couverture 100 %. Coupole/centre de commande repositionnés côté ventral (nadir) le
-2026-08-04 (rotation 180° dans `vaisseau.tscn`) : la Terre, invisible depuis le poste dans la
-position dorsale d'origine, est désormais visible et validée par contrôle visuel. Phase non
-close : 4 points du gate visuel restent à recontrôler dans cette nouvelle configuration (voir
-`DEV/tests_manuels.md`). `DESIGN/vaisseau/proportions.md` désynchronisé (toujours « dessus du
-fuselage »), correction à passer côté design. Un conflit entre `roadmap_dev.md` et le handoff D4
-sur la visibilité de la coque depuis le cockpit reste aussi à trancher avant la phase 5. Côté zone
-`design`, phases D0 à D4 closes : charte, SOURCES.md, MANIFEST.md renseignés, textures
-Terre/Lune/étoiles livrées, proportions du vaisseau chiffrées, intérieur/volet et instruments 2D
-du cockpit livrés. Phase D5 (passe visuelle finale) bloquée, dépend d'un rendu `dev` en situation.
+Côté zone `dev` : phases 0 à 4 closes, gates validés par contrôle visuel. Phase 5 (cockpit)
+implémentée côté code — bornes de yaw ajoutées à `camera_rig.gd` (réutilisé), `scenes/cockpit.tscn`
+livré — 118/118 tests, couverture 100 %. Gate visuel (contrôle manuel) restant à valider, voir
+`DEV/tests_manuels.md`. Outillage de test étoffé : `python run.py` lance `scenes/test_env.tscn`
+avec un menu de sélection de caméra (Vaisseau en orbite+zoom, Observatoire, Cockpit, Drone en vol
+libre planétaire), retour au menu par F1. `DESIGN/vaisseau/proportions.md` reste désynchronisé
+(position de la coupole toujours documentée « dessus du fuselage » alors que le code la place côté
+ventral depuis le 2026-08-04), correction à passer côté design. Côté zone `design`, phases D0 à D4
+closes : charte, SOURCES.md, MANIFEST.md renseignés, textures Terre/Lune/étoiles livrées,
+proportions du vaisseau chiffrées, intérieur/volet et instruments 2D du cockpit livrés. Phase D5
+(passe visuelle finale) bloquée, dépend d'un rendu `dev` en situation.

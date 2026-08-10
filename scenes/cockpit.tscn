@@ -1,0 +1,81 @@
+[gd_scene load_steps=13 format=3]
+
+[ext_resource type="Script" path="res://scripts/nodes/camera_rig_node.gd" id="1_rig"]
+[ext_resource type="Texture2D" path="res://DESIGN/instruments/instrument_ecran.svg" id="2_ecran"]
+[ext_resource type="Texture2D" path="res://DESIGN/instruments/instrument_cadran.svg" id="3_cadran"]
+
+[sub_resource type="StandardMaterial3D" id="mat_console"]
+albedo_color = Color(0.106, 0.129, 0.161, 1.0)
+roughness = 0.6
+
+[sub_resource type="StandardMaterial3D" id="mat_ecran"]
+albedo_color = Color(1, 1, 1, 1.0)
+albedo_texture = ExtResource("2_ecran")
+roughness = 0.4
+shading_mode = 0
+
+[sub_resource type="StandardMaterial3D" id="mat_cadran"]
+albedo_color = Color(1, 1, 1, 1.0)
+albedo_texture = ExtResource("3_cadran")
+transparency = 1
+cull_mode = 2
+roughness = 0.4
+shading_mode = 0
+
+[sub_resource type="StandardMaterial3D" id="mat_bandeau"]
+albedo_color = Color(0.3098, 0.8471, 0.8784, 1.0)
+emission_enabled = true
+emission = Color(0.3098, 0.8471, 0.8784, 1.0)
+emission_energy_multiplier = 0.6
+
+[sub_resource type="BoxMesh" id="mesh_console"]
+material = SubResource("mat_console")
+size = Vector3(0.1, 0.02, 0.03)
+
+[sub_resource type="QuadMesh" id="mesh_ecran"]
+material = SubResource("mat_ecran")
+size = Vector2(0.04, 0.02)
+
+[sub_resource type="QuadMesh" id="mesh_cadran"]
+material = SubResource("mat_cadran")
+size = Vector2(0.015, 0.015)
+
+[sub_resource type="BoxMesh" id="mesh_bandeau"]
+material = SubResource("mat_bandeau")
+size = Vector3(0.04, 0.002, 0.005)
+
+[node name="Cockpit" type="Node3D"]
+
+[node name="Console" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03, -0.01)
+mesh = SubResource("mesh_console")
+
+[node name="EcranCentral" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0.02, 0.005)
+mesh = SubResource("mesh_ecran")
+
+[node name="CadranTribord" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0.03, 0.02, 0.005)
+mesh = SubResource("mesh_cadran")
+
+[node name="CadranBabord" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, -0.03, 0.02, 0.005)
+mesh = SubResource("mesh_cadran")
+
+[node name="BandeauVoyants" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03, -0.007)
+mesh = SubResource("mesh_bandeau")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.04, 0)
+near = 0.05
+far = 500.0
+fov = 75.0
+
+[node name="CameraRig" type="Node" parent="."]
+script = ExtResource("1_rig")
+camera_path = NodePath("../Camera3D")
+pitch_min = -0.5235988
+pitch_max = 0.5235988
+yaw_min = -0.6981317
+yaw_max = 0.6981317

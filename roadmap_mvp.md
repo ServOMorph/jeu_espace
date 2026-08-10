@@ -2,7 +2,7 @@
 
 ## Cible MVP
 Le joueur est à bord d'un vaisseau en orbite terrestre basse. Il bascule entre deux points de
-vue : le cockpit (instruments + espace devant, vaisseau invisible) et le centre de commande
+vue : le cockpit (instruments + espace devant, vaisseau invisible) et l'observatoire
 sous coupole de verre (vue 360°, vaisseau visible, volet blindé qu'il peut ouvrir). L'orbite
 défile automatiquement, à vitesse réglable. Terre, Soleil et Lune sont rendus de façon
 réaliste. Vaisseau low poly. 1920x1080 fenêtré, caméra à la souris.
@@ -11,7 +11,7 @@ réaliste. Vaisseau low poly. 1920x1080 fenêtré, caméra à la souris.
 - Pilotage : aucun. Orbite automatique, le joueur ne fait que regarder et changer de lieu.
 - Simulation : trajectoire sur rail paramétrée, monde à échelle réduite (pas de mécanique
   képlerienne, pas d'échelle 1:1 — évite le problème de précision flottante).
-- Transition cockpit / centre de commande : bascule instantanée par touche, pas de déplacement
+- Transition cockpit / observatoire : bascule instantanée par touche, pas de déplacement
   à pied, pas d'intérieur de vaisseau à modéliser entre les deux salles.
 - Orbite : basse, ~400 km (type ISS). La Terre remplit la majeure partie du champ de vision,
   le globe entier n'est jamais visible. Conséquence directe : textures au sol haute résolution
@@ -71,7 +71,7 @@ change que si une **décision** change.
 | 1 Environnement spatial | D1 textures NASA | 1 sphères, shader Terre, ciel |
 | 2 Orbite | — | 2 horloge simulée + rail orbital |
 | 3 Vaisseau | D2 forme + proportions chiffrées | 3 mesh, matériaux, hiérarchie |
-| 4 Centre de commande + volet | D3 intérieur + volet | 4 coupole, caméra 360, volet |
+| 4 Observatoire + volet | D3 intérieur + volet | 4 coupole, caméra 360, volet |
 | 5 Cockpit | D4 instruments 2D | 5 cockpit, caméra bornée |
 | 6 Bascule et polish | D5 passe visuelle | 6 bascule, performance, polish |
 
@@ -87,7 +87,7 @@ Une phase `dev` ne démarre pas tant que sa dépendance n'est pas listée comme 
 
 ---
 
-## Phase 0 — Fondations du projet Godot  [EN COURS]
+## Phase 0 — Fondations du projet Godot  [FAIT]
 
 Créer le projet Godot et son squelette, aujourd'hui inexistants.
 
@@ -108,7 +108,7 @@ Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmati
 
 ---
 
-## Phase 1 — Environnement spatial extérieur  [TODO]
+## Phase 1 — Environnement spatial extérieur  [FAIT]
 
 Produire le décor. C'est la phase qui porte l'essentiel du réalisme attendu. L'orbite basse
 à 400 km est exigeante : le sol est vu de près, toute texture insuffisante se verra.
@@ -132,7 +132,7 @@ Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmati
 
 ---
 
-## Phase 2 — Mouvement orbital sur rail  [TODO]
+## Phase 2 — Mouvement orbital sur rail  [FAIT]
 
 - Script d'orbite paramétrable : altitude (400 km par défaut), période (~90 min à cette
   altitude), inclinaison, phase de départ.
@@ -153,7 +153,7 @@ Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmati
 
 ---
 
-## Phase 3 — Vaisseau low poly  [TODO]
+## Phase 3 — Vaisseau low poly  [FAIT]
 
 Le mesh est produit par l'agent. Deux voies possibles, à arbitrer en ouverture de phase selon
 la complexité de forme retenue :
@@ -180,7 +180,7 @@ Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmati
 
 ---
 
-## Phase 4 — Centre de commande sous coupole  [TODO]
+## Phase 4 — Observatoire sous coupole  [FAIT]
 
 - Intérieur de la salle : sol, structure, mobilier minimal low poly.
 - Coupole de verre vue de l'intérieur, transparente et sans artefact de tri de rendu.
@@ -202,7 +202,7 @@ Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmati
 
 ---
 
-## Phase 5 — Cockpit  [TODO]
+## Phase 5 — Cockpit  [EN COURS]
 
 - Intérieur du cockpit : console, baie vitrée frontale.
 - Caméra à débattement limité (on regarde devant, pas derrière).
@@ -221,7 +221,7 @@ Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmati
 
 ## Phase 6 — Bascule des lieux et finalisation  [TODO]
 
-- Gestionnaire de point de vue : une touche bascule entre cockpit et centre de commande,
+- Gestionnaire de point de vue : une touche bascule entre cockpit et observatoire,
   active la bonne caméra et désactive l'autre.
 - Vérifier qu'aucun état caméra ne fuit d'un lieu à l'autre (orientation conservée par lieu).
 - Passe de performance : coût de la Terre haute résolution et de la transparence de coupole.
