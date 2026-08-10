@@ -1,3 +1,12 @@
+## v0.17 — 2026-08-11
+
+### Corrigé
+- `DESIGN/vaisseau/proportions.md` : § Coupole — observatoire resynchronisé sur le
+  repositionnement ventral (nadir) déjà appliqué côté `dev` le 2026-08-04, cerclage mi-hauteur
+  de l'armature corrigé pour cohérence.
+- `DESIGN/vaisseau/vue_cote.svg` et `vue_face.svg` : coupole, armature et cotations repositionnées
+  en miroir pour représenter le positionnement ventral.
+
 ## v0.16 — 2026-08-11
 
 ### Ajouté

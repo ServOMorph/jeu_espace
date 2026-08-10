@@ -25,9 +25,8 @@ implémentée côté code — bornes de yaw ajoutées à `camera_rig.gd` (réuti
 livré — 118/118 tests, couverture 100 %. Gate visuel (contrôle manuel) restant à valider, voir
 `DEV/tests_manuels.md`. Outillage de test étoffé : `python run.py` lance `scenes/test_env.tscn`
 avec un menu de sélection de caméra (Vaisseau en orbite+zoom, Observatoire, Cockpit, Drone en vol
-libre planétaire), retour au menu par F1. `DESIGN/vaisseau/proportions.md` reste désynchronisé
-(position de la coupole toujours documentée « dessus du fuselage » alors que le code la place côté
-ventral depuis le 2026-08-04), correction à passer côté design. Côté zone `design`, phases D0 à D4
-closes : charte, SOURCES.md, MANIFEST.md renseignés, textures Terre/Lune/étoiles livrées,
-proportions du vaisseau chiffrées, intérieur/volet et instruments 2D du cockpit livrés. Phase D5
-(passe visuelle finale) bloquée, dépend d'un rendu `dev` en situation.
+libre planétaire), retour au menu par F1. Côté zone `design`, phases D0 à D4 closes : charte,
+SOURCES.md, MANIFEST.md renseignés, textures Terre/Lune/étoiles livrées, proportions du vaisseau
+chiffrées et resynchronisées le 2026-08-11 sur le repositionnement ventral de la coupole,
+intérieur/volet et instruments 2D du cockpit livrés. Phase D5 (passe visuelle finale) bloquée,
+dépend d'un rendu `dev` en situation.

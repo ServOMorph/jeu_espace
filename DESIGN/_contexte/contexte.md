@@ -8,10 +8,12 @@ Assets 2D générés par ChatGPT via Codex. Vaisseau en low poly. Extérieur en 
 
 ## État actuel (réécrit intégralement à chaque /close)
 Phases D0 à D4 closes. Charte, SOURCES.md, MANIFEST.md renseignés. Textures Terre/Lune/étoiles
-livrées (D1). Proportions du vaisseau chiffrées et validées (D2). Intérieur sous coupole, volet
-blindé fermé/ouvert et palette intérieure livrés (D3). Instruments 2D du cockpit (set minimal
-générique) livrés (D4). Handoffs D3 et D4 envoyés vers `dev`. Phase D5 (passe visuelle finale)
-bloquée : dépend d'un rendu `dev` en situation, pas encore disponible.
+livrées (D1). Proportions du vaisseau chiffrées et validées (D2), resynchronisées le 2026-08-11
+sur le repositionnement ventral de la coupole (planches `vue_cote.svg`/`vue_face.svg` corrigées
+en miroir). Intérieur sous coupole, volet blindé fermé/ouvert et palette intérieure livrés (D3).
+Instruments 2D du cockpit (set minimal générique) livrés (D4). Handoffs D3 et D4 envoyés vers
+`dev`. Phase D5 (passe visuelle finale) bloquée : dépend d'un rendu `dev` en situation, pas encore
+disponible.
 
 ## Décisions structurantes (append only — 10 entrées max, 5 lignes max/entrée, archiver au-delà)
 - 2026-07-31 : Initialisation du protocole vibecoding.
@@ -27,3 +29,6 @@ bloquée : dépend d'un rendu `dev` en situation, pas encore disponible.
   opaque porte seule la sensation de bulle.
 - 2026-08-01 : Set d'instruments cockpit limité à un minimal générique (écran + 2 cadrans +
   bandeau de voyants), aucune fonction pilotée n'existant au MVP.
+- 2026-08-11 : Coupole/observatoire resynchronisés côté ventral (nadir) dans `proportions.md` et
+  les planches `vue_cote.svg`/`vue_face.svg`, suite au correctif `dev` du 2026-08-04
+  (Terre invisible au zénith).
