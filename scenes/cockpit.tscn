@@ -1,8 +1,10 @@
-[gd_scene load_steps=13 format=3]
+[gd_scene load_steps=15 format=3]
 
 [ext_resource type="Script" path="res://scripts/nodes/camera_rig_node.gd" id="1_rig"]
 [ext_resource type="Texture2D" path="res://DESIGN/instruments/instrument_ecran.svg" id="2_ecran"]
 [ext_resource type="Texture2D" path="res://DESIGN/instruments/instrument_cadran.svg" id="3_cadran"]
+[ext_resource type="PackedScene" path="res://scenes/ecran_holo.tscn" id="4_holo"]
+[ext_resource type="PackedScene" path="res://scenes/ecran_map_3d.tscn" id="5_map"]
 
 [sub_resource type="StandardMaterial3D" id="mat_console"]
 albedo_color = Color(0.106, 0.129, 0.161, 1.0)
@@ -30,7 +32,7 @@ emission_energy_multiplier = 0.6
 
 [sub_resource type="BoxMesh" id="mesh_console"]
 material = SubResource("mat_console")
-size = Vector3(0.1, 0.02, 0.03)
+size = Vector3(0.1, 0.02, 0.045)
 
 [sub_resource type="QuadMesh" id="mesh_ecran"]
 material = SubResource("mat_ecran")
@@ -47,7 +49,7 @@ size = Vector3(0.04, 0.002, 0.005)
 [node name="Cockpit" type="Node3D"]
 
 [node name="Console" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03, -0.01)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03, -0.0175)
 mesh = SubResource("mesh_console")
 
 [node name="EcranCentral" type="MeshInstance3D" parent="."]
@@ -65,6 +67,21 @@ mesh = SubResource("mesh_cadran")
 [node name="BandeauVoyants" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03, -0.007)
 mesh = SubResource("mesh_bandeau")
+
+[node name="Ecran1" parent="." instance=ExtResource("5_map")]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, -0.032, 0.03, -0.02)
+
+[node name="Ecran2" parent="." instance=ExtResource("4_holo")]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0.03, -0.02)
+taille_quad = Vector2(0.024, 0.016)
+libelle = "ECRAN 2"
+couleur_accent = Color(0.55, 0.58, 0.62, 1.0)
+
+[node name="Ecran3" parent="." instance=ExtResource("4_holo")]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0.032, 0.03, -0.02)
+taille_quad = Vector2(0.024, 0.016)
+libelle = "ECRAN 3"
+couleur_accent = Color(0.55, 0.58, 0.62, 1.0)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.04, 0)

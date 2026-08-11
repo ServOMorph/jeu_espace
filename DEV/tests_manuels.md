@@ -51,6 +51,30 @@ Un menu s'affiche au démarrage (`scenes/test_env.tscn`) : cliquer sur **Cockpit
 - Retour au menu : dans chacune des quatre vues (vaisseau, observatoire, cockpit, drone),
   appuyer sur **F1** ramène directement au menu de sélection (souris capturée ou non).
 
+## Tableau de bord du cockpit — rangée de 3 écrans (Ecran1 = MAP)
+
+Lancer :
+```
+python run.py
+```
+Choisir **Cockpit** depuis le menu.
+
+- Vue extérieure (baie vitrée existante) inchangée devant le cockpit, aucune régression.
+- Rangée de 3 écrans lisibles dans le tableau de bord, sous les instruments existants
+  (cadrans, bandeau) : cadre net, glow, palette sombre/contrastée (esthétique soignée, pas
+  de texture floue ni de contour baveux).
+- Écran 1 (gauche) : disque radar affiché en permanence, marqueur de vaisseau au centre,
+  icônes Terre/Lune/Soleil positionnées autour, aucune interaction requise.
+- Écrans 2 et 3 : placeholders statiques (« ECRAN 2 » / « ECRAN 3 »), aucune donnée live.
+- Temps accéléré (x60) : les icônes de l'écran 1 doivent bouger de façon cohérente avec
+  l'orbite observée (la Terre reste globalement au centre si le nadir est dans l'axe du
+  regard, le Soleil tourne lentement autour à mesure que l'orientation change).
+- Balayage complet du débattement caméra (yaw ±40°, pitch ±30°) : les 3 écrans doivent rester
+  atteignables sans sortir du cône avant ni se chevaucher avec les instruments existants.
+- Overlay `MAP` ouvert, temps accéléré (x60) : les icônes Terre/Lune/Soleil doivent bouger de
+  façon cohérente avec l'orbite observée (la Terre reste globalement au centre si le nadir est
+  dans l'axe du regard, le Soleil tourne lentement autour à mesure que l'orientation change).
+
 ## Nouvelles caméras — Vaisseau (orbite) et Drone
 
 - **Vaisseau** : orbite fluide autour du vaisseau dans toutes les directions (pitch borné

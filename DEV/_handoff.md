@@ -50,3 +50,20 @@ point de collision au `/close`. Aucune modification de `SCOPES` n'est nécessair
 - `CONVENTIONS.md` §5, sous-section « Ce qui n'est pas testable unitairement » : préciser que
   chaque zone tient sa propre file, dans son dossier.
 - `roadmap_mvp.md` : requalifier les références à `tests_manuels.md` si elles existent.
+
+## 3. `check_scope.py` — `SCOPES["dev"]` n'inclut pas README.md/CHANGELOG.md (constaté 2026-08-11)
+
+Le `/close` générique (étapes 8-9 du template) demande de mettre à jour `README.md` et
+`CHANGELOG.md` à la racine à chaque clôture, quelle que soit la zone. Mais `SCOPES["dev"]` dans
+`check_scope.py:18` ne contient que `("DEV/", "scripts/", "scenes/", "tests/", "addons/",
+"project.godot", ".gitignore")` — un `git add README.md CHANGELOG.md` fait échouer
+`check_scope.py dev`. C'est aussi contradictoire avec l'invariant explicite de
+`DEV/agent_role.md` (« Ne jamais committer hors de DEV/ et des dossiers de code Godot
+déclarés »). Un commit dev antérieur (821b97b, 2026-08-11) a pourtant inclus ces deux fichiers —
+soit `check_scope.py` n'a pas été lancé avant ce commit, soit l'invariant a été enfreint sans
+blocage.
+
+Correction à trancher par l'orchestrateur : soit exclure `README.md`/`CHANGELOG.md` de la
+responsabilité des zones (les gérer uniquement à la clôture `orchestrateur`), soit les ajouter
+explicitement au périmètre de chaque zone dans `SCOPES`. Dans le doute, cette clôture (dev,
+2026-08-11) a choisi de ne pas y toucher, en suivant l'invariant le plus strict.

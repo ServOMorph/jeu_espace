@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=8 format=3]
 
 [ext_resource type="Script" path="res://scripts/nodes/sim_clock_node.gd" id="1_horloge"]
 [ext_resource type="PackedScene" path="res://scenes/monde_lointain.tscn" id="2_lointain"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://scripts/nodes/vue_orbitale.gd" id="5_vue"]
 [ext_resource type="Script" path="res://scripts/nodes/selecteur_camera.gd" id="6_menu"]
 [ext_resource type="Script" path="res://scripts/nodes/camera_drone.gd" id="7_drone"]
+[ext_resource type="Script" path="res://scripts/nodes/carte_map_driver.gd" id="8_carte_driver"]
 
 [sub_resource type="Environment" id="env_proche"]
 background_mode = 3
@@ -65,6 +66,14 @@ camera_locale_path = NodePath("../Vaisseau/Observatoire/Interieur/Camera3D")
 camera_lointaine_path = NodePath("../LointainViewport/MondeLointain/CameraLointaine")
 soleil_lointain_path = NodePath("../LointainViewport/MondeLointain/Soleil")
 soleil_local_path = NodePath("../SoleilLocal")
+
+[node name="CarteMapDriver" type="Node" parent="."]
+script = ExtResource("8_carte_driver")
+vue_orbitale_path = NodePath("../VueOrbitale")
+horloge_path = NodePath("../Horloge")
+lune_path = NodePath("../LointainViewport/MondeLointain/Lune")
+soleil_path = NodePath("../LointainViewport/MondeLointain/Soleil")
+contenu_path = NodePath("../Vaisseau/Cockpit/Interieur/Ecran1/SubViewport/Contenu")
 
 [node name="MenuCameras" type="CanvasLayer" parent="."]
 script = ExtResource("6_menu")

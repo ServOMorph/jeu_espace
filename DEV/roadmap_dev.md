@@ -342,6 +342,35 @@ bornes de yaw (clamp si bornes < cercle complet, wrap continu sinon — aucune r
 ±30°). 101/101 tests, couverture 100 %. `scenes/vaisseau.tscn` câblé (`Cockpit/Interieur`).
 Gate 3 (contrôle visuel) en attente, entrée dans `DEV/tests_manuels.md`.
 
+**Ajout de périmètre (2026-08-11, décision orchestrateur, cf. `roadmap_mvp.md` Phase 5)** :
+tableau de bord du cockpit à construire, caméra inchangée (fixe, bornes déjà en place) :
+- Deux baies vitrées frontales avec vue sur l'espace (le rendu du monde lointain existant suffit,
+  pas de nouvelle géométrie de vue).
+- Deux écrans : `IA` et `MAP`, rendu procédural (shader ou dessin vectoriel en `CanvasLayer`),
+  esthétique soignée type Star Wars (contours nets, glow, palette sombre/contrastée) — pas de
+  planche 2D `design`, ce périmètre reste dans `dev`.
+- Clic sur l'écran MAP : ouvre un overlay plein cadre qui dessine la position relative de la
+  Terre, de la Lune et du Soleil, dérivée de l'état orbital réel (`orbit.gd`, `sun_direction.gd`
+  côté `scripts/core/`, aucune valeur en dur). C'est la seule donnée live du cockpit — le reste
+  des instruments (écran IA compris) reste statique, conformément à la contrainte d'origine.
+- Toute logique de calcul de position (projection sur la carte) doit vivre en `scripts/core/`,
+  pure et testable, au même titre que le reste de l'architecture imposée.
+
+**Pivot (2026-08-11, même session, plan utilisateur)** : la disposition ci-dessus (deux écrans
+IA/MAP, clic pour ouvrir un overlay plein cadre) est remplacée par un plan fourni par
+l'utilisateur — vue extérieure (baie vitrée existante, inchangée) en partie haute, rangée de
+trois écrans en dessous. Écran 1 affiche la carte Terre/Lune/Soleil **en permanence** (plus de
+clic ni d'overlay) ; écrans 2 et 3 sont des placeholders statiques, contenu à définir plus tard.
+Livré : `scripts/core/cockpit_map.gd` (projection azimutale équidistante, testé), `scenes/
+ecran_holo.tscn` (écran procédural réutilisable, style cadre net/glow/palette sombre, sert aux
+placeholders), `scenes/ecran_map_3d.tscn` + `carte_map_driver.gd` (écran 1, mis à jour en
+continu depuis `orbit.gd`/`sun_direction.gd`). Le mécanisme de clic/overlay initialement
+implémenté (`ciblage_ecran.gd`, `cockpit_interaction.gd`, `reticule_cockpit.gd`,
+`carte_overlay.gd`) a été retiré, devenu inutile. 127/127 tests, couverture `scripts/core/`
+100 %. Instruments existants (cadrans, bandeau, ancien écran central) conservés tels quels.
+Gate 3 (contrôle visuel) toujours en attente, entrée mise à jour dans `DEV/tests_manuels.md` —
+disposition géométrique de la nouvelle rangée non vérifiée à l'œil.
+
 Outillage ajouté à cette occasion, hors périmètre gate : `python run.py` lance désormais
 `scenes/test_env.tscn` avec un menu de sélection de caméra (`scripts/nodes/selecteur_camera.gd`)
 — remplace l'édition manuelle de `VueOrbitale.camera_locale_path` pour choisir entre les
