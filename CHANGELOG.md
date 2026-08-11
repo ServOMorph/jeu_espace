@@ -1,3 +1,16 @@
+## v0.20 — 2026-08-11
+
+### Ajouté
+- Zone `documentation` créée via `/create_agent` (`DOCUMENTATION/agent_role.md`, `_contexte/`,
+  alias enregistré dans `.claude/zones.md`). Rôle : cohérence et exactitude de la documentation
+  du projet.
+- `DOCUMENTATION/systeme_solaire/` : base de connaissance de 25 objets (Soleil, 8 planètes,
+  5 planètes naines majeures, 12 lunes majeures), gabarit `TEMPLATE.md`, catalogue `INDEX.md`.
+  Données sourcées NASA/JPL/ESA et Wikipédia, datées par fiche. Périmètre au-delà des 3 objets
+  réellement présents dans le jeu (Terre, Soleil, Lune), sur demande explicite utilisateur.
+  Lacunes connues (températures, inclinaisons d'axe, physique des planètes naines éloignées)
+  documentées dans `INDEX.md` plutôt qu'extrapolées.
+
 ## v0.19 — 2026-08-11
 
 ### Corrigé

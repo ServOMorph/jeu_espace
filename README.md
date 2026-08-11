@@ -14,6 +14,9 @@ fenêtré, contrôle caméra à la souris.
 - `orchestrateur` (racine) — roadmap, arbitrages, contexte projet.
 - `DEV/` (zone `dev`) — scripts, scènes, mécaniques Godot. Voir `DEV/roadmap_dev.md`.
 - `DESIGN/` (zone `design`) — direction artistique, assets 2D, textures. Voir `DESIGN/roadmap_design.md`.
+- `DOCUMENTATION/` (zone `documentation`) — base de connaissance et cohérence documentaire du
+  projet. Contient `systeme_solaire/` (25 fiches d'identité Soleil/planètes/planètes naines/lunes,
+  catalogue `INDEX.md`).
 - `roadmap_mvp.md` — décisions cadrantes et arbitrages du MVP, 7 phases.
 - `CONVENTIONS.md` — règles communes dev/design : périmètres, tests, passation, nommage.
 - `tools/` — scripts Python : passation inter-agents, couverture de tests, contrôle de périmètre, téléchargement de textures.
@@ -34,3 +37,6 @@ chiffrées et resynchronisées le 2026-08-11 sur le repositionnement ventral de 
 intérieur/volet et instruments 2D du cockpit livrés. Phase D5 (passe visuelle finale) en cours :
 retour `dev` en situation reçu, exposition/contraste/lisibilité nuit validés, halo atmosphérique
 corrigé (`shaders/halo.gdshader`).
+Zone `documentation` créée : base de connaissance `systeme_solaire/` (25 fiches Soleil/planètes/
+planètes naines/lunes, sourcées NASA/JPL/ESA et Wikipédia), lacunes connues documentées dans
+`DOCUMENTATION/systeme_solaire/INDEX.md`.
